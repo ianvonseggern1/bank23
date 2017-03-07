@@ -7,14 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */; };
+		B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */; };
+		B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F478E1E6E5F7C00A48CA4 /* Water.png */; };
+		B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */; };
+		B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62426711E5124B200CEEF08 /* NextPieceView.swift */; };
 		B64CB4F91E04A34C005A7781 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64CB4F81E04A34C005A7781 /* AppDelegate.swift */; };
 		B64CB4FB1E04A34C005A7781 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64CB4FA1E04A34C005A7781 /* ViewController.swift */; };
 		B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64CB4FC1E04A34C005A7781 /* Main.storyboard */; };
 		B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B64CB4FF1E04A34C005A7781 /* Assets.xcassets */; };
 		B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64CB5011E04A34C005A7781 /* LaunchScreen.storyboard */; };
+		B64CB50B1E04A634005A7781 /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64CB50A1E04A634005A7781 /* Piece.swift */; };
+		B64CB50D1E04B7EC005A7781 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64CB50C1E04B7EC005A7781 /* Board.swift */; };
+		B6517A801E51014D00EB9879 /* bank-icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = B6517A7F1E51014D00EB9879 /* bank-icon-60.png */; };
+		B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = B6517A811E5101CE00EB9879 /* bank-icon-120.png */; };
+		B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = B6517A831E5101D900EB9879 /* bank-icon-180.png */; };
+		B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B674460E1E0D1CB0001A3529 /* GameView.swift */; };
+		B67446111E0D1D5E001A3529 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446101E0D1D5E001A3529 /* PieceView.swift */; };
+		B67446131E0DCFC1001A3529 /* bank-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446121E0DCFC1001A3529 /* bank-icon.png */; };
+		B67446151E0DD308001A3529 /* water-icon-2.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446141E0DD308001A3529 /* water-icon-2.png */; };
+		B67446191E0DD3B2001A3529 /* sand-pile.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446181E0DD3B2001A3529 /* sand-pile.png */; };
+		B674461F1E0DD5EE001A3529 /* coin-stacks.png in Resources */ = {isa = PBXBuildFile; fileRef = B674461E1E0DD5EE001A3529 /* coin-stacks.png */; };
+		B67446231E0E55CB001A3529 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446221E0E55CB001A3529 /* refresh.png */; };
+		B67446251E10CEC7001A3529 /* menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446241E10CEC7001A3529 /* menu-icon.png */; };
+		B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446261E11F0D9001A3529 /* LevelMenuController.swift */; };
+		B67446291E135762001A3529 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446281E135762001A3529 /* BoardView.swift */; };
+		B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B674462A1E135E1D001A3529 /* EditGameView.swift */; };
+		B674462D1E145133001A3529 /* EditGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B674462C1E145133001A3529 /* EditGameViewController.swift */; };
+		B674462F1E14556A001A3529 /* edit-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B674462E1E14556A001A3529 /* edit-icon.png */; };
+		B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685361D1E1C982700A401B6 /* RemainingPiecesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Coin Icon 01.png"; sourceTree = "<group>"; };
+		B61F478E1E6E5F7C00A48CA4 /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
+		B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Piggy Bank 01.png"; sourceTree = "<group>"; };
+		B62426711E5124B200CEEF08 /* NextPieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextPieceView.swift; sourceTree = "<group>"; };
 		B64CB4F51E04A34C005A7781 /* Bank23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bank23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64CB4F81E04A34C005A7781 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64CB4FA1E04A34C005A7781 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +51,25 @@
 		B64CB4FF1E04A34C005A7781 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B64CB5021E04A34C005A7781 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B64CB5041E04A34C005A7781 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B64CB50A1E04A634005A7781 /* Piece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		B64CB50C1E04B7EC005A7781 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		B6517A7F1E51014D00EB9879 /* bank-icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bank-icon-60.png"; path = "../../Downloads/bank-icon-60.png"; sourceTree = "<group>"; };
+		B6517A811E5101CE00EB9879 /* bank-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank-icon-120.png"; sourceTree = "<group>"; };
+		B6517A831E5101D900EB9879 /* bank-icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank-icon-180.png"; sourceTree = "<group>"; };
+		B674460E1E0D1CB0001A3529 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		B67446101E0D1D5E001A3529 /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
+		B67446121E0DCFC1001A3529 /* bank-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bank-icon.png"; path = "../../Downloads/bank-icon.png"; sourceTree = "<group>"; };
+		B67446141E0DD308001A3529 /* water-icon-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-icon-2.png"; path = "../../Downloads/water-icon-2.png"; sourceTree = "<group>"; };
+		B67446181E0DD3B2001A3529 /* sand-pile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sand-pile.png"; path = "../../Downloads/sand-pile.png"; sourceTree = "<group>"; };
+		B674461E1E0DD5EE001A3529 /* coin-stacks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "coin-stacks.png"; path = "../../Downloads/coin-stacks.png"; sourceTree = "<group>"; };
+		B67446221E0E55CB001A3529 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = ../../Downloads/refresh.png; sourceTree = "<group>"; };
+		B67446241E10CEC7001A3529 /* menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-icon.png"; path = "../../Downloads/menu-icon.png"; sourceTree = "<group>"; };
+		B67446261E11F0D9001A3529 /* LevelMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMenuController.swift; sourceTree = "<group>"; };
+		B67446281E135762001A3529 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		B674462A1E135E1D001A3529 /* EditGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGameView.swift; sourceTree = "<group>"; };
+		B674462C1E145133001A3529 /* EditGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGameViewController.swift; sourceTree = "<group>"; };
+		B674462E1E14556A001A3529 /* edit-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "edit-icon.png"; path = "../../Downloads/edit-icon.png"; sourceTree = "<group>"; };
+		B685361D1E1C982700A401B6 /* RemainingPiecesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemainingPiecesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +88,20 @@
 			children = (
 				B64CB4F71E04A34C005A7781 /* Bank23 */,
 				B64CB4F61E04A34C005A7781 /* Products */,
+				B67446121E0DCFC1001A3529 /* bank-icon.png */,
+				B67446141E0DD308001A3529 /* water-icon-2.png */,
+				B61F478E1E6E5F7C00A48CA4 /* Water.png */,
+				B67446181E0DD3B2001A3529 /* sand-pile.png */,
+				B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */,
+				B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */,
+				B674462E1E14556A001A3529 /* edit-icon.png */,
+				B674461E1E0DD5EE001A3529 /* coin-stacks.png */,
+				B67446221E0E55CB001A3529 /* refresh.png */,
+				B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */,
+				B67446241E10CEC7001A3529 /* menu-icon.png */,
+				B6517A7F1E51014D00EB9879 /* bank-icon-60.png */,
+				B6517A811E5101CE00EB9879 /* bank-icon-120.png */,
+				B6517A831E5101D900EB9879 /* bank-icon-180.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +118,16 @@
 			children = (
 				B64CB4F81E04A34C005A7781 /* AppDelegate.swift */,
 				B64CB4FA1E04A34C005A7781 /* ViewController.swift */,
+				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
+				B674462C1E145133001A3529 /* EditGameViewController.swift */,
+				B64CB50A1E04A634005A7781 /* Piece.swift */,
+				B64CB50C1E04B7EC005A7781 /* Board.swift */,
+				B674460E1E0D1CB0001A3529 /* GameView.swift */,
+				B685361D1E1C982700A401B6 /* RemainingPiecesView.swift */,
+				B62426711E5124B200CEEF08 /* NextPieceView.swift */,
+				B674462A1E135E1D001A3529 /* EditGameView.swift */,
+				B67446281E135762001A3529 /* BoardView.swift */,
+				B67446101E0D1D5E001A3529 /* PieceView.swift */,
 				B64CB4FC1E04A34C005A7781 /* Main.storyboard */,
 				B64CB4FF1E04A34C005A7781 /* Assets.xcassets */,
 				B64CB5011E04A34C005A7781 /* LaunchScreen.storyboard */,
@@ -96,6 +168,7 @@
 				TargetAttributes = {
 					B64CB4F41E04A34C005A7781 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 7PLAT9NLJ3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -123,9 +196,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B67446151E0DD308001A3529 /* water-icon-2.png in Resources */,
+				B674461F1E0DD5EE001A3529 /* coin-stacks.png in Resources */,
+				B674462F1E14556A001A3529 /* edit-icon.png in Resources */,
+				B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */,
+				B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */,
+				B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */,
+				B67446191E0DD3B2001A3529 /* sand-pile.png in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
+				B6517A801E51014D00EB9879 /* bank-icon-60.png in Resources */,
+				B67446251E10CEC7001A3529 /* menu-icon.png in Resources */,
+				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
+				B67446131E0DCFC1001A3529 /* bank-icon.png in Resources */,
+				B67446231E0E55CB001A3529 /* refresh.png in Resources */,
+				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
 				B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */,
+				B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +225,16 @@
 			files = (
 				B64CB4FB1E04A34C005A7781 /* ViewController.swift in Sources */,
 				B64CB4F91E04A34C005A7781 /* AppDelegate.swift in Sources */,
+				B64CB50D1E04B7EC005A7781 /* Board.swift in Sources */,
+				B67446111E0D1D5E001A3529 /* PieceView.swift in Sources */,
+				B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */,
+				B67446291E135762001A3529 /* BoardView.swift in Sources */,
+				B64CB50B1E04A634005A7781 /* Piece.swift in Sources */,
+				B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */,
+				B674462D1E145133001A3529 /* EditGameViewController.swift in Sources */,
+				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
+				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
+				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +357,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7PLAT9NLJ3;
 				INFOPLIST_FILE = Bank23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank23;
@@ -272,6 +370,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7PLAT9NLJ3;
 				INFOPLIST_FILE = Bank23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank23;
@@ -299,6 +398,7 @@
 				B64CB5091E04A34C005A7781 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
