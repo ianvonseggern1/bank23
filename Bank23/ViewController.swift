@@ -18,7 +18,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   var _showedIsLostAlert = false
   
   public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    _view = GameView(frame:CGRect.zero, rowCount: _board.rowCount(), columnCount: _board.columnCount())
+    _view = GameView(frame:CGRect.zero)
     _pieces = [Piece]()
     _levelMenuController = LevelMenuController()
     _editGameViewController = EditGameViewController(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -27,7 +27,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   required init?(coder aDecoder: NSCoder) {
-    _view = GameView(frame:CGRect.zero, rowCount: _board.rowCount(), columnCount: _board.columnCount())
+    _view = GameView(frame:CGRect.zero)
     _pieces = [Piece]()
     _levelMenuController = LevelMenuController()
     _editGameViewController = EditGameViewController(coder: aDecoder)!

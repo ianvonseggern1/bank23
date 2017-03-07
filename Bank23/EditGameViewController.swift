@@ -19,17 +19,19 @@ final class EditGameViewController: UIViewController {
   var _pieces = [Piece]()
   var _view: EditGameView
   var _selectedPiece: Piece?
+  var _rows = 5
+  var _columns = 5
   
   var levelMenuController: LevelMenuController?
 
   public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    _view = EditGameView(frame:CGRect.zero, rowCount: _board.rowCount(), columnCount: _board.columnCount())
+    _view = EditGameView(frame:CGRect.zero)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
   
   required init?(coder aDecoder: NSCoder) {
-    _view = EditGameView(frame:CGRect.zero, rowCount: _board.rowCount(), columnCount: _board.columnCount())
+    _view = EditGameView(frame:CGRect.zero)
 
     super.init(coder: aDecoder)
   }
@@ -38,6 +40,13 @@ final class EditGameViewController: UIViewController {
     super.viewDidLoad()
     
     self.view = _view
+    
+    do {
+      _board = try Board(initialBoard: Array(repeating:Array(repeating:Piece.empty, count:_rows), count:_columns))
+      _view._board.updateModel(board: _board._board)
+    } catch {
+      print("Can't initialize board")
+    }
     
     _view._backButton.addTarget(self, action: #selector(didTapBack), for: UIControlEvents.touchUpInside)
     _view._saveButton.addTarget(self, action: #selector(didTapSave), for: UIControlEvents.touchUpInside)

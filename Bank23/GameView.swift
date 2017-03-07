@@ -22,8 +22,8 @@ class GameView: UIView {
   let _remainingPiecesView: RemainingPiecesView
   let _nextPieceView: NextPieceView
   
-  init(frame: CGRect, rowCount: Int, columnCount: Int) {
-    _board = BoardView(frame: CGRect.zero, rowCount: rowCount, columnCount: columnCount)
+  override init(frame: CGRect) {
+    _board = BoardView(frame: CGRect.zero)
     _refreshButton = UIButton()
     _editButton = UIButton()
     _menuIcon = UIButton()

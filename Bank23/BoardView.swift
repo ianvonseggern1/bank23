@@ -10,17 +10,14 @@ import Foundation
 import UIKit
 
 class BoardView: UIImageView {
-  var _rowCount: Int
-  var _columnCount: Int
+  var _rowCount = 0
+  var _columnCount = 0
   
   static func backgroundColor() -> UIColor {
     return UIColor(red:0.83, green:0.91, blue:0.88, alpha:1.0) // D3E8E1
   }
   
-  init(frame: CGRect, rowCount: Int, columnCount: Int) {
-    _rowCount = rowCount
-    _columnCount = columnCount
-  
+  override init(frame: CGRect) {
     super.init(frame:frame)
     
     self.backgroundColor = BoardView.backgroundColor()

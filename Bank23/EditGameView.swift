@@ -17,8 +17,8 @@ class EditGameView: UIView, UITextFieldDelegate {
   let _name = UITextField()
   let _remainingPieces = RemainingPiecesView(frame: CGRect.zero)
 
-  init(frame: CGRect, rowCount: Int, columnCount: Int) {
-    _board = BoardView(frame: CGRect.zero, rowCount: rowCount, columnCount: columnCount)
+  override init(frame: CGRect) {
+    _board = BoardView(frame: CGRect.zero)
     
     super.init(frame:frame)
     
@@ -81,11 +81,12 @@ class EditGameView: UIView, UITextFieldDelegate {
                            height: piece.frame.height)
     }
 
-    _board.sizeToFit()
-    _board.frame = CGRect(x: (bounds.width - _board.frame.width) / 2,
-                          y: (bounds.height - _board.frame.height) / 2 + 100,
-                          width: _board.frame.width,
-                          height: _board.frame.height)
+    let boardSize = _board.sizeThatFits(CGSize(width: bounds.width - 2 * BOARD_PADDING,
+                                               height: bounds.height - 2 * BOARD_PADDING))
+    _board.frame = CGRect(x: (bounds.width - boardSize.width) / 2,
+                          y: (bounds.height - boardSize.height) / 2 + 100,
+                          width: boardSize.width,
+                          height: boardSize.height)
     
     _remainingPieces.sizeToFit()
     _remainingPieces.frame = CGRect(x: _board.frame.minX,
