@@ -13,13 +13,17 @@ class BoardView: UIImageView {
   var _rowCount: Int
   var _columnCount: Int
   
+  static func backgroundColor() -> UIColor {
+    return UIColor(red:0.83, green:0.91, blue:0.88, alpha:1.0) // D3E8E1
+  }
+  
   init(frame: CGRect, rowCount: Int, columnCount: Int) {
     _rowCount = rowCount
     _columnCount = columnCount
   
     super.init(frame:frame)
     
-    self.backgroundColor = UIColor(red:0.83, green:0.91, blue:0.88, alpha:1.0) // D3E8E1
+    self.backgroundColor = BoardView.backgroundColor()
     self.isUserInteractionEnabled = true
   }
   

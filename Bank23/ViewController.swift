@@ -15,6 +15,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   let _levelMenuController: LevelMenuController
   let _editGameViewController: EditGameViewController
   var _currentSwipeDirection: Direction?
+  var _showedIsLostAlert = false
   
   public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     _view = GameView(frame:CGRect.zero, rowCount: _board.rowCount(), columnCount: _board.columnCount())
@@ -74,18 +75,22 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func didTapRefresh() {
-    if (_board.isWon()) {
+    if (_board.isWon() || _showedIsLostAlert) {
       self.reset()
     } else {
-      let alert = UIAlertController(title: nil,
-                                    message: "Are you sure you want to reset?",
-                                    preferredStyle: UIAlertControllerStyle.alert)
-      alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-      alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.destructive, handler: { (_ : UIAlertAction) -> Void in
-        self.reset()
-      }))
-      self.present(alert, animated: true, completion: nil)
+      self.showResetAlert(message: "Are you sure you want to reset?")
     }
+  }
+  
+  func showResetAlert(message: String) {
+    let alert = UIAlertController(title: nil,
+                                  message: message,
+                                  preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+    alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.destructive, handler: { (_ : UIAlertAction) -> Void in
+      self.reset()
+    }))
+    self.present(alert, animated: true, completion: nil)
   }
   
   func didTapEdit() {
@@ -94,8 +99,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   
   func reset() {
     self.setupBoard()
-    self._view.update(board: self._board._board, pieces: self._pieces)
-    self._view._victoryLabel.isHidden = true
+    _view.update(board: _board._board, pieces: _pieces)
+    _view._victoryLabel.isHidden = true
+    _view._levelMenu.isHidden = true
+    _showedIsLostAlert = false
+    _view._board.backgroundColor = BoardView.backgroundColor()
   }
   
   func userDidPan(gesture: UIPanGestureRecognizer) {
@@ -221,6 +229,22 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     if self._board.isWon() {
       self._view._victoryLabel.isHidden = false
     }
+    
+    if self._board.isLost(remainingCoins: self.remainingCoins()) && !_showedIsLostAlert {
+      self._view._board.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+      _showedIsLostAlert = true
+      self.showResetAlert(message: "No remaining ways to win, would you like to reset?")
+    }
+  }
+  
+  func remainingCoins() -> Int {
+    var remainingCoins = 0
+    for piece in _pieces {
+      if piece.sameType(otherPiece: Piece.coins(1)) {
+        remainingCoins += piece.value()
+      }
+    }
+    return remainingCoins
   }
 
   func setupBoard() {
@@ -252,14 +276,4 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     }
     return pieces
   }
-  
-  // LevelMenuControllerDelegate
-  
-  func shouldResetBoard() {
-    self.setupBoard()
-    _view.update(board: _board._board, pieces: _pieces)
-    _view._victoryLabel.isHidden = true
-    _view._levelMenu.isHidden = true
-  }
 }
-

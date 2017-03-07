@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol LevelMenuControllerDelegate: NSObjectProtocol {
-  func shouldResetBoard()
+  func reset()
 }
 
 public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDelegate {
@@ -221,6 +221,6 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
   
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     _currentRow = indexPath.row
-    delegate?.shouldResetBoard()
+    delegate?.reset()
   }
 }
