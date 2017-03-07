@@ -19,7 +19,7 @@ class BoardView: UIImageView {
   
     super.init(frame:frame)
     
-    self.backgroundColor = UIColor.lightGray
+    self.backgroundColor = UIColor(red:0.83, green:0.91, blue:0.88, alpha:1.0) // D3E8E1
     self.isUserInteractionEnabled = true
   }
   
@@ -31,6 +31,7 @@ class BoardView: UIImageView {
     // draw lines
     UIGraphicsBeginImageContext(self.frame.size)
     let context = UIGraphicsGetCurrentContext()
+    context?.setStrokeColor(UIColor(red:0.42, green:0.56, blue:0.33, alpha:1.0).cgColor)
     for i in 1...(_columnCount - 1) {
       let float_i = CGFloat(i)
       context?.move(to: CGPoint(x: self.singleSquareSize() * float_i, y: 0))
