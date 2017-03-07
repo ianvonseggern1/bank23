@@ -226,11 +226,10 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func setupBoard() {
     do {
       _board = try Board(initialBoard: _levelMenuController.initialBoard())
+      _pieces = shuffle(_levelMenuController.initialPieces())
     } catch {
       print("Can not initialize board")
     }
-
-    _pieces = shuffle(_levelMenuController.initialPieces())
   }
   
   func shuffle(_ p: [Piece]) -> [Piece] {

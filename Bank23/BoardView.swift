@@ -47,6 +47,15 @@ class BoardView: UIImageView {
     }
     self.image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
+    
+    // layout pieces
+    for subview in self.subviews {
+      let pieceview = subview as! PieceView
+      pieceview.frame = CGRect(x: self.singleSquareSize() * CGFloat(pieceview._column),
+                               y:self.singleSquareSize() * CGFloat(_rowCount - 1 - pieceview._row),
+                               width:self.singleSquareSize(),
+                               height:self.singleSquareSize())
+    }
   }
   
   func singleSquareSize() -> CGFloat {
@@ -123,10 +132,7 @@ class BoardView: UIImageView {
     if (row < 0 || col < 0 || row >= _rowCount || col >= _columnCount) {
       assertionFailure("invalide row /(row) or col /(col) value passed to view")
     }
-    let pieceView = PieceView(frame: CGRect(x: self.singleSquareSize() * CGFloat(col),
-                                            y:self.singleSquareSize() * CGFloat(_rowCount - 1 - row),
-                                            width:self.singleSquareSize(),
-                                            height:self.singleSquareSize()),
+    let pieceView = PieceView(frame: CGRect.zero,
                               model: piece,
                               pieceColor: UIColor.white,
                               row:row,
