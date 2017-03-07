@@ -15,7 +15,7 @@ enum selectedButton {
 }
 
 final class EditGameViewController: UIViewController {
-  var _board = Board(columns: 5, rows: 5)
+  var _board = Board()
   var _pieces = [Piece]()
   var _view: EditGameView
   var _selectedPiece: Piece?

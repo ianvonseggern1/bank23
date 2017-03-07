@@ -101,6 +101,9 @@ class BoardView: UIImageView {
   
   func updateModel(board: [[Piece]]) {
     _columnCount = board.count
+    if (_columnCount == 0) {
+      return
+    }
     _rowCount = board[0].count
 
     for subview in self.subviews {

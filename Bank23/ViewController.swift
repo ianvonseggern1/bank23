@@ -9,7 +9,7 @@
 import UIKit
 
 final class ViewController: UIViewController, LevelMenuControllerDelegate {
-  var _board = Board(columns: 5, rows: 5)
+  var _board = Board()
   var _view: GameView
   var _pieces: [Piece] // The pieces in the order they will come out
   let _levelMenuController: LevelMenuController
@@ -224,9 +224,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func setupBoard() {
-    let initalBoard = _levelMenuController.initialBoard()
-    _board = Board(columns: initalBoard.count, rows: initalBoard[0].count)
-    _board._board = initalBoard
+    do {
+      _board = try Board(initialBoard: _levelMenuController.initialBoard())
+    } catch {
+      print("Can not initialize board")
+    }
 
     _pieces = shuffle(_levelMenuController.initialPieces())
   }

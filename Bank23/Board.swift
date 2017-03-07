@@ -8,6 +8,9 @@
 
 import Foundation
 
+enum BoardModelError: Error {
+  case initialBoardNotRectangle
+}
 public enum Direction {
   case left
   case right
@@ -16,14 +19,27 @@ public enum Direction {
 }
 
 public class Board {
-  var _board:[[Piece]] // Board is an array of columns, so index with [column][row]. 0, 0 is bottom left
-  let _rows:Int
-  let _columns:Int
+  var _board = [[Piece]]() // Board is an array of columns, so index with [column][row]. 0, 0 is bottom left
+  var _rows = 0
+  var _columns = 0
   
-  public init(columns: Int, rows: Int) {
-    _rows = rows
-    _columns = columns
-    _board = Array(repeating:Array(repeating:Piece.empty, count:_rows), count:_columns)
+  public init() {
+  }
+  
+  public init(initialBoard: [[Piece]]) throws {
+    (_rows, _columns) = try getRowAndColumnCount(board: initialBoard)
+    _board = initialBoard
+  }
+  
+  func getRowAndColumnCount(board: [[Piece]]) throws -> (Int, Int) {
+    let columnCount = board.count
+    let rowCount = board[0].count
+    for column in board {
+      if column.count != rowCount {
+        throw BoardModelError.initialBoardNotRectangle
+      }
+    }
+    return (rowCount, columnCount)
   }
   
   func rowCount() -> Int {
