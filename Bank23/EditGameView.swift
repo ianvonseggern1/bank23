@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let DEFAULT_SIZE = 5
+
 class EditGameView: UIView, UITextFieldDelegate {
   let _board: BoardView
   var _pieceButtons = [PieceView]()
@@ -16,6 +18,8 @@ class EditGameView: UIView, UITextFieldDelegate {
   let _saveButton = UIButton()
   let _name = UITextField()
   let _remainingPieces = RemainingPiecesView(frame: CGRect.zero)
+  var _sizeLabel = UILabel()
+  var _sizeStepper = UIStepper()
 
   override init(frame: CGRect) {
     _board = BoardView(frame: CGRect.zero)
@@ -39,6 +43,14 @@ class EditGameView: UIView, UITextFieldDelegate {
     _name.returnKeyType = UIReturnKeyType.done
     _name.delegate = self
     self.addSubview(_name)
+    
+    _sizeLabel.text = "Size"
+    self.addSubview(_sizeLabel)
+    
+    _sizeStepper.autorepeat = false
+    _sizeStepper.value = Double(DEFAULT_SIZE)
+    self.addSubview(_sizeStepper)
+    
     
     _pieceButtons = [Piece.bank(1), Piece.coins(1), Piece.water(1), Piece.sand(1)].map({ (piece: Piece) -> PieceView in
       let pieceView = PieceView(frame: CGRect.zero, model: piece, pieceColor: UIColor.white, row: -1, column: -1)
@@ -93,6 +105,20 @@ class EditGameView: UIView, UITextFieldDelegate {
                                     y: _board.frame.minY - _remainingPieces.frame.height - 15,
                                     width: _remainingPieces.frame.width,
                                     height: _remainingPieces.frame.height)
+    
+    _sizeLabel.sizeToFit()
+    _sizeLabel.frame = CGRect(x: _board.frame.maxX - _sizeLabel.frame.width,
+                              y: _remainingPieces.frame.minY,
+                              width: _sizeLabel.frame.width,
+                              height: _sizeLabel.frame.height)
+    _sizeStepper.frame = CGRect(x: _board.frame.maxX - _sizeStepper.frame.width,
+                                y: _sizeLabel.frame.maxY,
+                                width: _sizeStepper.frame.width,
+                                height: _sizeStepper.frame.height)
+  }
+  
+  func sizeStepperTapped() {
+    
   }
   
   // UITextFieldDelegate

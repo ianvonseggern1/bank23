@@ -19,8 +19,6 @@ final class EditGameViewController: UIViewController {
   var _pieces = [Piece]()
   var _view: EditGameView
   var _selectedPiece: Piece?
-  var _rows = 5
-  var _columns = 5
   
   var levelMenuController: LevelMenuController?
 
@@ -40,16 +38,14 @@ final class EditGameViewController: UIViewController {
     super.viewDidLoad()
     
     self.view = _view
-    
-    do {
-      _board = try Board(initialBoard: Array(repeating:Array(repeating:Piece.empty, count:_rows), count:_columns))
-      _view._board.updateModel(board: _board._board)
-    } catch {
-      print("Can't initialize board")
-    }
+
+    let initialBoardSize = 5
+    _view._sizeStepper.value = Double(initialBoardSize)
+    self.setEmptyBoardModel(size: initialBoardSize)
     
     _view._backButton.addTarget(self, action: #selector(didTapBack), for: UIControlEvents.touchUpInside)
     _view._saveButton.addTarget(self, action: #selector(didTapSave), for: UIControlEvents.touchUpInside)
+    _view._sizeStepper.addTarget(self, action: #selector(sizeStepperTapped), for: UIControlEvents.valueChanged)
 
     _view.isUserInteractionEnabled = true
     _view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userDidTap(gesture:))))
@@ -57,6 +53,15 @@ final class EditGameViewController: UIViewController {
     _pieces.append(Piece.coins(0))
     _pieces.append(Piece.sand(0))
     _view._remainingPieces.updatePiecesLeft(pieces: _pieces)
+  }
+  
+  func setEmptyBoardModel(size: Int) {
+    _board = try! Board(initialBoard: Array(repeating:Array(repeating:Piece.empty, count:size), count:size))
+    _view._board.updateModel(board: _board._board)
+  }
+  
+  func sizeStepperTapped() {
+    self.setEmptyBoardModel(size: Int(_view._sizeStepper.value))
   }
   
   func userDidTap(gesture: UITapGestureRecognizer) {
@@ -80,7 +85,7 @@ final class EditGameViewController: UIViewController {
     if hitView is RemainingPiecesView {
       didTapRemainingPieces()
     }
-  }// grandma's wifi password: anieldrm
+  }
   
   func didTapPieceButton(pieceView: PieceView) {
     // If you select the same piece we swap between increment and decrement
@@ -108,8 +113,8 @@ final class EditGameViewController: UIViewController {
     }
     
     let boardOrigin = _view._board.frame.origin
-    let column = Int(floor((at.x - boardOrigin.x) / SINGLE_SQUARE_SIZE))
-    let row = _board.rowCount() - 1 - Int(floor((at.y - boardOrigin.y) / SINGLE_SQUARE_SIZE))
+    let column = Int(floor((at.x - boardOrigin.x) / _view._board.singleSquareSize()))
+    let row = _board.rowCount() - 1 - Int(floor((at.y - boardOrigin.y) / _view._board.singleSquareSize()))
     
     let existingPiece = _board._board[column][row]
     var pieceToAdd = _selectedPiece!
