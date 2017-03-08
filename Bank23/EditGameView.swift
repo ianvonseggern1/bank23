@@ -14,8 +14,6 @@ let DEFAULT_SIZE = 5
 class EditGameView: UIView, UITextFieldDelegate {
   let _board: BoardView
   var _pieceButtons = [PieceView]()
-  let _backButton = UIButton()
-  let _saveButton = UIButton()
   let _name = UITextField()
   let _remainingPieces = RemainingPiecesView(frame: CGRect.zero)
   var _sizeLabel = UILabel()
@@ -27,16 +25,6 @@ class EditGameView: UIView, UITextFieldDelegate {
     super.init(frame:frame)
     
     self.backgroundColor = UIColor.white
-    
-    _backButton.setTitle("Back", for: UIControlState.normal)
-    _backButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-    _backButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-    self.addSubview(_backButton)
-    
-    _saveButton.setTitle("Save", for: UIControlState.normal)
-    _saveButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-    _saveButton.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-    self.addSubview(_saveButton)
     
     _name.placeholder = "Name"
     _name.textAlignment = NSTextAlignment.center
@@ -74,17 +62,8 @@ class EditGameView: UIView, UITextFieldDelegate {
   override func layoutSubviews() {
     let bounds = self.bounds
     
-    _backButton.sizeToFit()
-    _backButton.frame = CGRect(x: 0, y: 25, width:_backButton.frame.width, height:_backButton.frame.height)
-    
-    _saveButton.sizeToFit()
-    _saveButton.frame = CGRect(x: bounds.width - _saveButton.frame.width,
-                               y: 25,
-                               width: _saveButton.frame.width,
-                               height: _saveButton.frame.height)
-    
     _name.frame = CGRect(x: (bounds.width - 200) / 2,
-                         y: 25,
+                         y: 65,
                          width: 200,
                          height: 40)
     
@@ -92,7 +71,7 @@ class EditGameView: UIView, UITextFieldDelegate {
     for (index, piece) in _pieceButtons.enumerated() {
       piece.sizeToFit()
       piece.frame = CGRect(x: (bounds.width - pieceButtonsWidth) / 2 + CGFloat(index) * piece.frame.width,
-                           y: _backButton.frame.maxY + 20,
+                           y: _name.frame.maxY,
                            width: piece.frame.width,
                            height: piece.frame.height)
     }
@@ -119,10 +98,6 @@ class EditGameView: UIView, UITextFieldDelegate {
                                 y: _sizeLabel.frame.maxY,
                                 width: _sizeStepper.frame.width,
                                 height: _sizeStepper.frame.height)
-  }
-  
-  func sizeStepperTapped() {
-    
   }
   
   // UITextFieldDelegate

@@ -24,6 +24,7 @@
 		B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = B6517A831E5101D900EB9879 /* bank-icon-180.png */; };
 		B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */ = {isa = PBXBuildFile; fileRef = B66C18651E6FC8EF00CD0498 /* mountain.png */; };
 		B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */ = {isa = PBXBuildFile; fileRef = B66C18671E6FCA2500CD0498 /* mountain2.png */; };
+		B66C186A1E70843500CD0498 /* menu-icon25.png in Resources */ = {isa = PBXBuildFile; fileRef = B66C18691E70843500CD0498 /* menu-icon25.png */; };
 		B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B674460E1E0D1CB0001A3529 /* GameView.swift */; };
 		B67446111E0D1D5E001A3529 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446101E0D1D5E001A3529 /* PieceView.swift */; };
 		B67446131E0DCFC1001A3529 /* bank-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446121E0DCFC1001A3529 /* bank-icon.png */; };
@@ -31,7 +32,6 @@
 		B67446191E0DD3B2001A3529 /* sand-pile.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446181E0DD3B2001A3529 /* sand-pile.png */; };
 		B674461F1E0DD5EE001A3529 /* coin-stacks.png in Resources */ = {isa = PBXBuildFile; fileRef = B674461E1E0DD5EE001A3529 /* coin-stacks.png */; };
 		B67446231E0E55CB001A3529 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446221E0E55CB001A3529 /* refresh.png */; };
-		B67446251E10CEC7001A3529 /* menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B67446241E10CEC7001A3529 /* menu-icon.png */; };
 		B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446261E11F0D9001A3529 /* LevelMenuController.swift */; };
 		B67446291E135762001A3529 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446281E135762001A3529 /* BoardView.swift */; };
 		B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B674462A1E135E1D001A3529 /* EditGameView.swift */; };
@@ -60,6 +60,7 @@
 		B6517A831E5101D900EB9879 /* bank-icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank-icon-180.png"; sourceTree = "<group>"; };
 		B66C18651E6FC8EF00CD0498 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
 		B66C18671E6FCA2500CD0498 /* mountain2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain2.png; sourceTree = "<group>"; };
+		B66C18691E70843500CD0498 /* menu-icon25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-icon25.png"; sourceTree = "<group>"; };
 		B674460E1E0D1CB0001A3529 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B67446101E0D1D5E001A3529 /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
 		B67446121E0DCFC1001A3529 /* bank-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bank-icon.png"; path = "../../Downloads/bank-icon.png"; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		B67446181E0DD3B2001A3529 /* sand-pile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sand-pile.png"; path = "../../Downloads/sand-pile.png"; sourceTree = "<group>"; };
 		B674461E1E0DD5EE001A3529 /* coin-stacks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "coin-stacks.png"; path = "../../Downloads/coin-stacks.png"; sourceTree = "<group>"; };
 		B67446221E0E55CB001A3529 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = ../../Downloads/refresh.png; sourceTree = "<group>"; };
-		B67446241E10CEC7001A3529 /* menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-icon.png"; path = "../../Downloads/menu-icon.png"; sourceTree = "<group>"; };
 		B67446261E11F0D9001A3529 /* LevelMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMenuController.swift; sourceTree = "<group>"; };
 		B67446281E135762001A3529 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		B674462A1E135E1D001A3529 /* EditGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGameView.swift; sourceTree = "<group>"; };
@@ -99,12 +99,12 @@
 				B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */,
 				B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */,
 				B66C18651E6FC8EF00CD0498 /* mountain.png */,
+				B66C18691E70843500CD0498 /* menu-icon25.png */,
 				B66C18671E6FCA2500CD0498 /* mountain2.png */,
 				B674462E1E14556A001A3529 /* edit-icon.png */,
 				B674461E1E0DD5EE001A3529 /* coin-stacks.png */,
 				B67446221E0E55CB001A3529 /* refresh.png */,
 				B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */,
-				B67446241E10CEC7001A3529 /* menu-icon.png */,
 				B6517A7F1E51014D00EB9879 /* bank-icon-60.png */,
 				B6517A811E5101CE00EB9879 /* bank-icon-120.png */,
 				B6517A831E5101D900EB9879 /* bank-icon-180.png */,
@@ -206,12 +206,12 @@
 				B674461F1E0DD5EE001A3529 /* coin-stacks.png in Resources */,
 				B674462F1E14556A001A3529 /* edit-icon.png in Resources */,
 				B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */,
+				B66C186A1E70843500CD0498 /* menu-icon25.png in Resources */,
 				B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */,
 				B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */,
 				B67446191E0DD3B2001A3529 /* sand-pile.png in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
 				B6517A801E51014D00EB9879 /* bank-icon-60.png in Resources */,
-				B67446251E10CEC7001A3529 /* menu-icon.png in Resources */,
 				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
 				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,

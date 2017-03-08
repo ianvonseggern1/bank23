@@ -43,18 +43,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     self.view = _view
     
     self.navigationItem.title = _levelMenuController.currentName()
-    self.navigationController?.setNavigationBarHidden(true, animated: true)
-    
-    // TODO, move menu buttons to navigationItem, lots of problems with custom icons though
-//    let menuIcon = UIButton()
-//    menuIcon.setImage(UIImage(named: "menu-icon.png"), for: UIControlState.normal)
-//    menuIcon.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-//    menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
-//    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: true)
-    
-    _view._refreshButton.addTarget(self, action: #selector(didTapRefresh), for: UIControlEvents.touchUpInside)
-    _view._editButton.addTarget(self, action: #selector(didTapEdit), for: UIControlEvents.touchUpInside)
-    _view._menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
+    self.setupNavigationBarItems()
     
     // Configure level menu controller
     _levelMenuController.configureWith(tableView: _view._levelMenu)
@@ -67,6 +56,27 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     
     setupBoard()
     _view.update(board: _board._board, pieces: _pieces)
+  }
+  
+  func setupNavigationBarItems() {
+    let menuIcon = UIButton()
+    menuIcon.setImage(UIImage(named: "menu-icon25.png"), for: UIControlState.normal)
+    menuIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 22)
+    menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
+    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
+    
+    let refreshIcon = UIButton()
+    refreshIcon.setImage(UIImage(named: "refresh.png"), for: UIControlState.normal)
+    refreshIcon.bounds = CGRect(x: 10, y: 0, width: 25, height: 25)
+    refreshIcon.addTarget(self, action: #selector(didTapRefresh), for: UIControlEvents.touchUpInside)
+    let editIcon = UIButton()
+    editIcon.setImage(UIImage(named: "edit-icon.png"), for: UIControlState.normal)
+    editIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
+    editIcon.addTarget(self, action: #selector(didTapEdit), for: UIControlEvents.touchUpInside)
+    
+
+    self.navigationItem.setRightBarButtonItems([UIBarButtonItem(customView: refreshIcon),
+                                                UIBarButtonItem(customView: editIcon)], animated: false)
   }
   
   func didTapMenu() {
@@ -98,6 +108,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
+    self.navigationItem.title = _levelMenuController.currentName()
     self.setupBoard()
     _view.update(board: _board._board, pieces: _pieces)
     _view._victoryLabel.isHidden = true

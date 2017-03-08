@@ -38,13 +38,12 @@ final class EditGameViewController: UIViewController {
     super.viewDidLoad()
     
     self.view = _view
+    self.setupNavigationBar()
 
     let initialBoardSize = 5
     _view._sizeStepper.value = Double(initialBoardSize)
     self.setEmptyBoardModel(size: initialBoardSize)
     
-    _view._backButton.addTarget(self, action: #selector(didTapBack), for: UIControlEvents.touchUpInside)
-    _view._saveButton.addTarget(self, action: #selector(didTapSave), for: UIControlEvents.touchUpInside)
     _view._sizeStepper.addTarget(self, action: #selector(sizeStepperTapped), for: UIControlEvents.valueChanged)
 
     _view.isUserInteractionEnabled = true
@@ -53,6 +52,14 @@ final class EditGameViewController: UIViewController {
     _pieces.append(Piece.coins(0))
     _pieces.append(Piece.sand(0))
     _view._remainingPieces.updatePiecesLeft(pieces: _pieces)
+  }
+  
+  func setupNavigationBar() {
+    self.navigationItem.title = "Create Level"
+    self.navigationItem.setRightBarButton(UIBarButtonItem(title: "Save",
+                                                          style: UIBarButtonItemStyle.plain,
+                                                          target: self,
+                                                          action: #selector(didTapSave)), animated: true)
   }
   
   func setEmptyBoardModel(size: Int) {
@@ -65,6 +72,8 @@ final class EditGameViewController: UIViewController {
   }
   
   func userDidTap(gesture: UITapGestureRecognizer) {
+    _view._name.resignFirstResponder()
+    
     let location = gesture.location(in: _view)
     let hitView = _view.hitTest(location, with: nil)
     if hitView is PieceView {

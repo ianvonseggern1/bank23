@@ -14,19 +14,13 @@ let BOARD_PADDING: CGFloat = 20.0
 
 class GameView: UIView {
   let _board: BoardView
-  let _refreshButton: UIButton
-  let _menuIcon: UIButton
   let _victoryLabel: UILabel
   let _levelMenu: UITableView
-  let _editButton: UIButton
   let _remainingPiecesView: RemainingPiecesView
   let _nextPieceView: NextPieceView
   
   override init(frame: CGRect) {
     _board = BoardView(frame: CGRect.zero)
-    _refreshButton = UIButton()
-    _editButton = UIButton()
-    _menuIcon = UIButton()
     _victoryLabel = UILabel()
     _remainingPiecesView = RemainingPiecesView(frame: CGRect.zero)
     _nextPieceView = NextPieceView(frame: CGRect.zero)
@@ -40,18 +34,6 @@ class GameView: UIView {
     
     self.addSubview(_remainingPiecesView)
     self.addSubview(_nextPieceView)
-
-    _refreshButton.setImage(UIImage(named: "refresh.png"), for: UIControlState.normal)
-    _refreshButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    self.addSubview(_refreshButton)
-    
-    _editButton.setImage(UIImage(named:"edit-icon.png"), for: UIControlState.normal)
-    _editButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    self.addSubview(_editButton)
-    
-    _menuIcon.setImage(UIImage(named: "menu-icon.png"), for: UIControlState.normal)
-    _menuIcon.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    self.addSubview(_menuIcon)
     
     _levelMenu.isHidden = true
     self.addSubview(_levelMenu)
@@ -69,14 +51,11 @@ class GameView: UIView {
   override func layoutSubviews() {
     let bounds = self.frame
     
-    _refreshButton.frame = CGRect(x: bounds.width - 50, y: 25, width: 45, height: 45)
-    _editButton.frame = CGRect(x: _refreshButton.frame.minX - 45, y: 25, width: 45, height: 45)
-    _menuIcon.frame = CGRect(x: 5, y: 25, width: 45, height: 45)
-    
+    // todo replace 60 with actual height of navigation bar
     _levelMenu.frame = CGRect(x: 0,
-                              y: _menuIcon.frame.maxY,
+                              y: 60,
                               width: bounds.width * 3 / 4,
-                              height: bounds.height - _menuIcon.frame.maxY)
+                              height: bounds.height - 60)
     
     _victoryLabel.sizeToFit()
     _victoryLabel.frame = CGRect(x: (bounds.width - _victoryLabel.frame.width) / 2.0,
