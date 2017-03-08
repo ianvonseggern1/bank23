@@ -14,21 +14,24 @@ public enum Piece {
   case coins(Int)
   case water(Int)
   case sand(Int)
+  case mountain(Int)
 
   public static func == (left: Piece, right: Piece) -> Bool {
     switch (left, right) {
     case (.empty, .empty):
-      return true;
+      return true
     case (.bank(let x), .bank(let y)):
-      return x == y;
+      return x == y
     case (.coins(let x), .coins(let y)):
-      return x == y;
+      return x == y
     case (.water(let x), .water(let y)):
-      return x == y;
+      return x == y
     case (.sand(let x), .sand(let y)):
+      return x == y
+    case (.mountain(let x), .mountain(let y)):
       return x == y;
     default:
-      return false;
+      return false
     }
   }
   
@@ -61,6 +64,8 @@ public enum Piece {
       return Piece.water(x + value)
     case .sand(let x):
       return Piece.sand(x + value)
+    case .mountain(let x):
+      return Piece.mountain(x + value)
     default:
       // ERROR - NOT SUPPORTED
       return Piece.empty
@@ -77,6 +82,8 @@ public enum Piece {
       return x
     case .water(let x):
       return x
+    case .mountain(let x):
+      return x
     case .empty:
       return 0
     }
@@ -92,6 +99,8 @@ public enum Piece {
       return false
     case .water(_):
       return false
+    case .mountain(_):
+      return false
     case .empty:
       return true // return true to allow movement after all pieces are used up
     }
@@ -100,17 +109,19 @@ public enum Piece {
   func sameType(otherPiece: Piece) -> Bool {
     switch (self, otherPiece) {
     case (.empty, .empty):
-      return true;
+      return true
     case (.bank(_), .bank(_)):
-      return true;
+      return true
     case (.coins(_), .coins(_)):
-      return true;
+      return true
     case (.water(_), .water(_)):
-      return true;
+      return true
     case (.sand(_), .sand(_)):
-      return true;
+      return true
+    case (.mountain(_), .mountain(_)):
+      return true
     default:
-      return false;
+      return false
     }
   }
   

@@ -50,6 +50,9 @@ class PieceView: UIView {
     case .sand(_):
       padding = 2.0
       break
+    case .mountain(_):
+      padding = 8.0
+      break
     default:
       padding = 2.0
       break
@@ -89,6 +92,10 @@ class PieceView: UIView {
       break
     case .sand(let x):
       iconImage = UIImage(named: "sand-pile.png")
+      _countLabel.text = "\(x)"
+      break
+    case .mountain(let x):
+      iconImage = UIImage(named: "mountain2.png")
       _countLabel.text = "\(x)"
       break
     default:

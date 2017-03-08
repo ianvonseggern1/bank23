@@ -52,7 +52,11 @@ class EditGameView: UIView, UITextFieldDelegate {
     self.addSubview(_sizeStepper)
     
     
-    _pieceButtons = [Piece.bank(1), Piece.coins(1), Piece.water(1), Piece.sand(1)].map({ (piece: Piece) -> PieceView in
+    _pieceButtons = [Piece.bank(1),
+                     Piece.water(1),
+                     Piece.mountain(1),
+                     Piece.coins(1),
+                     Piece.sand(1)].map({ (piece: Piece) -> PieceView in
       let pieceView = PieceView(frame: CGRect.zero, model: piece, pieceColor: UIColor.white, row: -1, column: -1)
       self.addSubview(pieceView)
       return pieceView
