@@ -51,7 +51,7 @@ class PieceView: UIView {
       padding = 8.0
       break
     case .mountain(_):
-      padding = 8.0
+      padding = 0.0
       break
     default:
       padding = 2.0
