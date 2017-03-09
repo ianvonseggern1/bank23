@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
+		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
 		B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */; };
 		B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */; };
 		B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F478E1E6E5F7C00A48CA4 /* Water.png */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
+		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
 		B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Coin Icon 01.png"; sourceTree = "<group>"; };
 		B61F478E1E6E5F7C00A48CA4 /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
@@ -99,7 +103,9 @@
 				B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */,
 				B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */,
 				B66C18651E6FC8EF00CD0498 /* mountain.png */,
+				B61C692D1E71FD5600E68150 /* Mountains.png */,
 				B66C18691E70843500CD0498 /* menu-icon25.png */,
+				B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */,
 				B66C18671E6FCA2500CD0498 /* mountain2.png */,
 				B674462E1E14556A001A3529 /* edit-icon.png */,
 				B674461E1E0DD5EE001A3529 /* coin-stacks.png */,
@@ -204,7 +210,9 @@
 			files = (
 				B67446151E0DD308001A3529 /* water-icon-2.png in Resources */,
 				B674461F1E0DD5EE001A3529 /* coin-stacks.png in Resources */,
+				B61C692E1E71FD5600E68150 /* Mountains.png in Resources */,
 				B674462F1E14556A001A3529 /* edit-icon.png in Resources */,
+				B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */,
 				B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */,
 				B66C186A1E70843500CD0498 /* menu-icon25.png in Resources */,
 				B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */,
