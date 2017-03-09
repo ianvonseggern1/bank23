@@ -169,6 +169,42 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:16))
     initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:32))
     _initialPieces.append(initialPieces)
+    
+    // Level 9
+    _levelNames.append("Grand Canyon")
+    
+    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:7), count:7)
+    initialBoard[2][6] = Piece.mountain(1)
+    initialBoard[2][5] = Piece.mountain(1)
+    initialBoard[2][4] = Piece.mountain(1)
+    initialBoard[2][3] = Piece.mountain(1)
+    initialBoard[2][2] = Piece.mountain(1)
+    initialBoard[2][1] = Piece.mountain(1)
+    initialBoard[4][6] = Piece.mountain(1)
+    initialBoard[4][5] = Piece.mountain(1)
+    initialBoard[4][4] = Piece.mountain(1)
+    initialBoard[4][3] = Piece.mountain(1)
+    initialBoard[4][2] = Piece.mountain(1)
+    initialBoard[4][1] = Piece.mountain(1)
+    initialBoard[1][2] = Piece.mountain(1)
+    initialBoard[1][5] = Piece.mountain(1)
+    initialBoard[5][2] = Piece.mountain(1)
+    initialBoard[5][5] = Piece.mountain(1)
+    
+    initialBoard[1][1] = Piece.water(4)
+    initialBoard[1][4] = Piece.water(4)
+    initialBoard[5][1] = Piece.water(4)
+    initialBoard[5][4] = Piece.water(4)
+    initialBoard[3][3] = Piece.water(4)
+    
+    initialBoard[3][2] = Piece.bank(5)
+    initialBoard[3][4] = Piece.bank(5)
+    _initialBoards.append(initialBoard)
+    
+    initialPieces = [Piece]()
+    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
+    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    _initialPieces.append(initialPieces)
   }
   
   public func configureWith(tableView: UITableView) {
