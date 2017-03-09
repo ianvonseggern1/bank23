@@ -208,7 +208,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                      self._view.update(board: self._board._board, pieces: self._pieces)
                     
                      var newPieceView: PieceView? = nil
-                     if (piece != nil && newPieceLocation != nil) {
+                     if (piece != nil && piece! != Piece.empty && newPieceLocation != nil) {
                        let (newPieceColumn, newPieceRow) = newPieceLocation!
                        newPieceView = self._view._board.addPiece(piece: piece!,
                                                                  row: newPieceRow,
