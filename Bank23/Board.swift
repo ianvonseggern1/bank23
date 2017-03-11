@@ -18,17 +18,26 @@ public enum Direction {
   case bottom
 }
 
-public class Board {
+public final class Board : NSCoding {
   var _board = [[Piece]]() // Board is an array of columns, so index with [column][row]. 0, 0 is bottom left
   var _rows = 0
   var _columns = 0
   
-  public init() {
+  public func encode(with aCoder: NSCoder) {
+    aCoder.encode(_board, forKey: "boardArray")
+  }
+  
+  public init?(coder aDecoder: NSCoder) {
+    _board = aDecoder.decodeObject(forKey: "boardArray") as! [[Piece]]
+    (_rows, _columns) = try! getRowAndColumnCount(board: _board)
   }
   
   public init(initialBoard: [[Piece]]) throws {
     (_rows, _columns) = try getRowAndColumnCount(board: initialBoard)
     _board = initialBoard
+  }
+  
+  public init() {
   }
   
   func getRowAndColumnCount(board: [[Piece]]) throws -> (Int, Int) {

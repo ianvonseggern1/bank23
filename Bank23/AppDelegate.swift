@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AWSCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,7 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     nav1.viewControllers = [mainView]
     self.window!.rootViewController = nav1
     self.window?.makeKeyAndVisible()
-    return true
+    
+//    let credentialsProvider = AWSCognitoCredentialsProvider(regionType:AWSRegionType.USEast1, identityPoolId: "us-east-1:84b01aa1-441f-4269-a648-cf73fbf4d203")
+//    let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast1 , credentialsProvider:credentialsProvider)
+//    AWSServiceManager.default().defaultServiceConfiguration = configuration
+    
+    return AWSMobileClient.sharedInstance.didFinishLaunching(application, withOptions: launchOptions)
+    //return true
+  }
+  
+  func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    return AWSMobileClient.sharedInstance.withApplication(application, withURL: url, withSourceApplication: sourceApplication, withAnnotation: annotation)
   }
 
   func applicationWillResignActive(_ application: UIApplication) {
@@ -40,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    AWSMobileClient.sharedInstance.applicationDidBecomeActive(application)
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
+		B61C69341E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift in Resources */ = {isa = PBXBuildFile; fileRef = B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */; };
+		B61C69371E74AA6F00E68150 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69351E74AA6F00E68150 /* AWSCore.framework */; };
+		B61C69381E74AA6F00E68150 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69351E74AA6F00E68150 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B61C69391E74AA6F00E68150 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */; };
+		B61C693A1E74AA6F00E68150 /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B61C693F1E74AC9200E68150 /* AmazonAws in Resources */ = {isa = PBXBuildFile; fileRef = B61C693E1E74AC9200E68150 /* AmazonAws */; };
+		B61C69421E74ADB900E68150 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69411E74ADB900E68150 /* libz.tbd */; };
+		B61C69441E74ADCE00E68150 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69431E74ADCE00E68150 /* libsqlite3.tbd */; };
+		B61C69461E74B44F00E68150 /* AWSMobileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61C69451E74B44F00E68150 /* AWSMobileClient.swift */; };
+		B61C69481E74B45500E68150 /* AWSMobileHubHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69471E74B45500E68150 /* AWSMobileHubHelper.framework */; };
+		B61C694A1E74B45B00E68150 /* Models in Resources */ = {isa = PBXBuildFile; fileRef = B61C69491E74B45B00E68150 /* Models */; };
 		B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */; };
 		B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */; };
 		B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */ = {isa = PBXBuildFile; fileRef = B61F478E1E6E5F7C00A48CA4 /* Water.png */; };
@@ -42,9 +53,33 @@
 		B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B685361D1E1C982700A401B6 /* RemainingPiecesView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B61C693B1E74AA6F00E68150 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B61C693A1E74AA6F00E68150 /* AWSDynamoDB.framework in Embed Frameworks */,
+				B61C69381E74AA6F00E68150 /* AWSCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
+		B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift"; sourceTree = SOURCE_ROOT; };
+		B61C69351E74AA6F00E68150 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws/AWSCore.framework"; sourceTree = "<group>"; };
+		B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSDynamoDB.framework; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws/AWSDynamoDB.framework"; sourceTree = "<group>"; };
+		B61C693E1E74AC9200E68150 /* AmazonAws */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AmazonAws; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws"; sourceTree = "<group>"; };
+		B61C69411E74ADB900E68150 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		B61C69431E74ADCE00E68150 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		B61C69451E74B44F00E68150 /* AWSMobileClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSMobileClient.swift; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws/AWSMobileClient.swift"; sourceTree = "<group>"; };
+		B61C69471E74B45500E68150 /* AWSMobileHubHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSMobileHubHelper.framework; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws/AWSMobileHubHelper.framework"; sourceTree = "<group>"; };
+		B61C69491E74B45B00E68150 /* Models */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Models; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws/Models"; sourceTree = "<group>"; };
 		B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Coin Icon 01.png"; sourceTree = "<group>"; };
 		B61F478E1E6E5F7C00A48CA4 /* Water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Water.png; sourceTree = "<group>"; };
@@ -85,16 +120,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61C69481E74B45500E68150 /* AWSMobileHubHelper.framework in Frameworks */,
+				B61C69441E74ADCE00E68150 /* libsqlite3.tbd in Frameworks */,
+				B61C69421E74ADB900E68150 /* libz.tbd in Frameworks */,
+				B61C69391E74AA6F00E68150 /* AWSDynamoDB.framework in Frameworks */,
+				B61C69371E74AA6F00E68150 /* AWSCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61C693D1E74AC5100E68150 /* AmazonAws */ = {
+			isa = PBXGroup;
+			children = (
+				B61C69471E74B45500E68150 /* AWSMobileHubHelper.framework */,
+				B61C69451E74B44F00E68150 /* AWSMobileClient.swift */,
+				B61C69491E74B45B00E68150 /* Models */,
+				B61C693E1E74AC9200E68150 /* AmazonAws */,
+			);
+			name = AmazonAws;
+			sourceTree = "<group>";
+		};
+		B61C69401E74ADB900E68150 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B61C69431E74ADCE00E68150 /* libsqlite3.tbd */,
+				B61C69411E74ADB900E68150 /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B64CB4EC1E04A34C005A7781 = {
 			isa = PBXGroup;
 			children = (
+				B61C69351E74AA6F00E68150 /* AWSCore.framework */,
+				B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */,
 				B64CB4F71E04A34C005A7781 /* Bank23 */,
+				B61C693D1E74AC5100E68150 /* AmazonAws */,
 				B64CB4F61E04A34C005A7781 /* Products */,
 				B67446121E0DCFC1001A3529 /* bank-icon.png */,
 				B67446141E0DD308001A3529 /* water-icon-2.png */,
@@ -114,6 +177,7 @@
 				B6517A7F1E51014D00EB9879 /* bank-icon-60.png */,
 				B6517A811E5101CE00EB9879 /* bank-icon-120.png */,
 				B6517A831E5101D900EB9879 /* bank-icon-180.png */,
+				B61C69401E74ADB900E68150 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +204,7 @@
 				B674462A1E135E1D001A3529 /* EditGameView.swift */,
 				B67446281E135762001A3529 /* BoardView.swift */,
 				B67446101E0D1D5E001A3529 /* PieceView.swift */,
+				B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */,
 				B64CB4FC1E04A34C005A7781 /* Main.storyboard */,
 				B64CB4FF1E04A34C005A7781 /* Assets.xcassets */,
 				B64CB5011E04A34C005A7781 /* LaunchScreen.storyboard */,
@@ -158,6 +223,8 @@
 				B64CB4F11E04A34C005A7781 /* Sources */,
 				B64CB4F21E04A34C005A7781 /* Frameworks */,
 				B64CB4F31E04A34C005A7781 /* Resources */,
+				B61C693B1E74AA6F00E68150 /* Embed Frameworks */,
+				B61C693C1E74AAB900E68150 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -220,10 +287,13 @@
 				B67446191E0DD3B2001A3529 /* sand-pile.png in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
 				B6517A801E51014D00EB9879 /* bank-icon-60.png in Resources */,
+				B61C69341E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift in Resources */,
 				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
 				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,
+				B61C693F1E74AC9200E68150 /* AmazonAws in Resources */,
 				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
+				B61C694A1E74B45B00E68150 /* Models in Resources */,
 				B67446131E0DCFC1001A3529 /* bank-icon.png in Resources */,
 				B67446231E0E55CB001A3529 /* refresh.png in Resources */,
 				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
@@ -233,6 +303,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B61C693C1E74AAB900E68150 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B64CB4F11E04A34C005A7781 /* Sources */ = {
@@ -248,6 +334,7 @@
 				B64CB50B1E04A634005A7781 /* Piece.swift in Sources */,
 				B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */,
 				B674462D1E145133001A3529 /* EditGameViewController.swift in Sources */,
+				B61C69461E74B44F00E68150 /* AWSMobileClient.swift in Sources */,
 				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,
@@ -374,6 +461,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7PLAT9NLJ3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws",
+					"$(PROJECT_DIR)/Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws",
+					"$(PROJECT_DIR)/Bank23",
+				);
 				INFOPLIST_FILE = Bank23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank23;
@@ -387,6 +480,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 7PLAT9NLJ3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws",
+					"$(PROJECT_DIR)/Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws",
+					"$(PROJECT_DIR)/Bank23",
+				);
 				INFOPLIST_FILE = Bank23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank23;

@@ -41,5 +41,39 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+  <key>AWS</key>
+  <dict>
+    <key>IdentityManager</key>
+    <dict>
+      <key>Default</key>
+      <dict/>
+    </dict>
+    <key>CredentialsProvider</key>
+    <dict>
+      <key>CognitoIdentity</key>
+      <dict>
+        <key>Default</key>
+        <dict>
+          <key>PoolId</key>
+          <string>us-east-1:84b01aa1-441f-4269-a648-cf73fbf4d203</string>
+          <key>Region</key>
+          <string>us-east-1</string>
+        </dict>
+      </dict>
+    </dict>
+    <key>S3</key>
+    <dict>
+      <key>Default</key>
+      <dict>
+        <key>Region</key>
+        <string>us-east-1</string>
+      </dict>
+    </dict>
+    <key>MobileHub</key>
+    <dict>
+      <key>ProjectClientId</key>
+      <string>MobileHub 3ba7e07b-4371-438a-a7c2-2703f9a2ebdf aws-my-sample-app-ios-swift-v0.12</string>
+    </dict>
+  </dict>
 </dict>
 </plist>
