@@ -287,4 +287,37 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     }
     return pieces
   }
+  
+  
+  override var keyCommands: [UIKeyCommand]? {
+    return [
+      UIKeyCommand(input: UIKeyInputUpArrow, modifierFlags: [], action: #selector(arrowKeyTapped(sender:)), discoverabilityTitle: "Up Arrow"),
+      UIKeyCommand(input: UIKeyInputRightArrow, modifierFlags: [], action: #selector(arrowKeyTapped(sender:)), discoverabilityTitle: "Right Arrow"),
+      UIKeyCommand(input: UIKeyInputLeftArrow, modifierFlags: [], action: #selector(arrowKeyTapped(sender:)), discoverabilityTitle: "Left Arrow"),
+      UIKeyCommand(input: UIKeyInputDownArrow, modifierFlags: [], action: #selector(arrowKeyTapped(sender:)), discoverabilityTitle: "Down Arrow"),
+    ]
+  }
+  
+  func arrowKeyTapped(sender: UIKeyCommand) {
+    if !_view.isUserInteractionEnabled {
+      return
+    }
+
+    switch sender.input {
+    case UIKeyInputUpArrow:
+      self.swipePieceOn(from: Direction.bottom)
+      break
+    case UIKeyInputRightArrow:
+      self.swipePieceOn(from: Direction.left)
+      break
+    case UIKeyInputLeftArrow:
+      self.swipePieceOn(from: Direction.right)
+      break
+    case UIKeyInputDownArrow:
+      self.swipePieceOn(from: Direction.top)
+      break
+    default:
+      break
+    }
+  }
 }
