@@ -39,8 +39,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
 
     var initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 2
@@ -55,8 +55,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 3
@@ -70,8 +70,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 4
@@ -84,8 +84,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 5
@@ -104,8 +104,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 6
@@ -123,8 +123,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 7
@@ -143,8 +143,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
     // Level 8
@@ -167,8 +167,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:16))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:32))
+    initialPieces.append(Piece.coins(16))
+    initialPieces.append(Piece.sand(32))
     _initialPieces.append(initialPieces)
     
     // Level 9
@@ -203,8 +203,8 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialBoards.append(initialBoard)
     
     initialPieces = [Piece]()
-    initialPieces.append(contentsOf: Array(repeating:Piece.coins(1), count:10))
-    initialPieces.append(contentsOf: Array(repeating:Piece.sand(1), count:20))
+    initialPieces.append(Piece.coins(10))
+    initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
     
 //    let dynamodb = AWSDynamoDB.default()

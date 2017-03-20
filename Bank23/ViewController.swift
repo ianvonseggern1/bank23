@@ -259,14 +259,21 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func setupBoard() {
-    do {
-      _board = try Board(initialBoard: _levelMenuController.initialBoard())
-      _pieces = shuffle(_levelMenuController.initialPieces())
-    } catch {
-      print("Can not initialize board")
-    }
+    _board = try! Board(initialBoard: _levelMenuController.initialBoard())
+    _pieces = shuffle(expandPieces(_levelMenuController.initialPieces()))
   }
   
+  // We store the pieces as a single instance of each piece type, we need to expand those and
+  // shuffle to set up the game
+  func expandPieces(_ compactPieceList: [Piece]) -> [Piece] {
+    var initialPieces = [Piece]()
+    for piece in compactPieceList {
+      let newPieces = Array.init(repeating: piece.createPieceWithSameType(value: 1), count: piece.value())
+      initialPieces.append(contentsOf: newPieces)
+    }
+    return initialPieces
+  }
+
   func shuffle(_ p: [Piece]) -> [Piece] {
     var pieces = p
     if pieces.count < 2 {

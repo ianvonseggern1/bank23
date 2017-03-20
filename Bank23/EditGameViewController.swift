@@ -169,14 +169,8 @@ final class EditGameViewController: UIViewController {
       
       return
     }
-    
-    // We actually represent initialPieces with an array of 1 pieces instead so switch representations
-    var initialPieces = [Piece]()
-    for piece in _pieces {
-      let newPieces = Array.init(repeating: piece.increment(1 - piece.value()), count: piece.value())
-      initialPieces.append(contentsOf: newPieces)
-    }
-    levelMenuController!.add(board: _board._board, initialPieces: initialPieces, withName: _view._name.text!)
+
+    levelMenuController!.add(board: _board._board, initialPieces: _pieces, withName: _view._name.text!)
     
     let _ = self.navigationController?.popViewController(animated: true)
   }

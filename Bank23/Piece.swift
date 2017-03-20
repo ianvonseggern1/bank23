@@ -72,6 +72,24 @@ public enum Piece {
     }
   }
   
+  func createPieceWithSameType(value : Int) -> Piece {
+    switch self {
+    case .bank(_):
+      return Piece.bank(value)
+    case .coins(_):
+      return Piece.coins(value)
+    case .water(_):
+      return Piece.water(value)
+    case .sand(_):
+      return Piece.sand(value)
+    case .mountain(_):
+      return Piece.mountain(value)
+    default:
+      // ERROR - NOT SUPPORTED
+      return Piece.empty
+    }
+  }
+  
   func value() -> Int {
     switch self {
     case .coins(let x):
