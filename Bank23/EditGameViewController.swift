@@ -170,6 +170,7 @@ final class EditGameViewController: UIViewController {
       return
     }
 
+    try! LevelNetworker.writeLevelToDatabase(title: _view._name.text!, board: _board, initialPieces: _pieces)
     levelMenuController!.add(board: _board._board, initialPieces: _pieces, withName: _view._name.text!)
     
     let _ = self.navigationController?.popViewController(animated: true)

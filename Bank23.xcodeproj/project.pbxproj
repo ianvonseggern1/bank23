@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ED40AD41E81A18500E62E1B /* LevelNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */; };
+		1ED40AD61E81A3D800E62E1B /* Boards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD51E81A3D800E62E1B /* Boards.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
 		B61C69341E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift in Resources */ = {isa = PBXBuildFile; fileRef = B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */; };
@@ -62,6 +64,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNetworker.swift; sourceTree = "<group>"; };
+		1ED40AD51E81A3D800E62E1B /* Boards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Boards.swift; path = "../Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws/Models/NoSQL/Boards.swift"; sourceTree = "<group>"; };
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
 		B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift"; sourceTree = SOURCE_ROOT; };
@@ -174,10 +178,12 @@
 				B64CB4F81E04A34C005A7781 /* AppDelegate.swift */,
 				B64CB4FA1E04A34C005A7781 /* ViewController.swift */,
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
+				1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */,
 				B674462C1E145133001A3529 /* EditGameViewController.swift */,
 				B64CB50A1E04A634005A7781 /* Piece.swift */,
 				B64CB50C1E04B7EC005A7781 /* Board.swift */,
 				B674460E1E0D1CB0001A3529 /* GameView.swift */,
+				1ED40AD51E81A3D800E62E1B /* Boards.swift */,
 				B685361D1E1C982700A401B6 /* RemainingPiecesView.swift */,
 				B62426711E5124B200CEEF08 /* NextPieceView.swift */,
 				B674462A1E135E1D001A3529 /* EditGameView.swift */,
@@ -307,9 +313,11 @@
 				B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */,
 				B674462D1E145133001A3529 /* EditGameViewController.swift in Sources */,
 				B61C69461E74B44F00E68150 /* AWSMobileClient.swift in Sources */,
+				1ED40AD41E81A18500E62E1B /* LevelNetworker.swift in Sources */,
 				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,
+				1ED40AD61E81A3D800E62E1B /* Boards.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

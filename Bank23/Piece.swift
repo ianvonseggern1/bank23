@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum PieceModelError: Error {
+  case couldNotCreatePieceFromString
+}
+
+private let PIECE_LIST_STRING_PIECE_SEPERATOR = "."
+
 public enum Piece {
   case empty
   case bank(Int)
@@ -15,6 +21,55 @@ public enum Piece {
   case water(Int)
   case sand(Int)
   case mountain(Int)
+  
+  public static func initFromName(_ name: String) throws -> Piece {
+    let count = Int(name.substring(from: name.index(name.startIndex, offsetBy: 1)))
+    switch name.substring(to: name.index(name.startIndex, offsetBy: 1)) {
+    case "e":
+      return Piece.empty
+    case "b":
+      return Piece.bank(count!)
+    case "c":
+      return Piece.coins(count!)
+    case "w":
+      return Piece.water(count!)
+    case "s":
+      return Piece.sand(count!)
+    case "m":
+      return Piece.mountain(count!)
+    default:
+      throw PieceModelError.couldNotCreatePieceFromString
+    }
+  }
+  
+  public func shortName() -> String {
+    switch self {
+    case .empty:
+      return "e"
+    case .bank(let x):
+      return "b".appending(String(x))
+    case .coins(let x):
+      return "c".appending(String(x))
+    case .water(let x):
+      return "w".appending(String(x))
+    case .sand(let x):
+      return "s".appending(String(x))
+    case .mountain(let x):
+      return "m".appending(String(x))
+    }
+  }
+  
+  public static func pieceListToString(pieces: [Piece]) -> String {
+    return pieces.map({ (piece: Piece) -> String in
+      return piece.shortName()
+    }).joined(separator: PIECE_LIST_STRING_PIECE_SEPERATOR)
+  }
+  
+  public static func pieceListFromString(_ pieceListString: String) throws -> [Piece] {
+    return try pieceListString.components(separatedBy: PIECE_LIST_STRING_PIECE_SEPERATOR).map({ (pieceString) -> Piece in
+      return try Piece.initFromName(pieceString)
+    })
+  }
 
   public static func == (left: Piece, right: Piece) -> Bool {
     switch (left, right) {

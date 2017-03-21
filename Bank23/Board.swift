@@ -23,6 +23,8 @@ public final class Board : NSCoding {
   var _rows = 0
   var _columns = 0
   
+  private let BOARD_STRING_COLUMN_SEPERATOR = "_"
+  
   public func encode(with aCoder: NSCoder) {
     aCoder.encode(_board, forKey: "boardArray")
   }
@@ -37,7 +39,43 @@ public final class Board : NSCoding {
     _board = initialBoard
   }
   
+  public init(fromString boardString: String) {
+    _board = boardString.components(separatedBy: BOARD_STRING_COLUMN_SEPERATOR).map({ (columnString) -> [Piece] in
+      return try! Piece.pieceListFromString(columnString)
+    })
+    (_rows, _columns) = try! getRowAndColumnCount(board: _board)
+  }
+  
   public init() {
+  }
+  
+  public func toString() -> String {
+    return _board.reduce("", { (oldColumnString, column) -> String in
+      var newColumnString: String
+      if oldColumnString.characters.count > 0 {
+        newColumnString = oldColumnString.appending(BOARD_STRING_COLUMN_SEPERATOR)
+      } else {
+        newColumnString = oldColumnString
+      }
+      return newColumnString.appending(Piece.pieceListToString(pieces: column))
+    })
+  }
+  
+  public static func == (x: Board, y: Board) -> Bool {
+    if x._board.count != y._board.count {
+      return false
+    }
+    for i in 0..<x._board.count {
+      if x._board[i].count != y._board[i].count {
+        return false
+      }
+      for j in 0..<x._board[i].count {
+        if x._board[i][j] != y._board[i][j] {
+          return false
+        }
+      }
+    }
+    return true
   }
   
   func getRowAndColumnCount(board: [[Piece]]) throws -> (Int, Int) {

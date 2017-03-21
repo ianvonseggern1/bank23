@@ -120,7 +120,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func userDidPan(gesture: UIPanGestureRecognizer) {
     let minimumDistanceToConsider = CGFloat(3.0)
     let point = gesture.translation(in: _view)
-    if point.x < minimumDistanceToConsider && point.x > -1 * minimumDistanceToConsider && point.y < minimumDistanceToConsider && point.y > -1 * minimumDistanceToConsider {
+    if abs(point.x) < minimumDistanceToConsider && abs(point.y) < minimumDistanceToConsider {
       return
     }
     
@@ -248,6 +248,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     }
   }
   
+  // pragma mark - Game Model
+  // TODO move to seperate game model class
+  
   func remainingCoins() -> Int {
     var remainingCoins = 0
     for piece in _pieces {
@@ -294,6 +297,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     }
     return pieces
   }
+  
+  // pragma mark - External Keyboard Support
   
   
   override var keyCommands: [UIKeyCommand]? {

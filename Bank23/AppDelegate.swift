@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     let nav1 = UINavigationController()
@@ -23,12 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window!.rootViewController = nav1
     self.window?.makeKeyAndVisible()
     
-//    let credentialsProvider = AWSCognitoCredentialsProvider(regionType:AWSRegionType.USEast1, identityPoolId: "us-east-1:84b01aa1-441f-4269-a648-cf73fbf4d203")
-//    let configuration = AWSServiceConfiguration(region: AWSRegionType.USEast1 , credentialsProvider:credentialsProvider)
-//    AWSServiceManager.default().defaultServiceConfiguration = configuration
-    
     return AWSMobileClient.sharedInstance.didFinishLaunching(application, withOptions: launchOptions)
-    //return true
   }
   
   func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {

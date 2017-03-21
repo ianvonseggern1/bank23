@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import AWSDynamoDB
 
 protocol LevelMenuControllerDelegate: NSObjectProtocol {
   func reset()
@@ -206,21 +205,6 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialPieces.append(Piece.coins(10))
     initialPieces.append(Piece.sand(20))
     _initialPieces.append(initialPieces)
-    
-//    let dynamodb = AWSDynamoDB.default()
-//    let listTableInput = AWSDynamoDBListTablesInput()
-//    dynamodb.listTables(listTableInput!).continueWith { (task) -> Any? in
-//      if let error = task.error {
-//        print("Error occurred: \(error)")
-//        return nil
-//      }
-//      let listTablesOutput = task.result!
-//      
-//      for tableName in listTablesOutput.tableNames! {
-//        print("\(tableName)")
-//      }
-//      return nil
-//    }
   }
   
   public func configureWith(tableView: UITableView) {

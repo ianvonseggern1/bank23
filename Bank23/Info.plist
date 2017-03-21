@@ -74,6 +74,14 @@
       <key>ProjectClientId</key>
       <string>MobileHub 3ba7e07b-4371-438a-a7c2-2703f9a2ebdf aws-my-sample-app-ios-swift-v0.12</string>
     </dict>
+    <key>DynamoDBObjectMapper</key>
+    <dict>
+      <key>Default</key>
+      <dict>
+        <key>Region</key>
+        <string>us-east-1</string>
+      </dict>
+    </dict>
   </dict>
 </dict>
 </plist>
