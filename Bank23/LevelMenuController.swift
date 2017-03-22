@@ -206,9 +206,9 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
     
-    LevelNetworker.getAllBoardsFromDatabase { (level:GameModel) in
-      
-    }
+    super.init()
+    
+    LevelNetworker.getAllBoardsFromDatabase(boardCallback: self.add)
   }
   
   public func configureWith(tableView: UITableView) {
@@ -232,7 +232,7 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
   public func add(level: GameModel) {
     _initialGameModels.append(level)
     DispatchQueue.main.async {
-      self._tableView!.reloadData()
+      self._tableView?.reloadData()
     }
   }
   

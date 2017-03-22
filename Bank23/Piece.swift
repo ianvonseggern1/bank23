@@ -24,7 +24,11 @@ public enum Piece {
   
   public static func initFromName(_ name: String) throws -> Piece {
     let count = Int(name.substring(from: name.index(name.startIndex, offsetBy: 1)))
-    switch name.substring(to: name.index(name.startIndex, offsetBy: 1)) {
+    let pieceTypeString = name.substring(to: name.index(name.startIndex, offsetBy: 1))
+    if pieceTypeString != "e" && count == nil {
+      throw PieceModelError.couldNotCreatePieceFromString
+    }
+    switch pieceTypeString {
     case "e":
       return Piece.empty
     case "b":

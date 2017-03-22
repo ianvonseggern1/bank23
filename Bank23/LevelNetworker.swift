@@ -58,6 +58,7 @@ public final class LevelNetworker
                                           initialPiecesString: board._pieces!,
                                           initialBoardString: board._board!)
             boardCallback(gameModel)
+            print("SUCCESS! Added level \(board._boardName)")
           } catch {
             print("Unable to create game from board \(board._board) and pieces \(board._pieces)")
           }
