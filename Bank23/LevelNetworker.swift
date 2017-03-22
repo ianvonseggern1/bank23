@@ -42,21 +42,30 @@ public final class LevelNetworker
   }
   
   static func verifyBoardIsValid(board: Board) -> Bool {
-    return board == Board(fromString:board.toString())
+    do {
+      let boardCopy = try Board(fromString:board.toString())
+      return board == boardCopy
+    } catch {
+      return false
+    }
   }
   
   static func verifyInitialPieceListIsValid(pieces: [Piece]) -> Bool {
-    let piecesCopy = try! Piece.pieceListFromString(Piece.pieceListToString(pieces: pieces))
+    do {
+      let piecesCopy = try Piece.pieceListFromString(Piece.pieceListToString(pieces: pieces))
     
-    // Check if piecesCopy and pieces are the same
-    if pieces.count != piecesCopy.count {
-      return false
-    }
-    for i in 1..<pieces.count {
-      if pieces[i] != piecesCopy[i] {
+      // Check if piecesCopy and pieces are the same
+      if pieces.count != piecesCopy.count {
         return false
       }
+      for i in 1..<pieces.count {
+        if pieces[i] != piecesCopy[i] {
+          return false
+        }
+      }
+      return true
+    } catch {
+      return false
     }
-    return true
   }
 }

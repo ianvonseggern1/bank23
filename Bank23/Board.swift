@@ -39,11 +39,11 @@ public final class Board : NSCoding {
     _board = initialBoard
   }
   
-  public init(fromString boardString: String) {
-    _board = boardString.components(separatedBy: BOARD_STRING_COLUMN_SEPERATOR).map({ (columnString) -> [Piece] in
-      return try! Piece.pieceListFromString(columnString)
+  public init(fromString boardString: String) throws {
+    _board = try boardString.components(separatedBy: BOARD_STRING_COLUMN_SEPERATOR).map({ (columnString) -> [Piece] in
+      return try Piece.pieceListFromString(columnString)
     })
-    (_rows, _columns) = try! getRowAndColumnCount(board: _board)
+    (_rows, _columns) = try getRowAndColumnCount(board: _board)
   }
   
   public init() {
