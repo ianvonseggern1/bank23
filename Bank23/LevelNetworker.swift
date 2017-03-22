@@ -16,19 +16,19 @@ enum LevelNetworkerError: Error {
 
 public final class LevelNetworker
 {
-  static func writeLevelToDatabase(title: String, board: Board, initialPieces: [Piece]) throws {
-    if !verifyBoardIsValid(board: board) || !verifyInitialPieceListIsValid(pieces: initialPieces) {
+  static func writeLevelToDatabase(level: GameModel) throws {
+    if !verifyBoardIsValid(level._board) || !verifyInitialPieceListIsValid(level._pieces) {
       throw LevelNetworkerError.invalidBoardOrInitialPieces
     }
 
     let objectMapper = AWSDynamoDBObjectMapper.default()
     
-    let boardString = board.toString()
-    let initialPiecesString = Piece.pieceListToString(pieces: initialPieces)
+    let boardString = level._board.toString()
+    let initialPiecesString = Piece.pieceListToString(pieces: level._pieces)
     
     let itemToCreate = Boards()
     itemToCreate?._boardId = String(boardString.appending(initialPiecesString).hash)
-    itemToCreate?._boardName = title
+    itemToCreate?._boardName = level._levelName
     itemToCreate?._board = boardString
     itemToCreate?._pieces = initialPiecesString
 
@@ -41,7 +41,7 @@ public final class LevelNetworker
     })
   }
   
-  static func verifyBoardIsValid(board: Board) -> Bool {
+  static func verifyBoardIsValid(_ board: Board) -> Bool {
     do {
       let boardCopy = try Board(fromString:board.toString())
       return board == boardCopy
@@ -50,7 +50,7 @@ public final class LevelNetworker
     }
   }
   
-  static func verifyInitialPieceListIsValid(pieces: [Piece]) -> Bool {
+  static func verifyInitialPieceListIsValid(_ pieces: [Piece]) -> Bool {
     do {
       let piecesCopy = try Piece.pieceListFromString(Piece.pieceListToString(pieces: pieces))
     

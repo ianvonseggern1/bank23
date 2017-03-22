@@ -59,6 +59,8 @@ public enum Piece {
     }
   }
   
+  // TODO move pieceList functions to GameModel
+  
   public static func pieceListToString(pieces: [Piece]) -> String {
     return pieces.map({ (piece: Piece) -> String in
       return piece.shortName()

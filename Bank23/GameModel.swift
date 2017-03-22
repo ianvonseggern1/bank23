@@ -21,7 +21,8 @@ class GameModel {
   
   public init(name: String, initialPiecesString: String, initialBoardString: String) throws {
     _levelName = name
-    _pieces = try Piece.pieceListFromString(initialPiecesString)
+    let compactPieces = try Piece.pieceListFromString(initialPiecesString)
+    _pieces = GameModel.shuffle(GameModel.expandPieces(compactPieces))
     _board = try Board(fromString: initialBoardString)
   }
   
