@@ -177,9 +177,7 @@ final class EditGameViewController: UIViewController {
       try LevelNetworker.writeLevelToDatabase(level: gameModel)
       
       // For now we write it locally to the level menu controller and to the DB
-      levelMenuController!.add(board: _board._board,
-                               initialPieces: _pieces,
-                               withName: _view._name.text!)
+      levelMenuController!.add(level: gameModel)
     } catch {
       let alert = UIAlertController(title: nil,
                                     message: "Error while attampting to save level",

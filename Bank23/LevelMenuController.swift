@@ -205,6 +205,10 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _initialGameModels.append(try! GameModel(name: "Grand Canyon",
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
+    
+    LevelNetworker.getAllBoardsFromDatabase { (level:GameModel) in
+      
+    }
   }
   
   public func configureWith(tableView: UITableView) {
@@ -225,11 +229,11 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     return _initialGameModels[_currentRow]._pieces
   }
   
-  public func add(board: [[Piece]], initialPieces: [Piece], withName: String) {
-    _initialGameModels.append(try! GameModel(name: withName,
-                                             initialPieces: initialPieces,
-                                             initialBoard: board))
-    DispatchQueue.main.async(execute: { self._tableView!.reloadData() })
+  public func add(level: GameModel) {
+    _initialGameModels.append(level)
+    DispatchQueue.main.async {
+      self._tableView!.reloadData()
+    }
   }
   
   // UITableViewDataSource

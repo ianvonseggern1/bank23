@@ -9,6 +9,7 @@
 import Foundation
 import AWSMobileHubHelper
 import AWSDynamoDB
+import AWSCore
 
 enum LevelNetworkerError: Error {
   case invalidBoardOrInitialPieces
@@ -39,6 +40,31 @@ public final class LevelNetworker
       }
       print("Item saved.")
     })
+  }
+  
+  static func getAllBoardsFromDatabase(boardCallback: @escaping (GameModel) -> Void) {
+    let objectMapper = AWSDynamoDBObjectMapper.default()
+    let scanExpression = AWSDynamoDBScanExpression()
+    scanExpression.limit = 250
+
+    objectMapper.scan(Boards.self, expression: scanExpression).continueWith { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
+      if let error = task.error as? NSError {
+        print("Unable to fetch boards. Error: \(error)")
+      } else if let paginatedOutput = task.result {
+        for b in paginatedOutput.items {
+          let board = b as! Boards
+          do {
+            let gameModel = try GameModel(name: board._boardName!,
+                                          initialPiecesString: board._pieces!,
+                                          initialBoardString: board._board!)
+            boardCallback(gameModel)
+          } catch {
+            print("Unable to create game from board \(board._board) and pieces \(board._pieces)")
+          }
+        }
+      }
+      return nil
+    }
   }
   
   static func verifyBoardIsValid(_ board: Board) -> Bool {

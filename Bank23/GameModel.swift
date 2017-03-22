@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameModel {
+public final class GameModel {
   var _board = Board()
   var _pieces = [Piece]()
   var _levelName = ""
