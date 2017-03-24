@@ -30,9 +30,47 @@ public final class GameModel {
   }
   
   public func copy() -> GameModel {
+    // Arrays use copy symantics so we can just create a new model
     return try! GameModel(name:self._levelName,
                           initialPieces:self._pieces,
                           initialBoard:self._board._board)
+  }
+  
+  // Win iff there are no banks left
+  func isWon() -> Bool {
+    for column in _board._board {
+      for piece in column {
+        if piece.sameType(otherPiece: Piece.bank(1)) && piece.value() > 0 {
+          return false
+        }
+      }
+    }
+    return true
+  }
+  
+  // Returns true if there are not enough coins left to fill the banks
+  func isLost() -> Bool {
+    var remainingCoins = 0
+    for piece in _pieces {
+      if piece.sameType(otherPiece: Piece.coins(1)) {
+        remainingCoins += piece.value()
+      }
+    }
+    
+    var coinsOnBoard = 0
+    var banksOnBoard = 0
+    for column in _board._board {
+      for piece in column {
+        if piece.sameType(otherPiece: Piece.bank(1)) {
+          banksOnBoard += piece.value()
+        }
+        if piece.sameType(otherPiece: Piece.coins(1)) {
+          coinsOnBoard += piece.value()
+        }
+      }
+    }
+    
+    return coinsOnBoard + remainingCoins < banksOnBoard
   }
   
   // We store the pieces as a single instance of each piece type, we need to expand those and

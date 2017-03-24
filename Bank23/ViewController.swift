@@ -34,11 +34,13 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupBoard()
+    
     _levelMenuController.delegate = self
     
     self.view = _view
     
-    self.navigationItem.title = _levelMenuController.currentName()
+    self.navigationItem.title = _gameModel._levelName
     self.setupNavigationBarItems()
     
     // Configure level menu controller
@@ -49,8 +51,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     
     let panGesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(gesture:)))
     _view.addGestureRecognizer(panGesture)
-    
-    setupBoard()
+
     _view.updateModel(_gameModel)
   }
   
@@ -81,7 +82,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func didTapRefresh() {
-    if (_gameModel._board.isWon() || _showedIsLostAlert) {
+    if (_gameModel.isWon() || _showedIsLostAlert) {
       self.reset()
     } else {
       self.showResetAlert(message: "Are you sure you want to reset?")
@@ -104,8 +105,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
-    self.navigationItem.title = _levelMenuController.currentName()
     self.setupBoard()
+    self.navigationItem.title = _gameModel._levelName
     _view.updateModel(_gameModel)
     _view._victoryLabel.isHidden = true
     _view._levelMenu.isHidden = true
@@ -234,28 +235,15 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view.isUserInteractionEnabled = true
     
     // TODO move isWon and isLost to gameModel
-    if self._gameModel._board.isWon() {
+    if self._gameModel.isWon() {
       self._view._victoryLabel.isHidden = false
     }
     
-    if self._gameModel._board.isLost(remainingCoins: self.remainingCoins()) && !_showedIsLostAlert {
+    if self._gameModel.isLost() && !_showedIsLostAlert {
       self._view._board.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
       _showedIsLostAlert = true
       self.showResetAlert(message: "No remaining ways to win, would you like to reset?")
     }
-  }
-  
-  // pragma mark - Game Model
-  // TODO move to seperate game model class
-  
-  func remainingCoins() -> Int {
-    var remainingCoins = 0
-    for piece in _gameModel._pieces {
-      if piece.sameType(otherPiece: Piece.coins(1)) {
-        remainingCoins += piece.value()
-      }
-    }
-    return remainingCoins
   }
 
   func setupBoard() {

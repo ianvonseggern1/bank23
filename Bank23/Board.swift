@@ -192,35 +192,6 @@ public final class Board : NSCoding {
     _board[column][row] = piece.joinInto(existing: _board[column][row])!
   }
   
-  // Win iff there are no banks left
-  func isWon() -> Bool {
-    for column in _board {
-      for piece in column {
-        if piece.sameType(otherPiece: Piece.bank(1)) && piece.value() > 0 {
-          return false
-        }
-      }
-    }
-    return true
-  }
-  
-  // Returns true if there is no possible way to win
-  func isLost(remainingCoins: Int) -> Bool {
-    var coinsOnBoard = 0
-    var banksOnBoard = 0
-    for column in _board {
-      for piece in column {
-        if piece.sameType(otherPiece: Piece.bank(1)) {
-          banksOnBoard += piece.value()
-        }
-        if piece.sameType(otherPiece: Piece.coins(1)) {
-          coinsOnBoard += piece.value()
-        }
-      }
-    }
-    return coinsOnBoard + remainingCoins < banksOnBoard
-  }
-  
   func collapseColumn(column: [Piece]) -> [Piece] {
     var column = column
     var newColumn = Array(repeating: Piece.empty, count: column.count)

@@ -217,17 +217,17 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     _tableView = tableView
   }
   
-  public func currentName() -> String {
-    return _initialGameModels[_currentRow]._levelName
-  }
-  
-  public func initialBoard() -> [[Piece]] {
-    return _initialGameModels[_currentRow]._board._board
-  }
-  
-  public func initialPieces() -> [Piece] {
-    return _initialGameModels[_currentRow]._pieces
-  }
+//  public func currentName() -> String {
+//    return _initialGameModels[_currentRow]._levelName
+//  }
+//  
+//  public func initialBoard() -> [[Piece]] {
+//    return _initialGameModels[_currentRow]._board._board
+//  }
+//  
+//  public func initialPieces() -> [Piece] {
+//    return _initialGameModels[_currentRow]._pieces
+//  }
   
   public func currentLevel() -> GameModel {
     return _initialGameModels[_currentRow].copy()
