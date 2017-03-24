@@ -83,6 +83,14 @@ class GameView: UIView {
                                   height: _nextPieceView.frame.height)
   }
   
+  func updateModel(_ game: GameModel) {
+    self._nextPieceView.setPieceModel(piece: game._pieces.last)
+    _remainingPiecesView.updatePiecesLeft(pieces: game._pieces)
+    _board.updateModel(board: game._board._board)
+    self.setNeedsLayout()
+  }
+  
+  // TODO remove after updating EditGameViewController
   func update(board: [[Piece]], pieces: [Piece]) {
     self._nextPieceView.setPieceModel(piece: pieces.last)
     _remainingPiecesView.updatePiecesLeft(pieces: pieces)

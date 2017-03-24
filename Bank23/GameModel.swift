@@ -13,6 +13,9 @@ public final class GameModel {
   var _pieces = [Piece]()
   var _levelName = ""
   
+  public init() {
+  }
+  
   public init(name: String, initialPieces: [Piece], initialBoard: [[Piece]]) throws {
     _levelName = name
     _board = try Board(initialBoard: initialBoard)
@@ -24,6 +27,12 @@ public final class GameModel {
     let compactPieces = try Piece.pieceListFromString(initialPiecesString)
     _pieces = GameModel.shuffle(GameModel.expandPieces(compactPieces))
     _board = try Board(fromString: initialBoardString)
+  }
+  
+  public func copy() -> GameModel {
+    return try! GameModel(name:self._levelName,
+                          initialPieces:self._pieces,
+                          initialBoard:self._board._board)
   }
   
   // We store the pieces as a single instance of each piece type, we need to expand those and

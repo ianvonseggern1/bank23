@@ -9,31 +9,23 @@
 import UIKit
 
 final class ViewController: UIViewController, LevelMenuControllerDelegate {
-  var _view: GameView
+  var  _view = GameView(frame:CGRect.zero)
   
-  // TODO consolidate board and pieces into GameModel
-  var _board = Board()
-  var _pieces: [Piece] // The pieces in the order they will come out
+  var _gameModel = GameModel()
   
-  let _levelMenuController: LevelMenuController
+  let _levelMenuController = LevelMenuController()
   let _editGameViewController: EditGameViewController
 
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
   
   public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    _view = GameView(frame:CGRect.zero)
-    _pieces = [Piece]()
-    _levelMenuController = LevelMenuController()
     _editGameViewController = EditGameViewController(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
   }
   
   required init?(coder aDecoder: NSCoder) {
-    _view = GameView(frame:CGRect.zero)
-    _pieces = [Piece]()
-    _levelMenuController = LevelMenuController()
     _editGameViewController = EditGameViewController(coder: aDecoder)!
 
     super.init(coder: aDecoder)
@@ -59,7 +51,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view.addGestureRecognizer(panGesture)
     
     setupBoard()
-    _view.update(board: _board._board, pieces: _pieces)
+    _view.updateModel(_gameModel)
   }
   
   func setupNavigationBarItems() {
@@ -89,7 +81,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func didTapRefresh() {
-    if (_board.isWon() || _showedIsLostAlert) {
+    if (_gameModel._board.isWon() || _showedIsLostAlert) {
       self.reset()
     } else {
       self.showResetAlert(message: "Are you sure you want to reset?")
@@ -114,7 +106,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func reset() {
     self.navigationItem.title = _levelMenuController.currentName()
     self.setupBoard()
-    _view.update(board: _board._board, pieces: _pieces)
+    _view.updateModel(_gameModel)
     _view._victoryLabel.isHidden = true
     _view._levelMenu.isHidden = true
     _showedIsLostAlert = false
@@ -156,7 +148,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       }
     }
     
-    let movablePieceMask = _board.findMovablePieces(swipeDirection: direction)
+    let movablePieceMask = _gameModel._board.findMovablePieces(swipeDirection: direction)
     
     if (gesture.state == UIGestureRecognizerState.ended) {
       _currentSwipeDirection = nil
@@ -178,7 +170,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func swipePieceOn(from:Direction) {
-    var piece = _pieces.popLast()
+    var piece = _gameModel._pieces.popLast()
     if piece == nil {
       piece = Piece.empty
     }
@@ -195,7 +187,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view._nextPieceView._piece?.isHidden = true
     _view.isUserInteractionEnabled = false
 
-    let movablePieceMask = _board.findMovablePieces(swipeDirection: from)
+    let movablePieceMask = _gameModel._board.findMovablePieces(swipeDirection: from)
     UIView.animate(withDuration: 0.2,
                    delay: 0,
                    options: [UIViewAnimationOptions.curveLinear],
@@ -205,11 +197,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                               inDirection: from)
                    },
                    completion: { (completed) -> () in
-                     let newPieceLocation: (Int, Int)? = self._board.swipePieceOn(newPiece: piece!, from: from)
+                     let newPieceLocation: (Int, Int)? = self._gameModel._board.swipePieceOn(newPiece: piece!, from: from)
                     
                      // Update the view with all the new locations but not the new piece, then we animate it on,
                      // then we update again
-                     self._view.update(board: self._board._board, pieces: self._pieces)
+                     self._view.updateModel(self._gameModel)
                     
                      var newPieceView: PieceView? = nil
                      if (piece != nil && piece! != Piece.empty && newPieceLocation != nil) {
@@ -224,10 +216,10 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                         newPieceView?.alpha = 1.0
                                       },
                                       completion: { (completed) in
-                                        self._board.mergePiece(piece: piece!,
-                                                               row: newPieceRow,
-                                                               column: newPieceColumn)
-                                        self._view.update(board: self._board._board, pieces: self._pieces)
+                                        self._gameModel._board.mergePiece(piece: piece!,
+                                                                          row: newPieceRow,
+                                                                          column: newPieceColumn)
+                                        self._view.updateModel(self._gameModel)
                                         
                                         self.completedSwipingPieceOn()
                                       })
@@ -241,11 +233,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view._nextPieceView._piece?.isHidden = false
     _view.isUserInteractionEnabled = true
     
-    if self._board.isWon() {
+    // TODO move isWon and isLost to gameModel
+    if self._gameModel._board.isWon() {
       self._view._victoryLabel.isHidden = false
     }
     
-    if self._board.isLost(remainingCoins: self.remainingCoins()) && !_showedIsLostAlert {
+    if self._gameModel._board.isLost(remainingCoins: self.remainingCoins()) && !_showedIsLostAlert {
       self._view._board.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
       _showedIsLostAlert = true
       self.showResetAlert(message: "No remaining ways to win, would you like to reset?")
@@ -257,7 +250,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   
   func remainingCoins() -> Int {
     var remainingCoins = 0
-    for piece in _pieces {
+    for piece in _gameModel._pieces {
       if piece.sameType(otherPiece: Piece.coins(1)) {
         remainingCoins += piece.value()
       }
@@ -266,8 +259,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func setupBoard() {
-    _board = try! Board(initialBoard: _levelMenuController.initialBoard())
-    _pieces = GameModel.shuffle(GameModel.expandPieces(_levelMenuController.initialPieces()))
+    _gameModel = _levelMenuController.currentLevel()
   }
   
   // pragma mark - External Keyboard Support

@@ -229,6 +229,10 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     return _initialGameModels[_currentRow]._pieces
   }
   
+  public func currentLevel() -> GameModel {
+    return _initialGameModels[_currentRow].copy()
+  }
+  
   public func add(level: GameModel) {
     _initialGameModels.append(level)
     DispatchQueue.main.async {
