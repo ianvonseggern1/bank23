@@ -15,8 +15,7 @@ enum selectedButton {
 }
 
 final class EditGameViewController: UIViewController {
-  var _board = Board()
-  var _pieces = [Piece]()
+  var _gameModel = GameModel()
   var _view: EditGameView
   var _selectedPiece: Piece?
   
@@ -42,16 +41,12 @@ final class EditGameViewController: UIViewController {
 
     let initialBoardSize = 5
     _view._sizeStepper.value = Double(initialBoardSize)
-    self.setEmptyBoardModel(size: initialBoardSize)
+    self.setupEmptyGameModel(size: initialBoardSize)
     
     _view._sizeStepper.addTarget(self, action: #selector(sizeStepperTapped), for: UIControlEvents.valueChanged)
 
     _view.isUserInteractionEnabled = true
     _view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(userDidTap(gesture:))))
-    
-    _pieces.append(Piece.coins(0))
-    _pieces.append(Piece.sand(0))
-    _view._remainingPieces.updatePiecesLeft(pieces: _pieces)
   }
   
   func setupNavigationBar() {
@@ -62,17 +57,26 @@ final class EditGameViewController: UIViewController {
                                                           action: #selector(didTapSave)), animated: true)
   }
   
-  func setEmptyBoardModel(size: Int) {
-    _board = try! Board(initialBoard: Array(repeating:Array(repeating:Piece.empty, count:size), count:size))
-    _view._board.updateModel(board: _board._board)
+  func setupEmptyGameModel(size: Int) {
+    _gameModel = try! GameModel(name: "",
+                                initialPieces: [],
+                                initialBoard: Array.init(repeating:Array.init(repeating: Piece.empty,
+                                                                              count: size),
+                                                         count: size))
+
+    _view._board.updateModel(board: _gameModel._board._board)
+    _view._remainingPieces.updatePiecesLeft(pieces: _gameModel._pieces)
   }
   
   func sizeStepperTapped() {
-    self.setEmptyBoardModel(size: Int(_view._sizeStepper.value))
+    self.setupEmptyGameModel(size: Int(_view._sizeStepper.value))
   }
   
   func userDidTap(gesture: UITapGestureRecognizer) {
-    _view._name.resignFirstResponder()
+    if _view._name.isFirstResponder {
+      _view._name.resignFirstResponder()
+      return
+    }
     
     let location = gesture.location(in: _view)
     let hitView = _view.hitTest(location, with: nil)
@@ -123,9 +127,9 @@ final class EditGameViewController: UIViewController {
     
     let boardOrigin = _view._board.frame.origin
     let column = Int(floor((at.x - boardOrigin.x) / _view._board.singleSquareSize()))
-    let row = _board.rowCount() - 1 - Int(floor((at.y - boardOrigin.y) / _view._board.singleSquareSize()))
+    let row = _gameModel._board.rowCount() - 1 - Int(floor((at.y - boardOrigin.y) / _view._board.singleSquareSize()))
     
-    let existingPiece = _board._board[column][row]
+    let existingPiece = _gameModel._board._board[column][row]
     var pieceToAdd = _selectedPiece!
     if (_selectedPiece != nil && existingPiece.sameType(otherPiece: _selectedPiece!)) {
       pieceToAdd = existingPiece.increment(_selectedPiece!.value())
@@ -133,9 +137,9 @@ final class EditGameViewController: UIViewController {
     if pieceToAdd.value() < 1 {
       pieceToAdd = Piece.empty
     }
-    _board.addPiece(piece: pieceToAdd, row: row, column: column)
+    _gameModel._board.addPiece(piece: pieceToAdd, row: row, column: column)
     
-    _view._board.updateModel(board: _board._board)
+    _view._board.updateModel(board: _gameModel._board._board)
   }
   
   func didTapRemainingPieces() {
@@ -143,16 +147,19 @@ final class EditGameViewController: UIViewController {
       return
     }
     
-    var newPieces = [Piece]()
-    for piece in _pieces {
+    _gameModel._pieces = _gameModel._pieces.map { (piece) -> Piece in
       if _selectedPiece!.sameType(otherPiece: piece) && (piece.value() + _selectedPiece!.value() >= 0) {
-        newPieces.append(piece.increment(_selectedPiece!.value()))
+        return piece.increment(_selectedPiece!.value())
       } else {
-        newPieces.append(piece)
+        return piece
       }
     }
-    _pieces = newPieces
-    _view._remainingPieces.updatePiecesLeft(pieces: _pieces)
+    
+    if !_gameModel._pieces.contains(where: {_selectedPiece!.sameType(otherPiece: $0)}) && _selectedPiece!.value() > 0 {
+      _gameModel._pieces.append(_selectedPiece!)
+    }
+    
+    _view._remainingPieces.updatePiecesLeft(pieces: _gameModel._pieces)
   }
   
   func didTapBack() {
@@ -169,15 +176,14 @@ final class EditGameViewController: UIViewController {
       
       return
     }
+    
+    _gameModel._levelName = _view._name.text!
 
     do {
-      let gameModel = try GameModel(name: _view._name.text!,
-                                    initialPieces: _pieces,
-                                    initialBoard: _board._board)
-      try LevelNetworker.writeLevelToDatabase(level: gameModel)
+      try LevelNetworker.writeLevelToDatabase(level: _gameModel)
       
       // For now we write it locally to the level menu controller and to the DB
-      levelMenuController!.add(level: gameModel)
+      levelMenuController!.add(level: _gameModel)
     } catch {
       let alert = UIAlertController(title: nil,
                                     message: "Error while attampting to save level",

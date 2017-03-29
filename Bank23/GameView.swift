@@ -89,13 +89,4 @@ class GameView: UIView {
     _board.updateModel(board: game._board._board)
     self.setNeedsLayout()
   }
-  
-  // TODO remove after updating EditGameViewController
-  func update(board: [[Piece]], pieces: [Piece]) {
-    self._nextPieceView.setPieceModel(piece: pieces.last)
-    _remainingPiecesView.updatePiecesLeft(pieces: pieces)
-    _board.updateModel(board: board)
-    self.setNeedsLayout()
-  }
-
 }
