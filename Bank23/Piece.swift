@@ -12,8 +12,6 @@ enum PieceModelError: Error {
   case couldNotCreatePieceFromString
 }
 
-private let PIECE_LIST_STRING_PIECE_SEPERATOR = "."
-
 public enum Piece {
   case empty
   case bank(Int)
@@ -61,20 +59,6 @@ public enum Piece {
     case .mountain(let x):
       return "m".appending(String(x))
     }
-  }
-  
-  // TODO move pieceList functions to GameModel
-  
-  public static func pieceListToString(pieces: [Piece]) -> String {
-    return pieces.map({ (piece: Piece) -> String in
-      return piece.shortName()
-    }).joined(separator: PIECE_LIST_STRING_PIECE_SEPERATOR)
-  }
-  
-  public static func pieceListFromString(_ pieceListString: String) throws -> [Piece] {
-    return try pieceListString.components(separatedBy: PIECE_LIST_STRING_PIECE_SEPERATOR).map({ (pieceString) -> Piece in
-      return try Piece.initFromName(pieceString)
-    })
   }
 
   public static func == (left: Piece, right: Piece) -> Bool {

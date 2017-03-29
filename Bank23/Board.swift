@@ -41,7 +41,7 @@ public final class Board : NSCoding {
   
   public init(fromString boardString: String) throws {
     _board = try boardString.components(separatedBy: BOARD_STRING_COLUMN_SEPERATOR).map({ (columnString) -> [Piece] in
-      return try Piece.pieceListFromString(columnString)
+      return try GameModel.pieceListFromString(columnString)
     })
     (_rows, _columns) = try getRowAndColumnCount(board: _board)
   }
@@ -57,7 +57,7 @@ public final class Board : NSCoding {
       } else {
         newColumnString = oldColumnString
       }
-      return newColumnString.appending(Piece.pieceListToString(pieces: column))
+      return newColumnString.appending(GameModel.pieceListToString(pieces: column))
     })
   }
   

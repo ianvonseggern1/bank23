@@ -8,6 +8,8 @@
 
 import Foundation
 
+private let PIECE_LIST_STRING_PIECE_SEPERATOR = "."
+
 public final class GameModel {
   var _board = Board()
   var _pieces = [Piece]()
@@ -24,7 +26,7 @@ public final class GameModel {
   
   public init(name: String, initialPiecesString: String, initialBoardString: String) throws {
     _levelName = name
-    let compactPieces = try Piece.pieceListFromString(initialPiecesString)
+    let compactPieces = try GameModel.pieceListFromString(initialPiecesString)
     _pieces = GameModel.shuffle(GameModel.expandPieces(compactPieces))
     _board = try Board(fromString: initialBoardString)
   }
@@ -71,6 +73,22 @@ public final class GameModel {
     }
     
     return coinsOnBoard + remainingCoins < banksOnBoard
+  }
+  
+  public func pieceListToString() -> String {
+    return GameModel.pieceListToString(pieces: _pieces)
+  }
+  
+  public static func pieceListToString(pieces: [Piece]) -> String {
+    return pieces.map({ (piece: Piece) -> String in
+      return piece.shortName()
+    }).joined(separator: PIECE_LIST_STRING_PIECE_SEPERATOR)
+  }
+  
+  public static func pieceListFromString(_ pieceListString: String) throws -> [Piece] {
+    return try pieceListString.components(separatedBy: PIECE_LIST_STRING_PIECE_SEPERATOR).map({ (pieceString) -> Piece in
+      return try Piece.initFromName(pieceString)
+    })
   }
   
   // We store the pieces as a single instance of each piece type, we need to expand those and

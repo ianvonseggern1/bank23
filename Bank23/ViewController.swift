@@ -233,16 +233,15 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func completedSwipingPieceOn() {
     _view._nextPieceView._piece?.isHidden = false
     _view.isUserInteractionEnabled = true
-    
-    // TODO move isWon and isLost to gameModel
-    if self._gameModel.isWon() {
-      self._view._victoryLabel.isHidden = false
+
+    if _gameModel.isWon() {
+      _view._victoryLabel.isHidden = false
     }
     
-    if self._gameModel.isLost() && !_showedIsLostAlert {
-      self._view._board.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
+    if _gameModel.isLost() && !_showedIsLostAlert {
+      _view._board.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
       _showedIsLostAlert = true
-      self.showResetAlert(message: "No remaining ways to win, would you like to reset?")
+      showResetAlert(message: "No remaining ways to win, would you like to reset?")
     }
   }
 

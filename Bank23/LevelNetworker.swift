@@ -25,7 +25,7 @@ public final class LevelNetworker
     let objectMapper = AWSDynamoDBObjectMapper.default()
     
     let boardString = level._board.toString()
-    let initialPiecesString = Piece.pieceListToString(pieces: level._pieces)
+    let initialPiecesString = level.pieceListToString()
     
     let itemToCreate = Boards()
     itemToCreate?._boardId = String(boardString.appending(initialPiecesString).hash)
@@ -79,7 +79,7 @@ public final class LevelNetworker
   
   static func verifyInitialPieceListIsValid(_ pieces: [Piece]) -> Bool {
     do {
-      let piecesCopy = try Piece.pieceListFromString(Piece.pieceListToString(pieces: pieces))
+      let piecesCopy = try GameModel.pieceListFromString(GameModel.pieceListToString(pieces: pieces))
     
       // Check if piecesCopy and pieces are the same
       if pieces.count != piecesCopy.count {
