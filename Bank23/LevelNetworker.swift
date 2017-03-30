@@ -48,7 +48,7 @@ public final class LevelNetworker
     scanExpression.limit = 250
 
     objectMapper.scan(Boards.self, expression: scanExpression).continueWith { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
-      if let error = task.error as? NSError {
+      if let error = task.error as NSError? {
         print("Unable to fetch boards. Error: \(error)")
       } else if let paginatedOutput = task.result {
         for b in paginatedOutput.items {
@@ -58,9 +58,9 @@ public final class LevelNetworker
                                           initialPiecesString: board._pieces!,
                                           initialBoardString: board._board!)
             boardCallback(gameModel)
-            print("SUCCESS! Added level \(board._boardName)")
+            print("SUCCESS! Added level \(board._boardName ?? "")")
           } catch {
-            print("Unable to create game from board \(board._board) and pieces \(board._pieces)")
+            print("Unable to create game from board \(board._board ?? "") and pieces \(board._pieces ?? "")")
           }
         }
       }
