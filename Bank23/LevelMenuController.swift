@@ -13,15 +13,54 @@ protocol LevelMenuControllerDelegate: NSObjectProtocol {
   func reset()
 }
 
-public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDelegate {
+public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   weak var delegate: LevelMenuControllerDelegate?
 
   var _initialGameModels = [GameModel]()
 
-  var _tableView : UITableView?
+  var _tableView = UITableView()
   var _currentRow = 0
   
-  public override init () {
+  override public func viewDidLoad() {
+    super.viewDidLoad()
+
+    self.view.addSubview(_tableView)
+    _tableView.frame = self.view.bounds
+    _tableView.dataSource = self
+    _tableView.delegate = self
+    
+    // Setup Navigation Bar
+
+    self.navigationItem.title = "Main Menu"
+    
+    let menuIcon = UIButton() // todo, replace with an 'X' image
+    menuIcon.setImage(UIImage(named: "menu-icon25.png"), for: UIControlState.normal)
+    menuIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 22)
+    menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
+    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
+  }
+
+  public func fetchLevels() {
+    addLocalLevels()
+    LevelNetworker.getAllBoardsFromDatabase(boardCallback: self.add)
+  }
+
+  public func currentLevel() -> GameModel {
+    return _initialGameModels[_currentRow].copy()
+  }
+  
+  public func add(level: GameModel) {
+    _initialGameModels.append(level)
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
+  }
+  
+  func didTapMenu() {
+    self.dismiss(animated: true, completion: nil)
+  }
+  
+  func addLocalLevels() {
     // Helpful reminder board is indexed first by column, then row i.e. board[column][row]
     
     // Level 1
@@ -33,7 +72,7 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialBoard[3][3] = Piece.water(5)
     initialBoard[1][4] = Piece.water(3)
     initialBoard[3][4] = Piece.water(3)
-
+    
     var initialPieces = [Piece]()
     initialPieces.append(Piece.coins(10))
     initialPieces.append(Piece.sand(20))
@@ -78,11 +117,11 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialBoard[4][4] = Piece.bank(10)
     initialBoard[4][3] = Piece.water(10)
     initialBoard[3][4] = Piece.water(10)
-
+    
     initialPieces = [Piece]()
     initialPieces.append(Piece.coins(10))
     initialPieces.append(Piece.sand(20))
-
+    
     _initialGameModels.append(try! GameModel(name: "Corner Case",
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
@@ -117,11 +156,11 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialBoard[4][1] = Piece.water(3)
     initialBoard[4][3] = Piece.water(3)
     initialBoard[3][2] = Piece.water(4)
-
+    
     initialPieces = [Piece]()
     initialPieces.append(Piece.coins(10))
     initialPieces.append(Piece.sand(20))
-
+    
     _initialGameModels.append(try! GameModel(name: "Worlds Apart",
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
@@ -137,11 +176,11 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialBoard[2][1] = Piece.water(3)
     initialBoard[2][2] = Piece.water(2)
     initialBoard[2][3] = Piece.water(3)
-
+    
     initialPieces = [Piece]()
     initialPieces.append(Piece.coins(10))
     initialPieces.append(Piece.sand(20))
-
+    
     _initialGameModels.append(try! GameModel(name: "Split Brain",
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
@@ -161,11 +200,11 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     initialBoard[4][5] = Piece.water(2)
     initialBoard[1][4] = Piece.water(2)
     initialBoard[5][4] = Piece.water(2)
-
+    
     initialPieces = [Piece]()
     initialPieces.append(Piece.coins(16))
     initialPieces.append(Piece.sand(32))
-
+    
     _initialGameModels.append(try! GameModel(name: "007",
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
@@ -197,35 +236,14 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
     
     initialBoard[3][2] = Piece.bank(5)
     initialBoard[3][4] = Piece.bank(5)
-
+    
     initialPieces = [Piece]()
     initialPieces.append(Piece.coins(10))
     initialPieces.append(Piece.sand(20))
-
+    
     _initialGameModels.append(try! GameModel(name: "Grand Canyon",
                                              initialPieces: initialPieces,
                                              initialBoard: initialBoard))
-    
-    super.init()
-    
-    LevelNetworker.getAllBoardsFromDatabase(boardCallback: self.add)
-  }
-  
-  public func configureWith(tableView: UITableView) {
-    tableView.dataSource = self
-    tableView.delegate = self
-    _tableView = tableView
-  }
-
-  public func currentLevel() -> GameModel {
-    return _initialGameModels[_currentRow].copy()
-  }
-  
-  public func add(level: GameModel) {
-    _initialGameModels.append(level)
-    DispatchQueue.main.async {
-      self._tableView?.reloadData()
-    }
   }
   
   // UITableViewDataSource
@@ -254,5 +272,6 @@ public class LevelMenuController: NSObject, UITableViewDataSource, UITableViewDe
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     _currentRow = indexPath.row
     delegate?.reset()
+    self.dismiss(animated: true, completion: nil)
   }
 }

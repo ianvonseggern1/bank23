@@ -16,22 +16,10 @@ enum selectedButton {
 
 final class EditGameViewController: UIViewController {
   var _gameModel = GameModel()
-  var _view: EditGameView
+  var _view = EditGameView(frame:CGRect.zero)
   var _selectedPiece: Piece?
   
   var levelMenuController: LevelMenuController?
-
-  public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    _view = EditGameView(frame:CGRect.zero)
-
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    _view = EditGameView(frame:CGRect.zero)
-
-    super.init(coder: aDecoder)
-  }
   
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -15,7 +15,6 @@ let BOARD_PADDING: CGFloat = 20.0
 class GameView: UIView {
   let _board: BoardView
   let _victoryLabel: UILabel
-  let _levelMenu: UITableView
   let _remainingPiecesView: RemainingPiecesView
   let _nextPieceView: NextPieceView
   
@@ -24,7 +23,6 @@ class GameView: UIView {
     _victoryLabel = UILabel()
     _remainingPiecesView = RemainingPiecesView(frame: CGRect.zero)
     _nextPieceView = NextPieceView(frame: CGRect.zero)
-    _levelMenu = UITableView()
     
     super.init(frame:frame)
     
@@ -34,9 +32,6 @@ class GameView: UIView {
     
     self.addSubview(_remainingPiecesView)
     self.addSubview(_nextPieceView)
-    
-    _levelMenu.isHidden = true
-    self.addSubview(_levelMenu)
     
     _victoryLabel.text = "YOU WON!"
     _victoryLabel.font = UIFont.systemFont(ofSize: 48, weight: 1.0)
@@ -50,12 +45,6 @@ class GameView: UIView {
   
   override func layoutSubviews() {
     let bounds = self.frame
-    
-    // todo replace 60 with actual height of navigation bar
-    _levelMenu.frame = CGRect(x: 0,
-                              y: 60,
-                              width: bounds.width * 3 / 4,
-                              height: bounds.height - 60)
     
     _victoryLabel.sizeToFit()
     _victoryLabel.frame = CGRect(x: (bounds.width - _victoryLabel.frame.width) / 2.0,

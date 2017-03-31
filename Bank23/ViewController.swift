@@ -14,45 +14,29 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   var _gameModel = GameModel()
   
   let _levelMenuController = LevelMenuController()
-  let _editGameViewController: EditGameViewController
+  let _editGameViewController = EditGameViewController()
 
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
   
-  public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-    _editGameViewController = EditGameViewController(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    _editGameViewController = EditGameViewController(coder: aDecoder)!
-
-    super.init(coder: aDecoder)
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupBoard()
-    
-    _levelMenuController.delegate = self
-    
-    self.view = _view
-    
-    self.navigationItem.title = _gameModel._levelName
-    self.setupNavigationBarItems()
-    
     // Configure level menu controller
-    _levelMenuController.configureWith(tableView: _view._levelMenu)
+    _levelMenuController.delegate = self
+    _levelMenuController.fetchLevels()
     
     // Configure edit game view controller
     _editGameViewController.levelMenuController = _levelMenuController
     
+    self.setupNavigationBarItems()
     let panGesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(gesture:)))
     _view.addGestureRecognizer(panGesture)
+    self.view = _view
 
+    setupBoard()
     _view.updateModel(_gameModel)
+    self.navigationItem.title = _gameModel._levelName
   }
   
   func setupNavigationBarItems() {
@@ -77,8 +61,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func didTapMenu() {
-    _view._levelMenu.isHidden = !_view._levelMenu.isHidden
-    _view.bringSubview(toFront: _view._levelMenu)
+    let navigationController = UINavigationController(rootViewController: _levelMenuController)
+    self.present(navigationController, animated: true, completion: nil)
   }
   
   func didTapRefresh() {
@@ -109,7 +93,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     self.navigationItem.title = _gameModel._levelName
     _view.updateModel(_gameModel)
     _view._victoryLabel.isHidden = true
-    _view._levelMenu.isHidden = true
     _showedIsLostAlert = false
     _view._board.backgroundColor = BoardView.backgroundColor()
   }
