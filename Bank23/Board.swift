@@ -113,43 +113,9 @@ public final class Board : NSCoding {
   // Main action taken by user - returns location of new piece, nil if it can't be swipped on
   // doesn't actually place new piece on board yet, you have to manually call mergePiece for that
   func swipePieceOn(newPiece: Piece, from: Direction) -> (Int, Int)? {
-    var nextBoard = Array(repeating:Array(repeating:Piece.empty, count:_rows), count:_columns)
-    
-    // Collapse all existing
-    switch from {
-    case .top:
-      for (index, column) in _board.enumerated() {
-        nextBoard[index] = collapseColumn(column: column)
-      }
-      break
-    case .bottom:
-      for (index, column) in _board.enumerated() {
-        nextBoard[index] = collapseColumn(column: column.reversed()).reversed()
-      }
-      break
-    case .left:
-      for rowIndex in 0...(_rows - 1) {
-        let row = _board.map({ (column: [Piece]) -> Piece in
-          return column[rowIndex]
-        })
-        let newRow:[Piece] = collapseColumn(column: row.reversed()).reversed()
-        for (columnIndex, _) in nextBoard.enumerated() {
-          nextBoard[columnIndex][rowIndex] = newRow[columnIndex]
-        }
-      }
-      break
-    case .right:
-      for rowIndex in 0...(_rows - 1) {
-        let row = _board.map({ (column: [Piece]) -> Piece in
-          return column[rowIndex]
-        })
-        let newRow:[Piece] = collapseColumn(column: row)
-        for (columnIndex, _) in nextBoard.enumerated() {
-          nextBoard[columnIndex][rowIndex] = newRow[columnIndex]
-        }
-      }
-      break
-    }
+    var nextBoard = applyColumnFunction(swipeDirection: from,
+                                        function: {collapseColumn(column: $0)},
+                                        defaultValue: Piece.empty)
     
     // Find eligable spots for new piece
     var eligibleSpots = [(Int, Int)]()
@@ -192,7 +158,7 @@ public final class Board : NSCoding {
     _board[column][row] = piece.joinInto(existing: _board[column][row])!
   }
   
-  func collapseColumn(column: [Piece]) -> [Piece] {
+  private func collapseColumn(column: [Piece]) -> [Piece] {
     var column = column
     var newColumn = Array(repeating: Piece.empty, count: column.count)
     for index in 0...(column.count - 2) {
@@ -210,20 +176,25 @@ public final class Board : NSCoding {
     return newColumn
   }
   
-  // Used to animate partial user swipe
-  func findMovablePieces(swipeDirection: Direction) -> [[Bool]] {
-    var canMove = Array(repeating:Array(repeating:false, count:_rows), count:_columns)
+  // Allows you to define func's that apply to a single column regardless of swipe direction
+  // it handles applying that func properly in the appropriate direction
+  //
+  // Convention here is for the function to assume swipes happen from higher indicies toward
+  // lower ones
+  private func applyColumnFunction<T>(swipeDirection: Direction,
+                                   function: ([Piece]) -> [T],
+                                   defaultValue: T) -> [[T]] {
+    var rtn = Array(repeating:Array(repeating:defaultValue, count:_rows), count:_columns)
     
-    // Collapse all existing
     switch swipeDirection {
     case .top:
       for (index, column) in _board.enumerated() {
-        canMove[index] = findMovablePiecesInColumn(column: column)
+        rtn[index] = function(column)
       }
       break
     case .bottom:
       for (index, column) in _board.enumerated() {
-        canMove[index] = findMovablePiecesInColumn(column: column.reversed()).reversed()
+        rtn[index] = function(column.reversed()).reversed()
       }
       break
     case .left:
@@ -231,9 +202,9 @@ public final class Board : NSCoding {
         let row = _board.map({ (column: [Piece]) -> Piece in
           return column[rowIndex]
         })
-        let canMoveRow:[Bool] = findMovablePiecesInColumn(column: row.reversed()).reversed()
-        for (columnIndex, _) in canMove.enumerated() {
-          canMove[columnIndex][rowIndex] = canMoveRow[columnIndex]
+        let rtnRow:[T] = function(row.reversed()).reversed()
+        for (columnIndex, _) in rtn.enumerated() {
+          rtn[columnIndex][rowIndex] = rtnRow[columnIndex]
         }
       }
       break
@@ -242,18 +213,30 @@ public final class Board : NSCoding {
         let row = _board.map({ (column: [Piece]) -> Piece in
           return column[rowIndex]
         })
-        let canMoveRow:[Bool] = findMovablePiecesInColumn(column: row)
-        for (columnIndex, _) in canMove.enumerated() {
-          canMove[columnIndex][rowIndex] = canMoveRow[columnIndex]
+        let rtnRow:[T] = function(row)
+        for (columnIndex, _) in rtn.enumerated() {
+          rtn[columnIndex][rowIndex] = rtnRow[columnIndex]
         }
       }
       break
     }
     
-    return canMove
+    return rtn
   }
   
-  func findMovablePiecesInColumn(column: [Piece]) -> [Bool] {
+  // Used to animate partial user swipe
+  func findMovablePieces(swipeDirection: Direction) -> [[Bool]] {
+    return applyColumnFunction(swipeDirection: swipeDirection,
+                               function: { findMovablePiecesInColumn(column: $0) },
+                               defaultValue: false)
+  }
+  
+  // TODO
+//  private func findIncrementedPiecesInColumn(column: [Piece]) -> [Bool] {
+//    
+//  }
+  
+  private func findMovablePiecesInColumn(column: [Piece]) -> [Bool] {
     var tempColumn = column
     var canMove = Array(repeating: false, count: column.count)
     for index in 0...(column.count - 2) {
