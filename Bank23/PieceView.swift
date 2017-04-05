@@ -16,6 +16,8 @@ class PieceView: UIView {
   let _row: Int
   let _column: Int
   
+  var showCount = true
+  
   init(frame: CGRect, model: Piece, pieceColor: UIColor, row: Int, column: Int) {
     _row = row
     _column = column
@@ -58,10 +60,17 @@ class PieceView: UIView {
       break
     }
     
+    if padding > 0.2 * self.bounds.width {
+      padding = 1.0
+    }
+    
     _icon.frame = CGRect(x: padding,
                          y: padding,
                          width:self.bounds.width - padding * 2,
                          height:self.bounds.height - padding * 2)
+    
+    _countLabel.isHidden = !showCount
+    
     _countLabel.sizeToFit()
     _countLabel.frame = CGRect(x: self.bounds.width - _countLabel.frame.width,
                           y: 0,

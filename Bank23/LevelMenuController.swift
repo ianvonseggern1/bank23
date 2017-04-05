@@ -267,9 +267,16 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let label = UILabel()
+    let tableViewCell = UITableViewCell()
     
     if indexPath.section == 0 {
       label.text = _initialGameModels[indexPath.row]._levelName
+      
+      let boardView = BoardView(frame: CGRect(x: self._tableView.frame.width - 100, y: 10, width: 90, height: 90))
+      boardView.showCountLabels = false
+      boardView.updateModel(board: _initialGameModels[indexPath.row]._board._board)
+      tableViewCell.addSubview(boardView)
+    
     } else if indexPath.section == 1 {
       label.text = "+ Add a Level"
     }
@@ -277,10 +284,15 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     label.sizeToFit()
     label.frame = CGRect(x: 10, y: 10, width: label.frame.width, height: label.frame.height)
 
-    let tableViewCell = UITableViewCell()
     tableViewCell.addSubview(label)
-    tableViewCell.sizeToFit()
     return tableViewCell
+  }
+  
+  public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.section == 0 {
+      return 110
+    }
+    return 60
   }
   
   // UITableViewDelegate

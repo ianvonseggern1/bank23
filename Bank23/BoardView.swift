@@ -13,6 +13,8 @@ class BoardView: UIImageView {
   var _rowCount = 0
   var _columnCount = 0
   
+  var showCountLabels = true
+  
   static func backgroundColor() -> UIColor {
     return UIColor(red:0.83, green:0.91, blue:0.88, alpha:1.0) // D3E8E1
   }
@@ -150,6 +152,11 @@ class BoardView: UIImageView {
                               pieceColor: UIColor.white,
                               row:row,
                               column:col)
+    
+    if !showCountLabels {
+      pieceView.showCount = false
+    }
+    
     self.addSubview(pieceView)
 
     return pieceView
