@@ -91,7 +91,7 @@ class PieceView: UIView {
       _countLabel.text = "\(x)"
       break
     case .sand(let x):
-      iconImage = UIImage(named: "Sandcastle 01.png")
+      iconImage = UIImage(named: "Sandcastle.png")
       _countLabel.text = "\(x)"
       break
     case .mountain(let x):
