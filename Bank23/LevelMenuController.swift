@@ -13,8 +13,10 @@ protocol LevelMenuControllerDelegate: NSObjectProtocol {
   func reset()
 }
 
-public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate, EditGameViewControllerDelegate {
   weak var delegate: LevelMenuControllerDelegate?
+
+  let _editGameViewController = EditGameViewController()
 
   var _initialGameModels = [GameModel]()
 
@@ -28,6 +30,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _tableView.frame = self.view.bounds
     _tableView.dataSource = self
     _tableView.delegate = self
+    
+    _editGameViewController.delegate = self
     
     // Setup Navigation Bar
 
@@ -248,16 +252,28 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   // UITableViewDataSource
   
+  public func numberOfSections(in tableView: UITableView) -> Int {
+    return 2
+  }
+  
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
       return _initialGameModels.count
+    } else if section == 1 {
+      return 1
     }
     return 0
   }
   
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let label = UILabel()
-    label.text = _initialGameModels[indexPath.row]._levelName
+    
+    if indexPath.section == 0 {
+      label.text = _initialGameModels[indexPath.row]._levelName
+    } else if indexPath.section == 1 {
+      label.text = "+ Add a Level"
+    }
+    
     label.sizeToFit()
     label.frame = CGRect(x: 10, y: 10, width: label.frame.width, height: label.frame.height)
 
@@ -270,8 +286,12 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   // UITableViewDelegate
   
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    _currentRow = indexPath.row
-    delegate?.reset()
-    self.dismiss(animated: true, completion: nil)
+    if indexPath.section == 0 {
+      _currentRow = indexPath.row
+      delegate?.reset()
+      self.dismiss(animated: true, completion: nil)
+    } else if indexPath.section == 1 {
+      self.navigationController?.pushViewController(_editGameViewController, animated: true)
+    }
   }
 }

@@ -14,12 +14,16 @@ enum selectedButton {
   case none
 }
 
+protocol EditGameViewControllerDelegate: NSObjectProtocol {
+  func add(level: GameModel)
+}
+
 final class EditGameViewController: UIViewController {
   var _gameModel = GameModel()
   var _view = EditGameView(frame:CGRect.zero)
   var _selectedPiece: Piece?
   
-  var levelMenuController: LevelMenuController?
+  weak var delegate: EditGameViewControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -170,11 +174,11 @@ final class EditGameViewController: UIViewController {
     do {
       try LevelNetworker.writeLevelToDatabase(level: _gameModel)
       
-      // For now we write it locally to the level menu controller and to the DB
-      levelMenuController!.add(level: _gameModel)
+      // For now we write it locally to the level menu controller in addition to the DB
+      delegate!.add(level: _gameModel)
     } catch {
       let alert = UIAlertController(title: nil,
-                                    message: "Error while attampting to save level",
+                                    message: "Error while attempting to save level",
                                     preferredStyle: UIAlertControllerStyle.alert)
       alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
       self.present(alert, animated: true, completion: nil)

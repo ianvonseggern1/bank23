@@ -14,7 +14,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   var _gameModel = GameModel()
   
   let _levelMenuController = LevelMenuController()
-  let _editGameViewController = EditGameViewController()
 
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
@@ -25,9 +24,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     // Configure level menu controller
     _levelMenuController.delegate = self
     _levelMenuController.fetchLevels()
-    
-    // Configure edit game view controller
-    _editGameViewController.levelMenuController = _levelMenuController
     
     self.setupNavigationBarItems()
     let panGesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(gesture:)))
@@ -50,14 +46,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     refreshIcon.setImage(UIImage(named: "refresh.png"), for: UIControlState.normal)
     refreshIcon.bounds = CGRect(x: 10, y: 0, width: 25, height: 25)
     refreshIcon.addTarget(self, action: #selector(didTapRefresh), for: UIControlEvents.touchUpInside)
-    let editIcon = UIButton()
-    editIcon.setImage(UIImage(named: "edit-icon.png"), for: UIControlState.normal)
-    editIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
-    editIcon.addTarget(self, action: #selector(didTapEdit), for: UIControlEvents.touchUpInside)
-    
 
-    self.navigationItem.setRightBarButtonItems([UIBarButtonItem(customView: refreshIcon),
-                                                UIBarButtonItem(customView: editIcon)], animated: false)
+    self.navigationItem.setRightBarButton(UIBarButtonItem(customView: refreshIcon), animated: false)
   }
   
   func didTapMenu() {
@@ -82,10 +72,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       self.reset()
     }))
     self.present(alert, animated: true, completion: nil)
-  }
-  
-  func didTapEdit() {
-    self.navigationController?.pushViewController(_editGameViewController, animated: true)
   }
   
   func reset() {
