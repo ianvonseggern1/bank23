@@ -120,13 +120,24 @@ class BoardView: UIImageView {
     for subview in self.subviews {
       subview.removeFromSuperview()
     }
+    
+    var pieceViews = [PieceView]()
     for (columnIndex, column) in board.enumerated() {
       for (rowIndex, piece) in column.enumerated() {
         if (piece != Piece.empty) {
-          let _ = addPiece(piece: piece, row: rowIndex, col: columnIndex)
+          let pieceView = addPiece(piece: piece, row: rowIndex, col: columnIndex)
+          pieceViews.append(pieceView)
         }
       }
     }
+    
+    // We want to show the sand and the coins on top of the stationary pieces
+    for pieceView in pieceViews {
+      if pieceView._model.moves() {
+        self.bringSubview(toFront: pieceView)
+      }
+    }
+
     self.setNeedsLayout()
   }
   
