@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1ED40AD41E81A18500E62E1B /* LevelNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */; };
 		1ED40AD61E81A3D800E62E1B /* Boards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD51E81A3D800E62E1B /* Boards.swift */; };
+		669189331E957ACB0099A497 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189321E957ACB0099A497 /* refresh.png */; };
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
@@ -67,6 +68,7 @@
 /* Begin PBXFileReference section */
 		1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNetworker.swift; sourceTree = "<group>"; };
 		1ED40AD51E81A3D800E62E1B /* Boards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Boards.swift; path = "../Bank23-integration-lib-aws-my-sample-app-ios-swift/AmazonAws/Models/NoSQL/Boards.swift"; sourceTree = "<group>"; };
+		669189321E957ACB0099A497 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		66B5F0071E82DBE000F96770 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				B61C693D1E74AC5100E68150 /* AmazonAws */,
 				B64CB4F61E04A34C005A7781 /* Products */,
 				B61F478E1E6E5F7C00A48CA4 /* Water.png */,
+				669189321E957ACB0099A497 /* refresh.png */,
 				B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */,
 				B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */,
 				B66C18651E6FC8EF00CD0498 /* mountain.png */,
@@ -270,6 +273,7 @@
 				B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */,
 				B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
+				669189331E957ACB0099A497 /* refresh.png in Resources */,
 				B61C69341E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift in Resources */,
 				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
