@@ -17,6 +17,10 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
 
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
+  var _moveCount = 0
+  // Unique to each 'round' reset when the board is reset. Allows us to
+  // track moves and results in the database
+  var _uniquePlayId: String?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -75,6 +79,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
+    MoveNetworker.writeResultToDatabase(level: _levelMenuController.currentLevel(),
+                                        uniquePlayId: _uniquePlayId!,
+                                        victory: _gameModel.isWon(),
+                                        enoughPiecesLeft: _gameModel.isLost(),
+                                        moveCount: _moveCount)
+    
     self.setupBoard()
     self.navigationItem.title = _gameModel._levelName
     _view.updateModel(_gameModel)
@@ -140,6 +150,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func swipePieceOn(from:Direction) {
+    _moveCount += 1
+    
     var piece = _gameModel._pieces.popLast()
     if piece == nil {
       piece = Piece.empty
@@ -227,6 +239,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func setupBoard() {
+    _uniquePlayId = UUID.init().uuidString
+    _moveCount = 0
     _gameModel = _levelMenuController.currentLevel()
   }
   

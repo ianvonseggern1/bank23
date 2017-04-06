@@ -24,21 +24,18 @@ public final class LevelNetworker
 
     let objectMapper = AWSDynamoDBObjectMapper.default()
     
-    let boardString = level._board.toString()
-    let initialPiecesString = level.pieceListToString()
-    
     let itemToCreate = Boards()
-    itemToCreate?._boardId = String(boardString.appending(initialPiecesString).hash)
+    itemToCreate?._boardId = level.hash()
     itemToCreate?._boardName = level._levelName
-    itemToCreate?._board = boardString
-    itemToCreate?._pieces = initialPiecesString
+    itemToCreate?._board = level._board.toString()
+    itemToCreate?._pieces = level.pieceListToString()
 
     objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
       if let error = error {
-        print("Amazon DynamoDB Save Error: \(error)")
+        print("Amazon DynamoDB Error - saving level: \(error)")
         return
       }
-      print("Item saved.")
+      print("Level saved.")
     })
   }
   
@@ -58,7 +55,7 @@ public final class LevelNetworker
                                           initialPiecesString: board._pieces!,
                                           initialBoardString: board._board!)
             boardCallback(gameModel)
-            print("SUCCESS! Added level \(board._boardName ?? "")")
+            print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {
             print("Unable to create game from board \(board._board ?? "") and pieces \(board._pieces ?? "")")
           }

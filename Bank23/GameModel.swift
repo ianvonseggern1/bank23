@@ -38,6 +38,10 @@ public final class GameModel {
                           initialBoard:self._board._board)
   }
   
+  func hash() -> String {
+    return String((_board.toString().appending(self.pieceListToString())).hash)
+  }
+  
   // Win iff there are no banks left
   func isWon() -> Bool {
     for column in _board._board {
