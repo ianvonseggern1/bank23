@@ -12,6 +12,8 @@ class RemainingPiecesView: UIView {
   var _piecesLeft = [PieceView]()
   let _label = UILabel()
   
+  let squareSize = CGFloat(60.0)
+  
   override init(frame: CGRect) {
     super.init(frame:frame)
     
@@ -31,16 +33,16 @@ class RemainingPiecesView: UIView {
     _label.sizeToFit()
     _label.frame = CGRect(x: 4, y: 4, width:_label.frame.width, height: _label.frame.height)
     for (index, pieceView) in _piecesLeft.enumerated() {
-      pieceView.frame = CGRect(x: 4 + CGFloat(index) * SINGLE_SQUARE_SIZE,
+      pieceView.frame = CGRect(x: 4 + CGFloat(index) * squareSize,
                                y: _label.frame.maxY + 4,
-                               width: SINGLE_SQUARE_SIZE,
-                               height: SINGLE_SQUARE_SIZE)
+                               width: squareSize,
+                               height: squareSize)
     }
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {
-    return CGSize(width: SINGLE_SQUARE_SIZE * CGFloat(_piecesLeft.count) + 2 * 4,
-                  height: _label.frame.height + SINGLE_SQUARE_SIZE + 3 * 4)
+    return CGSize(width: squareSize * CGFloat(_piecesLeft.count) + 2 * 4,
+                  height: _label.frame.height + squareSize + 3 * 4)
   }
   
   func updatePiecesLeft(pieces: [Piece]) {

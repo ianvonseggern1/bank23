@@ -35,14 +35,14 @@ class BoardView: UIImageView {
     UIGraphicsBeginImageContext(self.frame.size)
     let context = UIGraphicsGetCurrentContext()
     context?.setStrokeColor(UIColor(red:0.42, green:0.56, blue:0.33, alpha:1.0).cgColor)
-    for i in 1...(_columnCount - 1) {
+    for i in 0..._columnCount {
       let float_i = CGFloat(i)
       context?.move(to: CGPoint(x: self.singleSquareSize() * float_i, y: 0))
       context?.addLine(to: CGPoint(x: self.singleSquareSize() * float_i,
                                    y: self.singleSquareSize() * CGFloat(_rowCount)))
       context?.strokePath()
     }
-    for i in 1...(_rowCount - 1) {
+    for i in 0..._rowCount {
       let float_i = CGFloat(i)
       context?.move(to: CGPoint(x: 0, y: self.singleSquareSize() * float_i))
       context?.addLine(to: CGPoint(x: self.singleSquareSize() * CGFloat(_columnCount),
@@ -112,6 +112,20 @@ class BoardView: UIImageView {
     }
   }
   
+  // First half of an animation used to show pieces combining with themselves, basically
+  // a spin simply by shrinking and expanding
+  func spinIn(pieceMask: [[Bool]]) {
+    for subview in self.subviews {
+      let pieceview = subview as! PieceView
+      if pieceMask[pieceview._column][pieceview._row] {
+        pieceview.frame = CGRect(x: self.singleSquareSize() * (CGFloat(pieceview._column) + 0.5),
+                                 y:self.singleSquareSize() * CGFloat(_rowCount - 1 - pieceview._row),
+                                 width:1.0,
+                                 height:self.singleSquareSize())
+      }
+    }
+  }
+  
   func updateModel(board: [[Piece]]) {
     _columnCount = board.count
     if (_columnCount == 0) {
@@ -149,7 +163,7 @@ class BoardView: UIImageView {
     }
     let pieceView = PieceView(frame: CGRect.zero,
                               model: piece,
-                              pieceColor: UIColor.white,
+                              pieceColor: UIColor(red:0.14, green:0.26, blue:0.05, alpha:1.0),
                               row:row,
                               column:col)
     

@@ -158,6 +158,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view.isUserInteractionEnabled = false
 
     let movablePieceMask = _gameModel._board.findMovablePieces(swipeDirection: from)
+    let incrementedPieceMask = _gameModel._board.findIncrementedPieces(swipeDirection: from)
     UIView.animate(withDuration: 0.2,
                    delay: 0,
                    options: [UIViewAnimationOptions.curveLinear],
@@ -172,6 +173,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                      // Update the view with all the new locations but not the new piece, then we animate it on,
                      // then we update again
                      self._view.updateModel(self._gameModel)
+                    
+//                     UIView.animate(withDuration: 0.2,
+//                                    animations: {
+//                                      self._view._board.spinIn(pieceMask: incrementedPieceMask)
+//                                    },
+//                                    completion: nil)
                     
                      var newPieceView: PieceView? = nil
                      if (piece != nil && piece! != Piece.empty && newPieceLocation != nil) {
@@ -190,6 +197,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                                                           row: newPieceRow,
                                                                           column: newPieceColumn)
                                         self._view.updateModel(self._gameModel)
+                                        
+                                        // testing
+                                        self._view._board.spinIn(pieceMask: incrementedPieceMask)
+                                        self._view.setNeedsLayout()
+                                        self._view.layoutIfNeeded()
                                         
                                         self.completedSwipingPieceOn()
                                       })

@@ -231,10 +231,33 @@ public final class Board : NSCoding {
                                defaultValue: false)
   }
   
-  // TODO
-//  private func findIncrementedPiecesInColumn(column: [Piece]) -> [Bool] {
-//    
-//  }
+  // Used to animate coins or sand joining with themselves after a swipe
+  //
+  // Sets only the index of the new pieces location to true, because the mask is used
+  // after the model is updated after the swipe
+  func findIncrementedPieces(swipeDirection: Direction) -> [[Bool]] {
+    return applyColumnFunction(swipeDirection: swipeDirection,
+                               function: { findIncrementedPiecesInColumn(column: $0) },
+                               defaultValue: false)
+  }
+  
+  private func findIncrementedPiecesInColumn(column: [Piece]) -> [Bool] {
+    var tempColumn = column
+    var willBeIncremented = Array(repeating: false, count: column.count)
+    for index in 0...(column.count - 2) {
+      let priorPiece = tempColumn[index]
+      let currentPiece = tempColumn[index + 1]
+      if currentPiece != Piece.empty {
+        if currentPiece.joinInto(existing: priorPiece) != nil {
+          if currentPiece.sameType(otherPiece: priorPiece) {
+            willBeIncremented[index] = true
+          }
+          tempColumn[index + 1] = Piece.empty
+        }
+      }
+    }
+    return willBeIncremented
+  }
   
   private func findMovablePiecesInColumn(column: [Piece]) -> [Bool] {
     var tempColumn = column

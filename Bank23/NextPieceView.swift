@@ -53,6 +53,7 @@ class NextPieceView: UIView {
                        pieceColor: UIColor.lightGray,
                        row: -1,
                        column: -1)
+    _piece?.showCount = false
     self.addSubview(_piece!)
     self.setNeedsLayout()
   }

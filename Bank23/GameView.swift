@@ -77,5 +77,6 @@ class GameView: UIView {
     _remainingPiecesView.updatePiecesLeft(pieces: game._pieces)
     _board.updateModel(board: game._board._board)
     self.setNeedsLayout()
+    self.layoutIfNeeded()
   }
 }
