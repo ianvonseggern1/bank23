@@ -76,8 +76,8 @@ class BoardView: UIImageView {
       singleSquareSize = size.width / CGFloat(_columnCount)
       singleSquareSize.round(.down)
     }
-    return CGSize(width: singleSquareSize * CGFloat(_columnCount),
-                  height: singleSquareSize * CGFloat(_rowCount))
+    return CGSize(width: singleSquareSize * CGFloat(_columnCount) + 2,
+                  height: singleSquareSize * CGFloat(_rowCount) + 2)
   }
   
   // Used to animate user pans, moves all the pieces that move that amount from their normal position in that direction
@@ -163,7 +163,6 @@ class BoardView: UIImageView {
     }
     let pieceView = PieceView(frame: CGRect.zero,
                               model: piece,
-                              pieceColor: UIColor(red:0.14, green:0.26, blue:0.05, alpha:1.0),
                               row:row,
                               column:col)
     

@@ -18,10 +18,11 @@ class RemainingPiecesView: UIView {
     super.init(frame:frame)
     
     _label.text = "Remaining"
-    _label.textColor = UIColor.white
+    _label.font = UIFont.boldSystemFont(ofSize: 16.0)
+    _label.textColor = PieceView.labelColor()
     self.addSubview(_label)
     
-    self.backgroundColor = UIColor.lightGray
+    self.backgroundColor = BoardView.backgroundColor()
     self.layer.cornerRadius = 4
   }
   
@@ -67,8 +68,8 @@ class RemainingPiecesView: UIView {
       }
     }
     
-    let coinPieceView = PieceView(frame: CGRect.zero, model: coinsPiece, pieceColor: UIColor.white, row: -1, column: -1)
-    let sandPieceView = PieceView(frame: CGRect.zero, model: sandPiece, pieceColor: UIColor.white, row: -1, column: -1)
+    let coinPieceView = PieceView(frame: CGRect.zero, model: coinsPiece, row: -1, column: -1)
+    let sandPieceView = PieceView(frame: CGRect.zero, model: sandPiece, row: -1, column: -1)
     self.addSubview(coinPieceView)
     self.addSubview(sandPieceView)
     _piecesLeft.append(coinPieceView)

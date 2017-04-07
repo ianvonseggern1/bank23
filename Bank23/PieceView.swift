@@ -18,7 +18,11 @@ class PieceView: UIView {
   
   var showCount = true
   
-  init(frame: CGRect, model: Piece, pieceColor: UIColor, row: Int, column: Int) {
+  static func labelColor() -> UIColor {
+    return UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.0)
+  }
+  
+  init(frame: CGRect, model: Piece, row: Int, column: Int) {
     _row = row
     _column = column
     _model = model
@@ -26,8 +30,9 @@ class PieceView: UIView {
     _icon = UIImageView()
     
     super.init(frame:frame)
-    
-    //_countLabel.textColor = UIColor.white //_countLabel.textColor = pieceColor
+
+    _countLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
+    _countLabel.textColor = PieceView.labelColor()
     self.setPiece(model: model)
     self.addSubview(_icon)
     self.addSubview(_countLabel)
@@ -91,7 +96,6 @@ class PieceView: UIView {
                          height:self.bounds.height - topPadding - bottomPadding)
     
     _countLabel.isHidden = !showCount
-    //_countLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
     _countLabel.sizeToFit()
     _countLabel.frame = CGRect(x: self.bounds.width - _countLabel.frame.width - 3,
                           y: 1,
@@ -106,30 +110,23 @@ class PieceView: UIView {
   func setPiece(model: Piece) {
     _model = model
     
-    let attribs = [
-      NSForegroundColorAttributeName: UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.0),
-      NSStrokeColorAttributeName:  UIColor(red:0.29, green:0.29, blue:0.29, alpha:1.0),
-      NSStrokeWidthAttributeName: -0.0,
-      NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12.0)
-    ] as [String : Any]
-    
     var iconImage: UIImage?
     switch model {
     case .bank(let x):
       iconImage = UIImage(named: "Piggy Bank 01.png")!
-      _countLabel.attributedText = NSAttributedString(string: "\(x)", attributes: attribs)
+      _countLabel.text = "\(x)"
       break
     case .coins(let x):
       iconImage = UIImage(named: "Coin Icon 01.png")
-      _countLabel.attributedText = NSAttributedString(string: "\(x)", attributes: attribs)
+      _countLabel.text = "\(x)"
       break
     case .water(let x):
       iconImage = UIImage(named: "Water.png")
-      _countLabel.attributedText = NSAttributedString(string: "\(x)", attributes: attribs)
+      _countLabel.text = "\(x)"
       break
     case .sand(let x):
       iconImage = UIImage(named: "Sandcastle 02.png")
-      _countLabel.attributedText = NSAttributedString(string: "\(x)", attributes: attribs)
+      _countLabel.text = "\(x)"
       break
     case .mountain(_):
       iconImage = UIImage(named: "Mountains 01.png")

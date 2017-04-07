@@ -16,10 +16,11 @@ class NextPieceView: UIView {
     super.init(frame:frame)
     
     _label.text = "Next"
-    _label.textColor = UIColor.white
+    _label.font = UIFont.boldSystemFont(ofSize: 16.0)
+    _label.textColor = PieceView.labelColor()
     self.addSubview(_label)
     
-    self.backgroundColor = UIColor.lightGray
+    self.backgroundColor = BoardView.backgroundColor()
     self.layer.cornerRadius = 4
   }
   
@@ -50,7 +51,6 @@ class NextPieceView: UIView {
     _piece?.removeFromSuperview()
     _piece = PieceView(frame: CGRect.zero,
                        model: piece != nil ? piece! : Piece.empty,
-                       pieceColor: UIColor.lightGray,
                        row: -1,
                        column: -1)
     _piece?.showCount = false
