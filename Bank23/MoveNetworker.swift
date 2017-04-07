@@ -30,7 +30,7 @@ public final class MoveNetworker
     resultToAdd?._shuffledPieces = initialShuffledPieces.map({ $0.shortName() })
     
     resultToAdd?._timeStamp = NSDate().timeIntervalSince1970 as NSNumber
-    resultToAdd?._userUUID = UIDevice.current.identifierForVendor!.uuidString
+    resultToAdd?._userUUID = UserController.getUserId()
     
     let objectMapper = AWSDynamoDBObjectMapper.default()
     objectMapper.save(resultToAdd!, completionHandler: {(error: Error?) -> Void in

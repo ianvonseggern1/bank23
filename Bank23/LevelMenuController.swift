@@ -57,6 +57,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   public func add(level: GameModel) {
     _initialGameModels.append(level)
+    _initialGameModels.sort(by: { $0._levelName < $1._levelName })
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
@@ -283,6 +284,9 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                    height: usernameLabel.frame.height)
       tableViewCell.addSubview(usernameLabel)
 
+      if _usernameTextField.text == nil || _usernameTextField.text == "" {
+        _usernameTextField.text = UserController.getUsername()
+      }
       _usernameTextField.placeholder = "Tap to enter"
       _usernameTextField.returnKeyType = UIReturnKeyType.done
       _usernameTextField.delegate = self
@@ -339,7 +343,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
     
     if _usernameTextField.isFirstResponder {
-      _usernameTextField.resignFirstResponder()
+      enteredUsername(_usernameTextField.text!)
       return
     }
     
@@ -355,7 +359,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   // UITextFieldDelegate
   
   public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    _usernameTextField.resignFirstResponder()
+    enteredUsername(textField.text!)
     return true
+  }
+  
+  private func enteredUsername(_ username: String?) {
+    if username != nil {
+      UserController.setUsername(username!)
+    }
+    _usernameTextField.resignFirstResponder()
   }
 }
