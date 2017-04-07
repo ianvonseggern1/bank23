@@ -11,12 +11,28 @@ import Foundation
 enum BoardModelError: Error {
   case initialBoardNotRectangle
 }
+
 public enum Direction {
   case left
   case right
   case top
   case bottom
+  
+  static func toString(_ direction: Direction) -> String {
+    switch direction {
+    case left:
+      return "l"
+    case right:
+      return "r"
+    case top:
+      return "t"
+    case bottom:
+      return "b"
+    }
+  }
 }
+
+
 
 public final class Board : NSCoding {
   var _board = [[Piece]]() // Board is an array of columns, so index with [column][row]. 0, 0 is bottom left

@@ -17,7 +17,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
 
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
-  var _moveCount = 0
+  var _moves = [Direction]()
+  var _initialShuffledPieces = [Piece]()
+
   // Unique to each 'round' reset when the board is reset. Allows us to
   // track moves and results in the database
   var _uniquePlayId: String?
@@ -83,7 +85,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                         uniquePlayId: _uniquePlayId!,
                                         victory: _gameModel.isWon(),
                                         enoughPiecesLeft: _gameModel.isLost(),
-                                        moveCount: _moveCount)
+                                        moves: _moves,
+                                        initialShuffledPieces: _initialShuffledPieces)
     
     self.setupBoard()
     self.navigationItem.title = _gameModel._levelName
@@ -150,7 +153,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func swipePieceOn(from:Direction) {
-    _moveCount += 1
+    _moves.append(from)
     
     var piece = _gameModel._pieces.popLast()
     if piece == nil {
@@ -240,8 +243,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
 
   func setupBoard() {
     _uniquePlayId = UUID.init().uuidString
-    _moveCount = 0
+    _moves = [Direction]()
     _gameModel = _levelMenuController.currentLevel()
+    // The pieces are popped off the back as the user plays so we reverse this list
+    // which is used for the database
+    _initialShuffledPieces = _gameModel._pieces.reversed()
   }
   
   // pragma mark - External Keyboard Support

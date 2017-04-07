@@ -82,7 +82,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "The Narrows",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 2
@@ -98,7 +98,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "The Island",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 3
@@ -113,7 +113,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "Top Side",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 4
@@ -127,7 +127,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "Corner Case",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 5
@@ -147,7 +147,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "The Narrows Part II",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 6
@@ -166,7 +166,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "Worlds Apart",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 7
@@ -186,7 +186,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "Split Brain",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 8
@@ -210,7 +210,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(32))
     
     _initialGameModels.append(try! GameModel(name: "007",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
     
     // Level 9
@@ -246,7 +246,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.sand(20))
     
     _initialGameModels.append(try! GameModel(name: "Grand Canyon",
-                                             initialPieces: initialPieces,
+                                             collapsedPieces: initialPieces,
                                              initialBoard: initialBoard))
   }
   

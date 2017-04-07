@@ -10,6 +10,7 @@ import Foundation
 
 enum PieceModelError: Error {
   case couldNotCreatePieceFromString
+  case canNotIncrementWithPieceOfDifferentType
 }
 
 public enum Piece {
@@ -58,6 +59,23 @@ public enum Piece {
       return "s".appending(String(x))
     case .mountain(let x):
       return "m".appending(String(x))
+    }
+  }
+  
+  public func typeName() -> String {
+    switch self {
+    case .empty:
+      return "empty"
+    case .bank(_):
+      return "bank"
+    case .coins(_):
+      return "coins"
+    case .water(_):
+      return "water"
+    case .sand(_):
+      return "sand"
+    case .mountain(_):
+      return "mountain"
     }
   }
 
@@ -115,6 +133,13 @@ public enum Piece {
       // ERROR - NOT SUPPORTED
       return Piece.empty
     }
+  }
+  
+  func increment(_ piece: Piece) throws -> Piece {
+    if !self.sameType(otherPiece: piece) {
+      throw PieceModelError.canNotIncrementWithPieceOfDifferentType
+    }
+    return self.increment(piece.value())
   }
   
   func createPieceWithSameType(value : Int) -> Piece {

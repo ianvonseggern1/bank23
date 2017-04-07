@@ -17,11 +17,11 @@ public final class GameModel {
   
   public init() {
   }
-  
-  public init(name: String, initialPieces: [Piece], initialBoard: [[Piece]]) throws {
+
+  public init(name: String, collapsedPieces: [Piece], initialBoard: [[Piece]]) throws {
     _levelName = name
     _board = try Board(initialBoard: initialBoard)
-    _pieces = GameModel.shuffle(GameModel.expandPieces(initialPieces))
+    _pieces = GameModel.shuffle(GameModel.expandPieces(collapsedPieces))
   }
   
   public init(name: String, initialPiecesString: String, initialBoardString: String) throws {
@@ -31,15 +31,26 @@ public final class GameModel {
     _board = try Board(fromString: initialBoardString)
   }
   
+  // Note this function reshuffles the pieces
   public func copy() -> GameModel {
     // Arrays use copy symantics so we can just create a new model
     return try! GameModel(name:self._levelName,
-                          initialPieces:self._pieces,
+                          collapsedPieces:self._pieces,
                           initialBoard:self._board._board)
   }
   
-  func hash() -> String {
-    return String((_board.toString().appending(self.pieceListToString())).hash)
+  func hash() -> UInt64 {
+    let gameString = _board.toString().appending(self.collapsedPieceListToString())
+    return strHash(gameString)
+  }
+  
+  func strHash(_ str: String) -> UInt64 {
+    var result = UInt64 (5381)
+    let buf = [UInt8](str.utf8)
+    for b in buf {
+      result = 127 * (result & 0x00ffffffffffffff) + UInt64(b)
+    }
+    return result
   }
   
   // Win iff there are no banks left
@@ -79,8 +90,8 @@ public final class GameModel {
     return coinsOnBoard + remainingCoins < banksOnBoard
   }
   
-  public func pieceListToString() -> String {
-    return GameModel.pieceListToString(pieces: _pieces)
+  public func collapsedPieceListToString() -> String {
+    return GameModel.pieceListToString(pieces: GameModel.collapsePieces(_pieces))
   }
   
   public static func pieceListToString(pieces: [Piece]) -> String {
@@ -106,6 +117,18 @@ public final class GameModel {
     return initialPieces
   }
   
+  static func collapsePieces(_ expandedPieceList: [Piece]) -> [Piece] {
+    var collapsedPieces = [String: Piece]()
+    for piece in expandedPieceList {
+      if let currentPiece = collapsedPieces[piece.typeName()] {
+        collapsedPieces[piece.typeName()] = try! currentPiece.increment(currentPiece)
+      } else {
+        collapsedPieces[piece.typeName()] = piece
+      }
+    }
+    return collapsedPieces.values.sorted(by: { $0.typeName() > $1.typeName() })
+  }
+
   static func shuffle(_ p: [Piece]) -> [Piece] {
     var pieces = p
     if pieces.count < 2 {

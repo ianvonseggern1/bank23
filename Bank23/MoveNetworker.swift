@@ -17,14 +17,17 @@ public final class MoveNetworker
                                     uniquePlayId: String,
                                     victory: Bool,
                                     enoughPiecesLeft: Bool,
-                                    moveCount: Int) {
+                                    moves: [Direction],
+                                    initialShuffledPieces: [Piece]) {
     let resultToAdd = ResultsTable()
-    resultToAdd?._boardHash = level.hash()
+    resultToAdd?._boardHash = String(level.hash())
     resultToAdd?._boardName = level._levelName
     resultToAdd?._playID = uniquePlayId
     resultToAdd?._won = victory as NSNumber
     resultToAdd?._notEnoughPieces = enoughPiecesLeft as NSNumber
-    resultToAdd?._moves = moveCount as NSNumber
+    resultToAdd?._moveCount = moves.count as NSNumber
+    resultToAdd?._moves = moves.map({ Direction.toString($0) })
+    resultToAdd?._shuffledPieces = initialShuffledPieces.map({ $0.shortName() })
     
     resultToAdd?._timeStamp = NSDate().timeIntervalSince1970 as NSNumber
     resultToAdd?._userUUID = UIDevice.current.identifierForVendor!.uuidString

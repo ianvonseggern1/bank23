@@ -21,9 +21,11 @@ class ResultsTable: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _timeStamp: NSNumber?
     var _boardHash: String?
     var _boardName: String?
-    var _moves: NSNumber?
+    var _moveCount: NSNumber?
+    var _moves: [String]?
     var _notEnoughPieces: NSNumber?
     var _playID: String?
+    var _shuffledPieces: [String]?
     var _won: NSNumber?
     
     class func dynamoDBTableName() -> String {
@@ -47,9 +49,11 @@ class ResultsTable: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_timeStamp" : "timeStamp",
                "_boardHash" : "boardHash",
                "_boardName" : "boardName",
+               "_moveCount" : "moveCount",
                "_moves" : "moves",
                "_notEnoughPieces" : "notEnoughPieces",
                "_playID" : "playID",
+               "_shuffledPieces" : "shuffledPieces",
                "_won" : "won",
         ]
     }

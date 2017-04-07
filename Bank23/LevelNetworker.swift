@@ -25,10 +25,10 @@ public final class LevelNetworker
     let objectMapper = AWSDynamoDBObjectMapper.default()
     
     let itemToCreate = Boards()
-    itemToCreate?._boardId = level.hash()
+    itemToCreate?._boardId = String(level.hash())
     itemToCreate?._boardName = level._levelName
     itemToCreate?._board = level._board.toString()
-    itemToCreate?._pieces = level.pieceListToString()
+    itemToCreate?._pieces = level.collapsedPieceListToString()
 
     objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
       if let error = error {

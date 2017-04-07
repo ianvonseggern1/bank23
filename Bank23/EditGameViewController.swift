@@ -51,7 +51,7 @@ final class EditGameViewController: UIViewController {
   
   func setupEmptyGameModel(size: Int) {
     _gameModel = try! GameModel(name: "",
-                                initialPieces: [],
+                                collapsedPieces: [],
                                 initialBoard: Array.init(repeating:Array.init(repeating: Piece.empty,
                                                                               count: size),
                                                          count: size))
