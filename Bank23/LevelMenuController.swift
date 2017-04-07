@@ -39,9 +39,9 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
 
     self.navigationItem.title = "Main Menu"
     
-    let menuIcon = UIButton() // todo, replace with an 'X' image
-    menuIcon.setImage(UIImage(named: "menu-icon25.png"), for: UIControlState.normal)
-    menuIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 22)
+    let menuIcon = UIButton()
+    menuIcon.setImage(UIImage(named: "cross.png"), for: UIControlState.normal)
+    menuIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
     menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
     self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
   }
