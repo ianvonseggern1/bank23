@@ -270,6 +270,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     return 0
   }
   
+  // TODO create seperate views for these
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let tableViewCell = UITableViewCell()
     tableViewCell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -278,6 +279,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       let usernameLabel = UILabel()
       usernameLabel.text = "Your Username: "
       usernameLabel.sizeToFit()
+      usernameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+      usernameLabel.textColor = UIColor.gray
       usernameLabel.frame = CGRect(x: 10,
                                    y: 10,
                                    width: usernameLabel.frame.width,
@@ -332,8 +335,10 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     } else if indexPath.section == 2 {
       let label = UILabel()
       label.text = "+ Add a Level"
+      label.font = UIFont.boldSystemFont(ofSize: 16.0)
+      label.textColor = UIColor.gray
       label.sizeToFit()
-      label.frame = CGRect(x: 10,
+      label.frame = CGRect(x: 30,
                            y: 10,
                            width: label.frame.width,
                            height: label.frame.height)
@@ -347,7 +352,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     if indexPath.section == 1 {
       return 110
     }
-    return 60
+    return 40
   }
   
   // UITableViewDelegate
