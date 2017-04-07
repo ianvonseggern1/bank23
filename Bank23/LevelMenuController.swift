@@ -13,7 +13,7 @@ protocol LevelMenuControllerDelegate: NSObjectProtocol {
   func reset()
 }
 
-public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate, EditGameViewControllerDelegate {
+public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EditGameViewControllerDelegate {
   weak var delegate: LevelMenuControllerDelegate?
 
   let _editGameViewController = EditGameViewController()
@@ -21,6 +21,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   var _initialGameModels = [GameModel]()
 
   var _tableView = UITableView()
+  let _usernameTextField = UITextField()
+  
   var _currentRow = 0
   
   override public func viewDidLoad() {
@@ -253,43 +255,76 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   // UITableViewDataSource
   
   public func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
+    return 3
   }
   
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
-      return _initialGameModels.count
+      return 1
     } else if section == 1 {
+      return _initialGameModels.count
+    } else if section == 2 {
       return 1
     }
     return 0
   }
   
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let label = UILabel()
     let tableViewCell = UITableViewCell()
-    
+    tableViewCell.selectionStyle = UITableViewCellSelectionStyle.none
+
     if indexPath.section == 0 {
+      let usernameLabel = UILabel()
+      usernameLabel.text = "Your Username: "
+      usernameLabel.sizeToFit()
+      usernameLabel.frame = CGRect(x: 10,
+                                   y: 10,
+                                   width: usernameLabel.frame.width,
+                                   height: usernameLabel.frame.height)
+      tableViewCell.addSubview(usernameLabel)
+
+      _usernameTextField.placeholder = "Tap to enter"
+      _usernameTextField.returnKeyType = UIReturnKeyType.done
+      _usernameTextField.delegate = self
+      _usernameTextField.frame = CGRect(x: usernameLabel.frame.maxX,
+                                       y: 10,
+                                       width: tableView.frame.width - usernameLabel.frame.maxX - 10,
+                                       height: usernameLabel.frame.height)
+      tableViewCell.addSubview(_usernameTextField)
+    } else if indexPath.section == 1 {
+      let label = UILabel()
       label.text = _initialGameModels[indexPath.row]._levelName
+      label.sizeToFit()
+      label.frame = CGRect(x: 10,
+                           y: 10,
+                           width: label.frame.width,
+                           height: label.frame.height)
+      tableViewCell.addSubview(label)
       
-      let boardView = BoardView(frame: CGRect(x: self._tableView.frame.width - 100, y: 10, width: 90, height: 90))
+      let boardView = BoardView(frame: CGRect(x: self._tableView.frame.width - 100,
+                                              y: 10,
+                                              width: 90,
+                                              height: 90))
       boardView.showCountLabels = false
       boardView.updateModel(board: _initialGameModels[indexPath.row]._board._board)
       tableViewCell.addSubview(boardView)
     
-    } else if indexPath.section == 1 {
+    } else if indexPath.section == 2 {
+      let label = UILabel()
       label.text = "+ Add a Level"
+      label.sizeToFit()
+      label.frame = CGRect(x: 10,
+                           y: 10,
+                           width: label.frame.width,
+                           height: label.frame.height)
+      tableViewCell.addSubview(label)
     }
-    
-    label.sizeToFit()
-    label.frame = CGRect(x: 10, y: 10, width: label.frame.width, height: label.frame.height)
 
-    tableViewCell.addSubview(label)
     return tableViewCell
   }
   
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == 0 {
+    if indexPath.section == 1 {
       return 110
     }
     return 60
@@ -299,11 +334,28 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == 0 {
+      _usernameTextField.becomeFirstResponder()
+      return
+    }
+    
+    if _usernameTextField.isFirstResponder {
+      _usernameTextField.resignFirstResponder()
+      return
+    }
+    
+    if indexPath.section == 1 {
       _currentRow = indexPath.row
       delegate?.reset()
       self.dismiss(animated: true, completion: nil)
-    } else if indexPath.section == 1 {
+    } else if indexPath.section == 2 {
       self.navigationController?.pushViewController(_editGameViewController, animated: true)
     }
+  }
+  
+  // UITextFieldDelegate
+  
+  public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    _usernameTextField.resignFirstResponder()
+    return true
   }
 }
