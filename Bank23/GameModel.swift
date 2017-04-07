@@ -14,6 +14,7 @@ public final class GameModel {
   var _board = Board()
   var _pieces = [Piece]()
   var _levelName = ""
+  var _creatorName: String?
   
   public init() {
   }

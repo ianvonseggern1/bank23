@@ -29,7 +29,11 @@ public final class LevelNetworker
     itemToCreate?._boardName = level._levelName
     itemToCreate?._board = level._board.toString()
     itemToCreate?._pieces = level.collapsedPieceListToString()
-
+    
+    itemToCreate?._creatorId = UserController.getUserId()
+    itemToCreate?._creatorName = UserController.getUsername()
+    itemToCreate?._creationTime = NSDate().timeIntervalSince1970 as NSNumber
+    
     objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
       if let error = error {
         print("Amazon DynamoDB Error - saving level: \(error)")
@@ -54,6 +58,7 @@ public final class LevelNetworker
             let gameModel = try GameModel(name: board._boardName!,
                                           initialPiecesString: board._pieces!,
                                           initialBoardString: board._board!)
+            gameModel._creatorName = board._creatorName
             boardCallback(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {

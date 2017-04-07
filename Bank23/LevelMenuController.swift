@@ -296,14 +296,30 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                        height: usernameLabel.frame.height)
       tableViewCell.addSubview(_usernameTextField)
     } else if indexPath.section == 1 {
-      let label = UILabel()
-      label.text = _initialGameModels[indexPath.row]._levelName
-      label.sizeToFit()
-      label.frame = CGRect(x: 10,
+      let gameModel = _initialGameModels[indexPath.row]
+      
+      let levelName = UILabel()
+      levelName.text = gameModel._levelName
+      levelName.font = UIFont.boldSystemFont(ofSize: 16.0)
+      levelName.sizeToFit()
+      levelName.frame = CGRect(x: 10,
                            y: 10,
-                           width: label.frame.width,
-                           height: label.frame.height)
-      tableViewCell.addSubview(label)
+                           width: levelName.frame.width,
+                           height: levelName.frame.height)
+      tableViewCell.addSubview(levelName)
+      
+      if gameModel._creatorName != nil {
+        let creatorName = UILabel()
+        creatorName.text = "Created by ".appending(gameModel._creatorName!)
+        creatorName.font = UIFont.systemFont(ofSize: 12.0)
+        creatorName.textColor = UIColor.gray
+        creatorName.sizeToFit()
+        creatorName.frame = CGRect(x: 10,
+                                   y: levelName.frame.maxY,
+                                   width: creatorName.frame.width,
+                                   height: creatorName.frame.height)
+        tableViewCell.addSubview(creatorName)
+      }
       
       let boardView = BoardView(frame: CGRect(x: self._tableView.frame.width - 100,
                                               y: 10,
