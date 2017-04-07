@@ -43,7 +43,7 @@ public final class LevelNetworker
     })
   }
   
-  static func getAllBoardsFromDatabase(boardCallback: @escaping (GameModel) -> Void) {
+  static func getAllBoardsFromDatabase(boardCallback: @escaping ([GameModel]) -> Void) {
     let objectMapper = AWSDynamoDBObjectMapper.default()
     let scanExpression = AWSDynamoDBScanExpression()
     scanExpression.limit = 250
@@ -52,6 +52,8 @@ public final class LevelNetworker
       if let error = task.error as NSError? {
         print("Unable to fetch boards. Error: \(error)")
       } else if let paginatedOutput = task.result {
+        
+        var models = [GameModel]()
         for b in paginatedOutput.items {
           let board = b as! Boards
           do {
@@ -59,12 +61,13 @@ public final class LevelNetworker
                                           initialPiecesString: board._pieces!,
                                           initialBoardString: board._board!)
             gameModel._creatorName = board._creatorName
-            boardCallback(gameModel)
+            models.append(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {
             print("Unable to create game from board \(board._board ?? "") and pieces \(board._pieces ?? "")")
           }
         }
+        boardCallback(models)
       }
       return nil
     }

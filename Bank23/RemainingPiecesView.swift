@@ -34,16 +34,16 @@ class RemainingPiecesView: UIView {
     _label.sizeToFit()
     _label.frame = CGRect(x: 4, y: 4, width:_label.frame.width, height: _label.frame.height)
     for (index, pieceView) in _piecesLeft.enumerated() {
-      pieceView.frame = CGRect(x: 4 + CGFloat(index) * squareSize,
-                               y: _label.frame.maxY + 4,
+      pieceView.frame = CGRect(x: 4 + CGFloat(index) * (squareSize + 5),
+                               y: _label.frame.maxY + 9,
                                width: squareSize,
                                height: squareSize)
     }
   }
   
   override func sizeThatFits(_ size: CGSize) -> CGSize {
-    return CGSize(width: squareSize * CGFloat(_piecesLeft.count) + 2 * 4,
-                  height: _label.frame.height + squareSize + 3 * 4)
+    return CGSize(width: squareSize * CGFloat(_piecesLeft.count) + 2 * 4 + 10,
+                  height: _label.frame.height + squareSize + 3 * 4 + 5)
   }
   
   func updatePiecesLeft(pieces: [Piece]) {
@@ -70,6 +70,10 @@ class RemainingPiecesView: UIView {
     
     let coinPieceView = PieceView(frame: CGRect.zero, model: coinsPiece, row: -1, column: -1)
     let sandPieceView = PieceView(frame: CGRect.zero, model: sandPiece, row: -1, column: -1)
+    coinPieceView.countLabelXPadding = CGFloat(-5.0)
+    coinPieceView.countLabelYPadding = CGFloat(-5.0)
+    sandPieceView.countLabelXPadding = CGFloat(-5.0)
+    sandPieceView.countLabelYPadding = CGFloat(-5.0)
     self.addSubview(coinPieceView)
     self.addSubview(sandPieceView)
     _piecesLeft.append(coinPieceView)

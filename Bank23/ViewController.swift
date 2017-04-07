@@ -94,6 +94,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view._victoryLabel.isHidden = true
     _showedIsLostAlert = false
     _view._board.backgroundColor = BoardView.backgroundColor()
+
+    _view.setNeedsLayout()
+    _view.layoutIfNeeded()
   }
   
   func userDidPan(gesture: UIPanGestureRecognizer) {

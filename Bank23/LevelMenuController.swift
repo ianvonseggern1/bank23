@@ -48,7 +48,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
 
   public func fetchLevels() {
     addLocalLevels()
-    LevelNetworker.getAllBoardsFromDatabase(boardCallback: self.add)
+    LevelNetworker.getAllBoardsFromDatabase(boardCallback: self.addAllAndReloadCurrentGame)
   }
 
   public func currentLevel() -> GameModel {
@@ -60,6 +60,15 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _initialGameModels.sort(by: { $0._levelName < $1._levelName })
     DispatchQueue.main.async {
       self._tableView.reloadData()
+    }
+  }
+  
+  public func addAllAndReloadCurrentGame(levels: [GameModel]) {
+    _initialGameModels.append(contentsOf: levels)
+    _initialGameModels.sort(by: { $0._levelName < $1._levelName })
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+      self.delegate?.reset()
     }
   }
   

@@ -16,6 +16,8 @@ class PieceView: UIView {
   let _row: Int
   let _column: Int
   
+  var countLabelXPadding = CGFloat(3)
+  var countLabelYPadding = CGFloat(1)
   var showCount = true
   
   static func labelColor() -> UIColor {
@@ -97,8 +99,8 @@ class PieceView: UIView {
     
     _countLabel.isHidden = !showCount
     _countLabel.sizeToFit()
-    _countLabel.frame = CGRect(x: self.bounds.width - _countLabel.frame.width - 3,
-                          y: 1,
+    _countLabel.frame = CGRect(x: self.bounds.width - _countLabel.frame.width - countLabelXPadding,
+                          y: countLabelYPadding,
                           width:_countLabel.frame.width,
                           height:_countLabel.frame.height)
   }
