@@ -22,6 +22,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
 
   var _tableView = UITableView()
   let _usernameTextField = UITextField()
+  let _aboutLabel = UILabel()
+  let _aboutExplanation = UILabel()
   
   var _currentRow = 0
   
@@ -32,6 +34,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _tableView.frame = self.view.bounds
     _tableView.dataSource = self
     _tableView.delegate = self
+    
+    _aboutExplanation.isHidden = true
     
     _editGameViewController.delegate = self
     
@@ -265,7 +269,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   // UITableViewDataSource
   
   public func numberOfSections(in tableView: UITableView) -> Int {
-    return 3
+    return 4
   }
   
   public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -274,6 +278,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     } else if section == 1 {
       return _initialGameModels.count
     } else if section == 2 {
+      return 1
+    } else if section == 3 {
       return 1
     }
     return 0
@@ -289,7 +295,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       usernameLabel.text = "Your Username: "
       usernameLabel.sizeToFit()
       usernameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-      usernameLabel.textColor = UIColor.gray
+      usernameLabel.textColor = UIColor.darkGray
       usernameLabel.frame = CGRect(x: 10,
                                    y: 10,
                                    width: usernameLabel.frame.width,
@@ -345,13 +351,40 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       let label = UILabel()
       label.text = "+ Add a Level"
       label.font = UIFont.boldSystemFont(ofSize: 16.0)
-      label.textColor = UIColor.gray
+      label.textColor = UIColor.darkGray
       label.sizeToFit()
       label.frame = CGRect(x: 30,
                            y: 10,
                            width: label.frame.width,
                            height: label.frame.height)
       tableViewCell.addSubview(label)
+    } else if indexPath.section == 3 {
+      _aboutLabel.text = "About"
+      _aboutLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+      _aboutLabel.sizeToFit()
+      _aboutLabel.frame = CGRect(x: 10,
+                                 y: 10,
+                                 width: _aboutLabel.frame.width,
+                                 height: _aboutLabel.frame.height)
+      tableViewCell.addSubview(_aboutLabel)
+      
+      _aboutExplanation.font = UIFont.boldSystemFont(ofSize: 12.0)
+      _aboutExplanation.textColor = UIColor.darkGray
+      _aboutExplanation.textAlignment = NSTextAlignment.center
+      _aboutExplanation.numberOfLines = 0
+      var explanation = ""
+      explanation += "Version 0.0\n\n"
+      explanation += "Welcome to the alpha of Bank 23. This is the first release and probably contains lots of bugs, so sorry for any frustration and please report them to me :) It also is very bare bones (currently), so also feel free to let me know what you would like to see added and what isn't currently working for you. Thanks for test driving!\n\n"
+      explanation += "Credits\nSabrina Siu created all the (very cute) peices and much of the design (the good looking parts anyway). See's also thought through many different user flows and experiences, as well as spent hours providing general advice. Plus she has lots of ideas on deck that I haven't had time to implement yet.\nIan Vonseggern, well since this is first person - me, I've spent years playing simple cell phone games and decided I wanted to create one instead of just playing existing ones. I wanted to create a game that involved treasure and goals, that had a simple design, but from which complex strategy emerged. I had a bunch of different ideas, but decided this would be a relatively easy one to prototype and so far I'm really enjoying playing it. I also wanted to try out Swift, which I've built this entirely in (and I want to mention how much I like this language). I created this game on a plane, typed the name Bank into XCode, and I'm not sure how I typed the 23, but I think it might have been my elbow. Anyway I like it, so here's Bank 23.\n\n"
+      explanation += "Copyright 2017. All rights reserved."
+      _aboutExplanation.text = explanation
+      let explanationSize = _aboutExplanation.sizeThatFits(CGSize(width: tableView.frame.width - 20,
+                                                                  height: CGFloat.greatestFiniteMagnitude))
+      _aboutExplanation.frame = CGRect(x: 10,
+                                       y: 40,
+                                       width: tableView.frame.width - 20,
+                                       height: explanationSize.height)
+      tableViewCell.addSubview(_aboutExplanation)
     }
 
     return tableViewCell
@@ -360,6 +393,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.section == 1 {
       return 110
+    } else if indexPath.section == 3 {
+      return _aboutExplanation.isHidden ? 40 : 40 + _aboutExplanation.frame.height + 10
     }
     return 40
   }
@@ -381,8 +416,13 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       _currentRow = indexPath.row
       delegate?.reset()
       self.dismiss(animated: true, completion: nil)
+    
     } else if indexPath.section == 2 {
       self.navigationController?.pushViewController(_editGameViewController, animated: true)
+    } else if indexPath.section == 3 {
+      _aboutExplanation.isHidden = !_aboutExplanation.isHidden
+      tableView.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+      tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
     }
   }
   
