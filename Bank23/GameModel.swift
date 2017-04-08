@@ -15,6 +15,7 @@ public final class GameModel {
   var _pieces = [Piece]()
   var _levelName = ""
   var _creatorName: String?
+  var _explanationLabel: String? // Used for tutorials
   
   public init() {
   }
@@ -35,9 +36,13 @@ public final class GameModel {
   // Note this function reshuffles the pieces
   public func copy() -> GameModel {
     // Arrays use copy symantics so we can just create a new model
-    return try! GameModel(name:self._levelName,
-                          collapsedPieces:self._pieces,
-                          initialBoard:self._board._board)
+    let copy = try! GameModel(name:self._levelName,
+                              collapsedPieces:self._pieces,
+                              initialBoard:self._board._board)
+    copy._creatorName = self._creatorName
+    copy._explanationLabel = self._explanationLabel
+    
+    return copy
   }
   
   func hash() -> UInt64 {

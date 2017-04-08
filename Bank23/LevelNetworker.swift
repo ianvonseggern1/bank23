@@ -61,6 +61,7 @@ public final class LevelNetworker
                                           initialPiecesString: board._pieces!,
                                           initialBoardString: board._board!)
             gameModel._creatorName = board._creatorName
+            gameModel._explanationLabel = board._explanationLabel
             models.append(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {

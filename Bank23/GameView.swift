@@ -13,17 +13,15 @@ let SINGLE_SQUARE_SIZE:CGFloat = 60.0
 let BOARD_PADDING: CGFloat = 20.0
 
 class GameView: UIView {
-  let _board: BoardView
-  let _victoryLabel: UILabel
-  let _remainingPiecesView: RemainingPiecesView
-  let _nextPieceView: NextPieceView
+  let _board = BoardView(frame: CGRect.zero)
+  let _victoryLabel = UILabel()
+  let _remainingPiecesView = RemainingPiecesView(frame: CGRect.zero)
+  let _nextPieceView = NextPieceView(frame: CGRect.zero)
+  
+  // Used to place text under the board in tutorials
+  let _explanationLabel = UILabel()
   
   override init(frame: CGRect) {
-    _board = BoardView(frame: CGRect.zero)
-    _victoryLabel = UILabel()
-    _remainingPiecesView = RemainingPiecesView(frame: CGRect.zero)
-    _nextPieceView = NextPieceView(frame: CGRect.zero)
-    
     super.init(frame:frame)
     
     self.backgroundColor = UIColor.white
@@ -37,6 +35,11 @@ class GameView: UIView {
     _victoryLabel.font = UIFont.systemFont(ofSize: 48, weight: 1.0)
     _victoryLabel.isHidden = true
     self.addSubview(_victoryLabel)
+
+    _explanationLabel.font = UIFont.systemFont(ofSize: 16.0)
+    _explanationLabel.numberOfLines = 0
+    _explanationLabel.textAlignment = NSTextAlignment.center
+    self.addSubview(_explanationLabel)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -51,31 +54,40 @@ class GameView: UIView {
                                  y: (bounds.height - _victoryLabel.frame.height) / 2.0,
                                  width: _victoryLabel.frame.width,
                                  height: _victoryLabel.frame.height)
-
+    
+    _remainingPiecesView.sizeToFit()
+    _nextPieceView.sizeToFit()
     let boardSize = _board.sizeThatFits(CGSize(width: bounds.width - 2 * BOARD_PADDING,
                                                height: bounds.height - 2 * BOARD_PADDING))
+    
     _board.frame = CGRect(x: (bounds.width - boardSize.width) / 2,
-                          y: (bounds.height - boardSize.height) / 2 + 50,
+                          y: 90 + _nextPieceView.frame.height + 15,
                           width: boardSize.width,
                           height: boardSize.height)
     
-    _remainingPiecesView.sizeToFit()
     _remainingPiecesView.frame = CGRect(x: _board.frame.minX,
-                                        y: _board.frame.minY - 15 - _remainingPiecesView.frame.height,
+                                        y: 90,
                                         width: _remainingPiecesView.frame.width,
                                         height: _remainingPiecesView.frame.height)
-    
-    _nextPieceView.sizeToFit()
+
     _nextPieceView.frame = CGRect(x: _board.frame.maxX - _nextPieceView.frame.width,
-                                  y: _board.frame.minY - _nextPieceView.frame.height - 15,
+                                  y: 90,
                                   width: _nextPieceView.frame.width,
                                   height: _nextPieceView.frame.height)
+
+    let explanationSize = _explanationLabel.sizeThatFits(CGSize(width: bounds.width - 2 * BOARD_PADDING,
+                                                                height: bounds.height - 30 - _board.frame.maxY))
+    _explanationLabel.frame = CGRect(x: (bounds.width - explanationSize.width) / 2,
+                                     y: _board.frame.maxY + (bounds.height - _board.frame.maxY - explanationSize.height) / 2,
+                                     width: explanationSize.width,
+                                     height: explanationSize.height)
   }
   
   func updateModel(_ game: GameModel) {
     self._nextPieceView.setPieceModel(piece: game._pieces.last)
     _remainingPiecesView.updatePiecesLeft(pieces: game._pieces)
     _board.updateModel(board: game._board._board)
+    _explanationLabel.text = game._explanationLabel
     self.setNeedsLayout()
     self.layoutIfNeeded()
   }

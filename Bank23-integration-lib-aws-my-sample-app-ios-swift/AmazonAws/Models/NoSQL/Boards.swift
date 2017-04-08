@@ -23,6 +23,7 @@ class Boards: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _creationTime: NSNumber?
     var _creatorId: String?
     var _creatorName: String?
+    var _explanationLabel: String?
     var _pieces: String?
     
     class func dynamoDBTableName() -> String {
@@ -43,6 +44,7 @@ class Boards: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
                "_creationTime" : "creationTime",
                "_creatorId" : "creatorId",
                "_creatorName" : "creatorName",
+               "_explanationLabel" : "explanationLabel",
                "_pieces" : "pieces",
         ]
     }
