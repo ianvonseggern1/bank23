@@ -107,6 +107,9 @@ public final class GameModel {
   }
   
   public static func pieceListFromString(_ pieceListString: String) throws -> [Piece] {
+    if pieceListString.characters.count == 0 {
+      return []
+    }
     return try pieceListString.components(separatedBy: PIECE_LIST_STRING_PIECE_SEPERATOR).map({ (pieceString) -> Piece in
       return try Piece.initFromName(pieceString)
     })

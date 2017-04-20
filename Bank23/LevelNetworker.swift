@@ -15,6 +15,10 @@ enum LevelNetworkerError: Error {
   case invalidBoardOrInitialPieces
 }
 
+// Amazon Dynamo DB doesn't allow empty strings in as values (which is super silly)
+// so we swap with EMPTY_STRING
+private let EMPTY_STRING = "empty"
+
 public final class LevelNetworker
 {
   static func writeLevelToDatabase(level: GameModel) throws {
@@ -28,7 +32,9 @@ public final class LevelNetworker
     itemToCreate?._boardId = String(level.hash())
     itemToCreate?._boardName = level._levelName
     itemToCreate?._board = level._board.toString()
-    itemToCreate?._pieces = level.collapsedPieceListToString()
+    
+    let pieceListString = level.collapsedPieceListToString()
+    itemToCreate?._pieces = pieceListString == "" ? EMPTY_STRING : pieceListString
     
     itemToCreate?._creatorId = UserController.getUserId()
     itemToCreate?._creatorName = UserController.getUsername()
@@ -57,8 +63,9 @@ public final class LevelNetworker
         for b in paginatedOutput.items {
           let board = b as! Boards
           do {
+            let pieceListString = board._pieces! == EMPTY_STRING ? "" : board._pieces!
             let gameModel = try GameModel(name: board._boardName!,
-                                          initialPiecesString: board._pieces!,
+                                          initialPiecesString: pieceListString,
                                           initialBoardString: board._board!)
             gameModel._creatorName = board._creatorName
             gameModel._explanationLabel = board._explanationLabel
@@ -91,12 +98,19 @@ public final class LevelNetworker
       if pieces.count != piecesCopy.count {
         return false
       }
+      
+      if pieces.count == 0 {
+        return piecesCopy.count == 0
+      }
+      
       for i in 1..<pieces.count {
         if pieces[i] != piecesCopy[i] {
           return false
         }
       }
+      
       return true
+      
     } catch {
       return false
     }

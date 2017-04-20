@@ -21,12 +21,10 @@
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
-		B61C69341E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift in Resources */ = {isa = PBXBuildFile; fileRef = B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */; };
 		B61C69371E74AA6F00E68150 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69351E74AA6F00E68150 /* AWSCore.framework */; };
 		B61C69381E74AA6F00E68150 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69351E74AA6F00E68150 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B61C69391E74AA6F00E68150 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */; };
 		B61C693A1E74AA6F00E68150 /* AWSDynamoDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B61C693F1E74AC9200E68150 /* AmazonAws in Resources */ = {isa = PBXBuildFile; fileRef = B61C693E1E74AC9200E68150 /* AmazonAws */; };
 		B61C69421E74ADB900E68150 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69411E74ADB900E68150 /* libz.tbd */; };
 		B61C69441E74ADCE00E68150 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69431E74ADCE00E68150 /* libsqlite3.tbd */; };
 		B61C69461E74B44F00E68150 /* AWSMobileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61C69451E74B44F00E68150 /* AWSMobileClient.swift */; };
@@ -262,7 +260,7 @@
 				TargetAttributes = {
 					B64CB4F41E04A34C005A7781 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7PLAT9NLJ3;
+						DevelopmentTeam = SR5TW3X3HQ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -303,11 +301,9 @@
 				669189541E9853440099A497 /* sandcastle 03.png in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
 				669189331E957ACB0099A497 /* refresh.png in Resources */,
-				B61C69341E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift in Resources */,
 				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
 				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,
-				B61C693F1E74AC9200E68150 /* AmazonAws in Resources */,
 				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
 				B61C694A1E74B45B00E68150 /* Models in Resources */,
 				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
@@ -482,7 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7PLAT9NLJ3;
+				DEVELOPMENT_TEAM = SR5TW3X3HQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws",
@@ -491,7 +487,7 @@
 				);
 				INFOPLIST_FILE = Bank23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank23;
+				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank232;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -501,7 +497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7PLAT9NLJ3;
+				DEVELOPMENT_TEAM = SR5TW3X3HQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws",
@@ -510,7 +506,7 @@
 				);
 				INFOPLIST_FILE = Bank23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank23;
+				PRODUCT_BUNDLE_IDENTIFIER = ian.games.Bank232;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
