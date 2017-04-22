@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 
 protocol LevelMenuControllerDelegate: NSObjectProtocol {
+  // TODO, update to explictly pass newly selected level here
+  // rather than creating a hidden dependency on setting it first
   func reset()
 }
 
@@ -17,6 +19,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   weak var delegate: LevelMenuControllerDelegate?
 
   let _editGameViewController = EditGameViewController()
+  let _userController = UserController()
+  let _resultController = ResultController()
 
   var _initialGameModels = [GameModel]()
 
@@ -26,6 +30,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _aboutExplanation = UILabel()
   
   var _currentRow = 0
+  var _levelsBeaten = Set<String>()
   
   override public func viewDidLoad() {
     super.viewDidLoad()
@@ -48,6 +53,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     menuIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
     menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
     self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
+    
+    _levelsBeaten = _resultController.getAllLevelsBeaten()
   }
 
   public func fetchLevels() {
@@ -266,6 +273,17 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                              initialBoard: initialBoard))
   }
   
+  public func userBeatLevel() {
+    _resultController.userBeatlevel(level: currentLevel())
+    
+    // Could make this more efficient and only reload when they beat a level for the
+    // first time, for now reload data every time
+    _levelsBeaten = _resultController.getAllLevelsBeaten()
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
+  }
+  
   // UITableViewDataSource
   
   public func numberOfSections(in tableView: UITableView) -> Int {
@@ -337,6 +355,16 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                    width: creatorName.frame.width,
                                    height: creatorName.frame.height)
         tableViewCell.addSubview(creatorName)
+      }
+      
+      if _levelsBeaten.contains(String(gameModel.hash())) {
+        let checkmark = UIImageView()
+        checkmark.image = UIImage(named: "Piggy Bank 01.png")! // TODO replace with checkmark
+        checkmark.frame = CGRect(x: 10,
+                                 y: 90 - 15,
+                                 width: 15,
+                                 height: 15)
+        tableViewCell.addSubview(checkmark)
       }
       
       let boardView = BoardView(frame: CGRect(x: self._tableView.frame.width - 100,

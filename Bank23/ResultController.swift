@@ -11,11 +11,25 @@ import AWSMobileHubHelper
 import AWSDynamoDB
 import AWSCore
 
+private let LEVELS_BEAT_STRING_SEPERATOR = "-"
+private let LEVELS_BEAT_USER_DEFAULTS_KEY = "Bank23LevelsBeat"
 
 // This class is responsible for recording the results when a user beats or
 // restarts a level both locally and to the database
 public final class ResultController
 {
+  var levelsBeat: [String]
+  
+  public init() {
+    let levelsBeatString = UserDefaults.standard.object(forKey: LEVELS_BEAT_USER_DEFAULTS_KEY) as? String
+
+    if levelsBeatString == nil {
+      levelsBeat = []
+    } else {
+      levelsBeat = levelsBeatString!.components(separatedBy: LEVELS_BEAT_STRING_SEPERATOR)
+    }
+  }
+  
   static func writeResultToDatabase(level: GameModel, // Initial model, before moves are made
                                     uniquePlayId: String,
                                     victory: Bool,
@@ -44,5 +58,23 @@ public final class ResultController
       }
       print("Result recorded.")
     })
+  }
+
+  func userBeatlevel(level: GameModel) {
+    let levelHash = String(level.hash())
+    if levelsBeat.contains(levelHash) {
+      return
+    }
+    
+    levelsBeat.append(levelHash)
+    
+    let userDefaults = UserDefaults.standard
+    userDefaults.set(levelsBeat.joined(separator: LEVELS_BEAT_STRING_SEPERATOR),
+                     forKey: LEVELS_BEAT_USER_DEFAULTS_KEY)
+    userDefaults.synchronize()
+  }
+  
+  func getAllLevelsBeaten() -> Set<String> {
+    return Set(levelsBeat)
   }
 }

@@ -88,6 +88,10 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                            moves: _moves,
                                            initialShuffledPieces: _initialShuffledPieces)
     
+    if _gameModel.isWon() {
+      _levelMenuController.userBeatLevel()
+    }
+    
     self.setupBoard()
     self.navigationItem.title = _gameModel._levelName
     _view.updateModel(_gameModel)
