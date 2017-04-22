@@ -88,10 +88,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                            moves: _moves,
                                            initialShuffledPieces: _initialShuffledPieces)
     
-    if _gameModel.isWon() {
-      _levelMenuController.userBeatLevel()
-    }
-    
     self.setupBoard()
     self.navigationItem.title = _gameModel._levelName
     _view.updateModel(_gameModel)
@@ -236,6 +232,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func completedSwipingPieceOn() {
     _view._nextPieceView._piece?.isHidden = false
     _view.isUserInteractionEnabled = true
+    
+    // If they just won inform the level controller
+    if _gameModel.isWon() && _view._victoryLabel.isHidden {
+      _levelMenuController.userBeatLevel()
+    }
 
     if _gameModel.isWon() {
       _view._victoryLabel.isHidden = false
