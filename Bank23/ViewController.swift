@@ -38,6 +38,16 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
 
     setupBoard()
     _view.updateModel(_gameModel)
+    
+    _view._victoryView.isHidden = true
+    let nextLevelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNextLevel))
+    _view._victoryView._nextLevelLabel.isUserInteractionEnabled = true
+    _view._victoryView._nextLevelLabel.addGestureRecognizer(nextLevelTap)
+    // hack
+    if _levelMenuController._currentRow == _levelMenuController._initialGameModels.count - 1 {
+      _view._victoryView._nextLevelLabel.isHidden = true
+    }
+    
     self.navigationItem.title = _gameModel._levelName
   }
   
@@ -54,6 +64,11 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     refreshIcon.addTarget(self, action: #selector(didTapRefresh), for: UIControlEvents.touchUpInside)
 
     self.navigationItem.setRightBarButton(UIBarButtonItem(customView: refreshIcon), animated: false)
+  }
+  
+  func didTapNextLevel() {
+    _levelMenuController._currentRow += 1
+    reset()
   }
   
   func didTapMenu() {
@@ -91,7 +106,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     self.setupBoard()
     self.navigationItem.title = _gameModel._levelName
     _view.updateModel(_gameModel)
-    _view._victoryLabel.isHidden = true
+    _view._victoryView.isHidden = true
     _showedIsLostAlert = false
     _view._board.backgroundColor = BoardView.backgroundColor()
 
@@ -234,12 +249,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view.isUserInteractionEnabled = true
     
     // If they just won inform the level controller
-    if _gameModel.isWon() && _view._victoryLabel.isHidden {
+    if _gameModel.isWon() && _view._victoryView.isHidden {
       _levelMenuController.userBeatLevel()
     }
 
     if _gameModel.isWon() {
-      _view._victoryLabel.isHidden = false
+      _view._victoryView.isHidden = false
     }
     
     if _gameModel.isLost() && !_showedIsLostAlert {

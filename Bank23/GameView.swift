@@ -14,7 +14,7 @@ let BOARD_PADDING: CGFloat = 20.0
 
 class GameView: UIView {
   let _board = BoardView(frame: CGRect.zero)
-  let _victoryLabel = UILabel()
+  let _victoryView = VictoryView(frame: CGRect.zero)
   let _remainingPiecesView = RemainingPiecesView(frame: CGRect.zero)
   let _nextPieceView = NextPieceView(frame: CGRect.zero)
   
@@ -31,10 +31,7 @@ class GameView: UIView {
     self.addSubview(_remainingPiecesView)
     self.addSubview(_nextPieceView)
     
-    _victoryLabel.text = "YOU WON!"
-    _victoryLabel.font = UIFont.systemFont(ofSize: 48, weight: 1.0)
-    _victoryLabel.isHidden = true
-    self.addSubview(_victoryLabel)
+    self.addSubview(_victoryView)
 
     _explanationLabel.font = UIFont.systemFont(ofSize: 16.0)
     _explanationLabel.numberOfLines = 0
@@ -49,11 +46,11 @@ class GameView: UIView {
   override func layoutSubviews() {
     let bounds = self.frame
     
-    _victoryLabel.sizeToFit()
-    _victoryLabel.frame = CGRect(x: (bounds.width - _victoryLabel.frame.width) / 2.0,
-                                 y: (bounds.height - _victoryLabel.frame.height) / 2.0,
-                                 width: _victoryLabel.frame.width,
-                                 height: _victoryLabel.frame.height)
+    _victoryView.sizeToFit()
+    _victoryView.frame = CGRect(x: (bounds.width - _victoryView.frame.width) / 2.0,
+                                 y: (bounds.height - _victoryView.frame.height) / 2.0,
+                                 width: _victoryView.frame.width,
+                                 height: _victoryView.frame.height)
     
     _remainingPiecesView.sizeToFit()
     _nextPieceView.sizeToFit()
