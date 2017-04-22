@@ -81,12 +81,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
-    MoveNetworker.writeResultToDatabase(level: _levelMenuController.currentLevel(),
-                                        uniquePlayId: _uniquePlayId!,
-                                        victory: _gameModel.isWon(),
-                                        enoughPiecesLeft: _gameModel.isLost(),
-                                        moves: _moves,
-                                        initialShuffledPieces: _initialShuffledPieces)
+    ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
+                                           uniquePlayId: _uniquePlayId!,
+                                           victory: _gameModel.isWon(),
+                                           enoughPiecesLeft: _gameModel.isLost(),
+                                           moves: _moves,
+                                           initialShuffledPieces: _initialShuffledPieces)
     
     self.setupBoard()
     self.navigationItem.title = _gameModel._levelName

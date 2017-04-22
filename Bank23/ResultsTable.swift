@@ -18,6 +18,7 @@ import AWSDynamoDB
 class ResultsTable: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userUUID: String?
+    var _username: String?
     var _timeStamp: NSNumber?
     var _boardHash: String?
     var _boardName: String?
@@ -46,6 +47,7 @@ class ResultsTable: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
                "_userUUID" : "userUUID",
+               "_username" : "username",
                "_timeStamp" : "timeStamp",
                "_boardHash" : "boardHash",
                "_boardName" : "boardName",

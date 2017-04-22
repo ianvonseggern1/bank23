@@ -175,6 +175,9 @@ final class EditGameViewController: UIViewController {
       try LevelNetworker.writeLevelToDatabase(level: _gameModel)
       
       // For now we write it locally to the level menu controller in addition to the DB
+      if let username = UserController.getUsername() {
+        _gameModel._creatorName = username
+      }
       delegate!.add(level: _gameModel)
     } catch {
       let alert = UIAlertController(title: nil,
