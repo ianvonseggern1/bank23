@@ -133,6 +133,13 @@ public final class Board : NSCoding {
                                         function: {collapseColumn(column: $0)},
                                         defaultValue: Piece.empty)
     
+    // We don't need to look for places to put the next piece if we are out of
+    // remaining pieces
+    if newPiece == Piece.empty {
+      _board = nextBoard
+      return nil
+    }
+    
     // Find eligable spots for new piece
     var eligibleSpots = [(Int, Int)]()
     switch from {
