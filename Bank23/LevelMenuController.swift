@@ -359,11 +359,11 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       
       if _levelsBeaten.contains(String(gameModel.hash())) {
         let checkmark = UIImageView()
-        checkmark.image = UIImage(named: "Piggy Bank 01.png")! // TODO replace with checkmark
+        checkmark.image = UIImage(named: "checkmark.png")!
         checkmark.frame = CGRect(x: 10,
-                                 y: 90 - 15,
-                                 width: 15,
-                                 height: 15)
+                                 y: 90 - 20,
+                                 width: 20,
+                                 height: 20)
         tableViewCell.addSubview(checkmark)
       }
       

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1ED40AD41E81A18500E62E1B /* LevelNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */; };
 		6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */; };
+		6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6611C9241EAFA04200A2E7C5 /* checkmark.png */; };
 		669189331E957ACB0099A497 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189321E957ACB0099A497 /* refresh.png */; };
 		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNetworker.swift; sourceTree = "<group>"; };
 		6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryView.swift; sourceTree = "<group>"; };
+		6611C9241EAFA04200A2E7C5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		669189321E957ACB0099A497 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
 		669189361E959AB50099A497 /* Mountains 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mountains 01.png"; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */,
 				669189571E9855480099A497 /* cross.png */,
 				669189531E9853440099A497 /* sandcastle 03.png */,
+				6611C9241EAFA04200A2E7C5 /* checkmark.png */,
 				B66C18651E6FC8EF00CD0498 /* mountain.png */,
 				B61C692D1E71FD5600E68150 /* Mountains.png */,
 				B66C18691E70843500CD0498 /* menu-icon25.png */,
@@ -310,6 +313,7 @@
 				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
 				B61C694A1E74B45B00E68150 /* Models in Resources */,
 				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
+				6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */,
 				B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */,
 				B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */,
 			);

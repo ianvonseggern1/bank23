@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import QuartzCore
 
 class BoardView: UIImageView {
   var _rowCount = 0
@@ -115,6 +116,11 @@ class BoardView: UIImageView {
   // First half of an animation used to show pieces combining with themselves, basically
   // a spin simply by shrinking and expanding
   func spinIn(pieceMask: [[Bool]]) {
+//    var transition = CATransition()
+//    var animation = CAAnimation()
+//    animation.beginTime = 0.0
+//    animation.duration = 0.3
+//    animation.type
     for subview in self.subviews {
       let pieceview = subview as! PieceView
       if pieceMask[pieceview._column][pieceview._row] {
