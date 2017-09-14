@@ -77,4 +77,5 @@ public final class ResultController
   func getAllLevelsBeaten() -> Set<String> {
     return Set(levelsBeat)
   }
+
 }
