@@ -79,6 +79,7 @@
 		363CF6CA2565A25D716503AE /* Pods_Bank23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bank23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryView.swift; sourceTree = "<group>"; };
 		6611C9241EAFA04200A2E7C5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		667895791FE0976F00A7D840 /* Bank23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bank23.entitlements; sourceTree = "<group>"; };
 		669189321E957ACB0099A497 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
 		669189361E959AB50099A497 /* Mountains 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mountains 01.png"; sourceTree = "<group>"; };
@@ -211,6 +212,7 @@
 		B64CB4F71E04A34C005A7781 /* Bank23 */ = {
 			isa = PBXGroup;
 			children = (
+				667895791FE0976F00A7D840 /* Bank23.entitlements */,
 				B64CB4F81E04A34C005A7781 /* AppDelegate.swift */,
 				B64CB4FA1E04A34C005A7781 /* ViewController.swift */,
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
@@ -287,6 +289,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = SR5TW3X3HQ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -569,6 +576,7 @@
 			baseConfigurationReference = BA1680ED3126D55672E51F31 /* Pods-Bank23.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Bank23/Bank23.entitlements;
 				DEVELOPMENT_TEAM = SR5TW3X3HQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -589,6 +597,7 @@
 			baseConfigurationReference = C16E2C61629634A7F136035B /* Pods-Bank23.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Bank23/Bank23.entitlements;
 				DEVELOPMENT_TEAM = SR5TW3X3HQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

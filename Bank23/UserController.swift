@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import FacebookLogin
+import FacebookCore
 
-final class UserController {
+final class UserController: LoginButtonDelegate {
   static func getUserId() -> String {
     let userDefaults = UserDefaults.standard
   
@@ -30,5 +32,23 @@ final class UserController {
   
   static func getUsername() -> String? {
     return UserDefaults.standard.object(forKey: "Bank23Username") as? String
+  }
+  
+  // LoginButtonDelegate
+  
+  public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+    switch result {
+    case .success(let grantedPermissions, let declinedPermissions, let token):
+      // TODO something with logged in user
+      break
+    case .cancelled:
+      break
+    case .failed(_):
+      break
+    }
+  }
+  
+  public func loginButtonDidLogOut(_ loginButton: LoginButton) {
+    
   }
 }

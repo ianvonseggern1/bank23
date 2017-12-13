@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FacebookLogin
+import FacebookCore
 
 protocol LevelMenuControllerDelegate: NSObjectProtocol {
   // TODO, update to explictly pass newly selected level here
@@ -16,6 +18,7 @@ protocol LevelMenuControllerDelegate: NSObjectProtocol {
 }
 
 public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EditGameViewControllerDelegate {
+  
   weak var delegate: LevelMenuControllerDelegate?
 
   let _editGameViewController = EditGameViewController()
@@ -28,6 +31,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _usernameTextField = UITextField()
   let _aboutLabel = UILabel()
   let _aboutExplanation = UILabel()
+  
+  var _loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
   
   var _currentRow = 0
   var _levelsBeaten = Set<String>()
@@ -309,28 +314,36 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     tableViewCell.selectionStyle = UITableViewCellSelectionStyle.none
 
     if indexPath.section == 0 {
-      let usernameLabel = UILabel()
-      usernameLabel.text = "Your Username: "
-      usernameLabel.sizeToFit()
-      usernameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-      usernameLabel.textColor = UIColor.darkGray
-      usernameLabel.frame = CGRect(x: 10,
-                                   y: 10,
-                                   width: usernameLabel.frame.width,
-                                   height: usernameLabel.frame.height)
-      tableViewCell.addSubview(usernameLabel)
-
-      if _usernameTextField.text == nil || _usernameTextField.text == "" {
-        _usernameTextField.text = UserController.getUsername()
-      }
-      _usernameTextField.placeholder = "Tap to enter"
-      _usernameTextField.returnKeyType = UIReturnKeyType.done
-      _usernameTextField.delegate = self
-      _usernameTextField.frame = CGRect(x: usernameLabel.frame.maxX,
-                                       y: 10,
-                                       width: tableView.frame.width - usernameLabel.frame.maxX - 10,
-                                       height: usernameLabel.frame.height)
-      tableViewCell.addSubview(_usernameTextField)
+      // TODO remove username text field
+//      let usernameLabel = UILabel()
+//      usernameLabel.text = "Your Username: "
+//      usernameLabel.sizeToFit()
+//      usernameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+//      usernameLabel.textColor = UIColor.darkGray
+//      usernameLabel.frame = CGRect(x: 10,
+//                                   y: 10,
+//                                   width: usernameLabel.frame.width,
+//                                   height: usernameLabel.frame.height)
+//      tableViewCell.addSubview(usernameLabel)
+//
+//      if _usernameTextField.text == nil || _usernameTextField.text == "" {
+//        _usernameTextField.text = UserController.getUsername()
+//      }
+//      _usernameTextField.placeholder = "Tap to enter"
+//      _usernameTextField.returnKeyType = UIReturnKeyType.done
+//      _usernameTextField.delegate = self
+//      _usernameTextField.frame = CGRect(x: usernameLabel.frame.maxX,
+//                                       y: 10,
+//                                       width: tableView.frame.width - usernameLabel.frame.maxX - 10,
+//                                       height: usernameLabel.frame.height)
+      
+      _loginButton.sizeToFit()
+      _loginButton.frame = CGRect(x: 10,
+                                  y: 10,
+                                  width: _loginButton.frame.width,
+                                  height: _loginButton.frame.height)
+      _loginButton.delegate = _userController
+      tableViewCell.addSubview(_loginButton)
     } else if indexPath.section == 1 {
       let gameModel = _initialGameModels[indexPath.row]
       
@@ -419,7 +432,9 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   }
   
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == 1 {
+    if indexPath.section == 0 {
+      return 50
+    } else if indexPath.section == 1 {
       return 110
     } else if indexPath.section == 3 {
       return _aboutExplanation.isHidden ? 40 : 40 + _aboutExplanation.frame.height + 10

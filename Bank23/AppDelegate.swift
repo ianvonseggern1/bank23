@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSCore
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,9 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return AWSMobileClient.sharedInstance.didFinishLaunching(application, withOptions: launchOptions)
   }
   
-  func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-    return AWSMobileClient.sharedInstance.withApplication(application, withURL: url, withSourceApplication: sourceApplication, withAnnotation: annotation)
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    let fbShouldOpen = SDKApplicationDelegate.shared.application(app, open: url, options: options)
+    //let awsShouldOpen = AWSMobileClient.sharedInstance.withApplication(app, withURL: url,  withSourceApplication: nil, withAnnotation: [])
+    return fbShouldOpen //|| awsShouldOpen
   }
+  
+  // TODO move aws to new should open api
+//  func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//    let awsShouldOpen = AWSMobileClient.sharedInstance.withApplication(application, withURL: url, withSourceApplication: sourceApplication, withAnnotation: annotation)
+//
+//    return awsShouldOpen || fbShouldOpen
+//  }
 
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
