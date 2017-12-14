@@ -68,7 +68,7 @@ public final class Board : NSCoding {
   public func toString() -> String {
     return _board.reduce("", { (oldColumnString, column) -> String in
       var newColumnString: String
-      if oldColumnString.characters.count > 0 {
+      if oldColumnString.count > 0 {
         newColumnString = oldColumnString.appending(BOARD_STRING_COLUMN_SEPERATOR)
       } else {
         newColumnString = oldColumnString
