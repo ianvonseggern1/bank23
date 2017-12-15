@@ -16,6 +16,7 @@ public final class GameModel {
   var _levelName = ""
   var _creatorName: String?
   var _explanationLabel: String? // Used for tutorials
+  var _sortKey = ""
   
   public init() {
   }
@@ -41,6 +42,7 @@ public final class GameModel {
                               initialBoard:self._board._board)
     copy._creatorName = self._creatorName
     copy._explanationLabel = self._explanationLabel
+    copy._sortKey = self._sortKey
     
     return copy
   }

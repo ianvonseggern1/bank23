@@ -53,6 +53,8 @@ public final class LevelNetworker
     let objectMapper = AWSDynamoDBObjectMapper.default()
     let scanExpression = AWSDynamoDBScanExpression()
     scanExpression.limit = 250
+    scanExpression.filterExpression = "isActive = :val"
+    scanExpression.expressionAttributeValues = [":val": true]
 
     objectMapper.scan(Boards.self, expression: scanExpression).continueWith { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
       if let error = task.error as NSError? {
@@ -69,6 +71,9 @@ public final class LevelNetworker
                                           initialBoardString: board._board!)
             gameModel._creatorName = board._creatorName
             gameModel._explanationLabel = board._explanationLabel
+            if (board._sortKey != nil) {
+              gameModel._sortKey = board._sortKey!
+            }
             models.append(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {

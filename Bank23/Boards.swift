@@ -24,7 +24,7 @@ class Boards: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _creatorId: String?
     var _creatorName: String?
     var _explanationLabel: String?
-    var _pieces: String?
+    var _pieces: String? 
     
     class func dynamoDBTableName() -> String {
 

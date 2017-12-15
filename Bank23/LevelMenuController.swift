@@ -73,15 +73,23 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   public func add(level: GameModel) {
     _initialGameModels.append(level)
-    _initialGameModels.sort(by: { $0._levelName < $1._levelName })
+    sortGames()
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
   }
   
+  public func sortGames() {
+    _initialGameModels.sort(by: {
+      ($0._sortKey == $1._sortKey)
+        ? ($0._levelName < $1._levelName)
+        : ($0._sortKey < $1._sortKey)
+    })
+  }
+  
   public func addAllAndReloadCurrentGame(levels: [GameModel]) {
     _initialGameModels.append(contentsOf: levels)
-    _initialGameModels.sort(by: { $0._levelName < $1._levelName })
+    sortGames()
     DispatchQueue.main.async {
       self._tableView.reloadData()
       self.delegate?.reset()
@@ -237,9 +245,11 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     initialPieces.append(Piece.coins(16))
     initialPieces.append(Piece.sand(32))
     
-    _initialGameModels.append(try! GameModel(name: "007",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
+    let level8 = try! GameModel(name: "007",
+                                collapsedPieces: initialPieces,
+                                initialBoard: initialBoard)
+    level8._sortKey = "pm"
+    _initialGameModels.append(level8)
     
     // Level 9
     initialBoard = Array(repeating:Array(repeating:Piece.empty, count:7), count:7)
