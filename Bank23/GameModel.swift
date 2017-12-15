@@ -16,7 +16,7 @@ public final class GameModel {
   var _levelName = ""
   var _creatorName: String?
   var _explanationLabel: String? // Used for tutorials
-  var _sortKey = ""
+  var _sortKey = "zzzzz"
   
   public init() {
   }

@@ -43,10 +43,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     let nextLevelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNextLevel))
     _view._victoryView._nextLevelLabel.isUserInteractionEnabled = true
     _view._victoryView._nextLevelLabel.addGestureRecognizer(nextLevelTap)
-    // hack
-    if _levelMenuController._currentRow == _levelMenuController._initialGameModels.count - 1 {
-      _view._victoryView._nextLevelLabel.isHidden = true
-    }
     
     self.navigationItem.title = _gameModel._levelName
   }
@@ -67,7 +63,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func didTapNextLevel() {
-    _levelMenuController._currentRow += 1
+    _levelMenuController.goToNextLevel()
     reset()
   }
   
@@ -254,7 +250,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     }
 
     if _gameModel.isWon() {
-      _view._victoryView.isHidden = false
+      showVictoryView()
     }
     
     if _gameModel.isLost() && !_showedIsLostAlert {
@@ -262,6 +258,16 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       _showedIsLostAlert = true
       showResetAlert(message: "No remaining ways to win, would you like to reset?")
     }
+  }
+  
+  func showVictoryView() {
+    if _levelMenuController._currentRow == _levelMenuController._initialGameModels.count - 1 {
+      _view._victoryView._nextLevelLabel.isHidden = true
+    } else {
+      _view._victoryView._nextLevelLabel.isHidden = false
+    }
+    
+    _view._victoryView.isHidden = false
   }
 
   func setupBoard() {

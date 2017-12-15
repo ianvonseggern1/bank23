@@ -288,6 +288,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                              initialBoard: initialBoard))
   }
   
+  public func goToNextLevel() {
+    if (_currentRow < _initialGameModels.count) {
+      _currentRow += 1
+    } else {
+      NSLog("Can't go to next level, this is the last one")
+    }
+  }
+  
   public func userBeatLevel() {
     _resultController.userBeatlevel(level: currentLevel())
     
