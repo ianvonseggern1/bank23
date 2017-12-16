@@ -20,6 +20,7 @@
 		669189541E9853440099A497 /* sandcastle 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189531E9853440099A497 /* sandcastle 03.png */; };
 		669189581E9855480099A497 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189571E9855480099A497 /* cross.png */; };
 		669C5ABC1FE42D9700B04BA1 /* Boards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ABB1FE42D9700B04BA1 /* Boards.swift */; };
+		669C5AC01FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */; };
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
@@ -90,6 +91,7 @@
 		669189531E9853440099A497 /* sandcastle 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sandcastle 03.png"; sourceTree = "<group>"; };
 		669189571E9855480099A497 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		669C5ABB1FE42D9700B04BA1 /* Boards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Boards.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (8)/AmazonAws/Models/NoSQL/Boards.swift"; sourceTree = "<group>"; };
+		669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserCreatedBoardsTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (10)/AmazonAws/Models/NoSQL/UserCreatedBoardsTable.swift"; sourceTree = "<group>"; };
 		66B5F0071E82DBE000F96770 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				669189451E96EFA70099A497 /* ResultController.swift */,
 				B674462C1E145133001A3529 /* EditGameViewController.swift */,
 				B64CB50A1E04A634005A7781 /* Piece.swift */,
+				669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */,
 				B64CB50C1E04B7EC005A7781 /* Board.swift */,
 				B674460E1E0D1CB0001A3529 /* GameView.swift */,
 				669C5ABB1FE42D9700B04BA1 /* Boards.swift */,
@@ -432,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				669C5ABC1FE42D9700B04BA1 /* Boards.swift in Sources */,
+				669C5AC01FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift in Sources */,
 				669189501E9816810099A497 /* UserController.swift in Sources */,
 				B64CB4FB1E04A34C005A7781 /* ViewController.swift in Sources */,
 				B64CB4F91E04A34C005A7781 /* AppDelegate.swift in Sources */,

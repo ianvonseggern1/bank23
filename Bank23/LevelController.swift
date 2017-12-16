@@ -59,7 +59,6 @@ public final class LevelController
     return rtn
   }
   
-  // TODO update to save to a different database table
   static func writeLevelToDatabase(level: GameModel) throws {
     if !verifyBoardIsValid(level._board) || !verifyInitialPieceListIsValid(level._pieces) {
       throw LevelNetworkerError.invalidBoardOrInitialPieces
@@ -67,17 +66,17 @@ public final class LevelController
 
     let objectMapper = AWSDynamoDBObjectMapper.default()
     
-    let itemToCreate = Boards()
-    itemToCreate?._boardId = String(level.hash())
+    let itemToCreate = UserCreatedBoardsTable()
+    itemToCreate?._boardHash = String(level.hash())
     itemToCreate?._boardName = level._levelName
     itemToCreate?._board = level._board.toString()
     
     let pieceListString = level.collapsedPieceListToString()
     itemToCreate?._pieces = pieceListString == "" ? EMPTY_STRING : pieceListString
     
-    itemToCreate?._creatorId = UserController.getUserId()
+    itemToCreate?._creatorUUID = UserController.getUserId()
     itemToCreate?._creatorName = UserController.getUsername()
-    itemToCreate?._creationTime = NSDate().timeIntervalSince1970 as NSNumber
+    itemToCreate?._timeStamp = NSDate().timeIntervalSince1970 as NSNumber
     
     objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
       if let error = error {
