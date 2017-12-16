@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1ED40AD41E81A18500E62E1B /* LevelNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */; };
+		1ED40AD41E81A18500E62E1B /* LevelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelController.swift */; };
 		6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */; };
 		6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6611C9241EAFA04200A2E7C5 /* checkmark.png */; };
 		669189331E957ACB0099A497 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189321E957ACB0099A497 /* refresh.png */; };
@@ -75,7 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNetworker.swift; sourceTree = "<group>"; };
+		1ED40AD31E81A18500E62E1B /* LevelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelController.swift; sourceTree = "<group>"; };
 		363CF6CA2565A25D716503AE /* Pods_Bank23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bank23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryView.swift; sourceTree = "<group>"; };
 		6611C9241EAFA04200A2E7C5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
 				6691894F1E9816810099A497 /* UserController.swift */,
 				66B5F0071E82DBE000F96770 /* GameModel.swift */,
-				1ED40AD31E81A18500E62E1B /* LevelNetworker.swift */,
+				1ED40AD31E81A18500E62E1B /* LevelController.swift */,
 				669189451E96EFA70099A497 /* ResultController.swift */,
 				B674462C1E145133001A3529 /* EditGameViewController.swift */,
 				B64CB50A1E04A634005A7781 /* Piece.swift */,
@@ -446,7 +446,7 @@
 				B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */,
 				B674462D1E145133001A3529 /* EditGameViewController.swift in Sources */,
 				B61C69461E74B44F00E68150 /* AWSMobileClient.swift in Sources */,
-				1ED40AD41E81A18500E62E1B /* LevelNetworker.swift in Sources */,
+				1ED40AD41E81A18500E62E1B /* LevelController.swift in Sources */,
 				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,

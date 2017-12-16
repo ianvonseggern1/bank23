@@ -9,6 +9,7 @@
 import Foundation
 
 private let PIECE_LIST_STRING_PIECE_SEPERATOR = "."
+private let MODEL_STRING_SEPERATOR = ","
 
 public final class GameModel {
   var _board = Board()
@@ -32,6 +33,22 @@ public final class GameModel {
     let compactPieces = try GameModel.pieceListFromString(initialPiecesString)
     _pieces = GameModel.shuffle(GameModel.expandPieces(compactPieces))
     _board = try Board(fromString: initialBoardString)
+  }
+  
+  // We concatonate board, pieces, name in that order
+  public func toString() -> String {
+    var modelParts: [String] = [];
+    modelParts.append(_board.toString())
+    modelParts.append(self.collapsedPieceListToString())
+    modelParts.append(_levelName)
+    return modelParts.joined(separator: MODEL_STRING_SEPERATOR)
+  }
+  
+  public static func fromString(_ modelString: String) throws -> GameModel {
+    let modelParts = modelString.components(separatedBy: MODEL_STRING_SEPERATOR)
+    return try GameModel(name: modelParts[2],
+                         initialPiecesString: modelParts[1],
+                         initialBoardString: modelParts[0])
   }
   
   // Note this function reshuffles the pieces

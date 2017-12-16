@@ -172,7 +172,8 @@ final class EditGameViewController: UIViewController {
     _gameModel._levelName = _view._name.text!
 
     do {
-      try LevelNetworker.writeLevelToDatabase(level: _gameModel)
+      try LevelController.saveLocally(level: _gameModel)
+      try LevelController.writeLevelToDatabase(level: _gameModel)
       
       // For now we write it locally to the level menu controller in addition to the DB
       if let username = UserController.getUsername() {

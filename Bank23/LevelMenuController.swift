@@ -64,7 +64,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
 
   public func fetchLevels() {
     addLocalLevels()
-    LevelNetworker.getAllBoardsFromDatabase(boardCallback: self.addAllAndReloadCurrentGame)
+    addUserCreatedLevels()
+    LevelController.getAllBoardsFromDatabase(boardCallback: self.addAllAndReloadCurrentGame)
   }
 
   public func currentLevel() -> GameModel {
@@ -98,6 +99,10 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   func didTapMenu() {
     self.dismiss(animated: true, completion: nil)
+  }
+  
+  func addUserCreatedLevels() {
+    _initialGameModels.append(contentsOf: LevelController.getLocalLevels())
   }
   
   func addLocalLevels() {

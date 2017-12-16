@@ -19,8 +19,47 @@ enum LevelNetworkerError: Error {
 // so we swap with EMPTY_STRING
 private let EMPTY_STRING = "empty"
 
-public final class LevelNetworker
+private let LEVELS_CREATED_STRING_SEPERATOR = "-"
+private let LEVELS_CREATED_USER_DEFAULTS_KEY = "Bank23LevelsCreated"
+
+public final class LevelController
 {
+  static func saveLocally(level: GameModel) throws {
+    if !verifyBoardIsValid(level._board) || !verifyInitialPieceListIsValid(level._pieces) {
+      throw LevelNetworkerError.invalidBoardOrInitialPieces
+    }
+
+    var levelsString = UserDefaults.standard.object(forKey: LEVELS_CREATED_USER_DEFAULTS_KEY) as? String
+    
+    if levelsString == nil {
+      levelsString = level.toString()
+    } else {
+      levelsString = levelsString! + LEVELS_CREATED_STRING_SEPERATOR + level.toString()
+    }
+    
+    let userDefaults = UserDefaults.standard
+    userDefaults.set(levelsString, forKey: LEVELS_CREATED_USER_DEFAULTS_KEY)
+    userDefaults.synchronize()
+  }
+  
+  static func getLocalLevels() -> [GameModel] {
+    let levelsString = UserDefaults.standard.object(forKey: LEVELS_CREATED_USER_DEFAULTS_KEY) as? String
+    if levelsString == nil {
+      return []
+    }
+    
+    var rtn = [GameModel]()
+    for levelString in levelsString!.components(separatedBy: LEVELS_CREATED_STRING_SEPERATOR) {
+      do {
+        rtn.append(try GameModel.fromString(levelString))
+      } catch {
+        print("Unable to read local level")
+      }
+    }
+    return rtn
+  }
+  
+  // TODO update to save to a different database table
   static func writeLevelToDatabase(level: GameModel) throws {
     if !verifyBoardIsValid(level._board) || !verifyInitialPieceListIsValid(level._pieces) {
       throw LevelNetworkerError.invalidBoardOrInitialPieces
