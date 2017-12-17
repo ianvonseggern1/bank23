@@ -62,6 +62,7 @@ final class EditGameViewController: UIViewController {
   
   func setModel(model: GameModel) {
     _gameModel = model.copy()
+    _gameModel._pieces = GameModel.collapsePieces(_gameModel._pieces)
     _view._sizeStepper.value = Double(_gameModel.boardSize())
     refreshViews()
   }
