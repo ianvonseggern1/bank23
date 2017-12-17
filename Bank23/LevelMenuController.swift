@@ -32,6 +32,11 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _aboutLabel = UILabel()
   let _aboutExplanation = UILabel()
   
+  let _deleteLevelAlert = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+  var _longPressSelectedRow: Int? = nil
+  
   var _loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
   
   var _currentRow = 0
@@ -44,6 +49,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _tableView.frame = self.view.bounds
     _tableView.dataSource = self
     _tableView.delegate = self
+    
+    let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(gesture:)))
+    _tableView.addGestureRecognizer(gesture)
+    
+    _deleteLevelAlert.addAction(UIAlertAction(title: "Delete",
+                                              style: .destructive,
+                                              handler: { (action) in self.removeLevel() }))
+    _deleteLevelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     
     _aboutExplanation.isHidden = true
     
@@ -60,6 +73,24 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
     
     _levelsBeaten = _resultController.getAllLevelsBeaten()
+  }
+  
+  public func didLongPress(gesture: UIPanGestureRecognizer) {
+    if gesture.state != UIGestureRecognizerState.began {
+      return
+    }
+    
+    let location = gesture.location(in: _tableView)
+    let indexPath = _tableView.indexPathForRow(at: location)
+    if indexPath == nil || indexPath!.section != 1 {
+      return
+    }
+    
+    let model = _initialGameModels[indexPath!.row]
+    if model._levelType == LevelType.UserCreated {
+      _longPressSelectedRow = indexPath!.row
+      self.present(_deleteLevelAlert, animated: true, completion: nil)
+    }
   }
 
   public func fetchLevels() {
@@ -78,6 +109,15 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
+  }
+  
+  public func removeLevel() {
+    LevelController.removeLocalLevel(toRemove: _initialGameModels[_longPressSelectedRow!])
+    _initialGameModels.remove(at: _longPressSelectedRow!)
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
+    _longPressSelectedRow = nil
   }
   
   public func sortGames() {
@@ -380,9 +420,16 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                            height: levelName.frame.height)
       tableViewCell.addSubview(levelName)
       
-      if gameModel._creatorName != nil {
+      if gameModel._creatorName != nil || gameModel._levelType == LevelType.UserCreated {
+        let creatorNameString: String
+        if gameModel._levelType == LevelType.UserCreated {
+          creatorNameString = "You!"
+        } else {
+          creatorNameString = gameModel._creatorName!
+        }
+        
         let creatorName = UILabel()
-        creatorName.text = "Created by ".appending(gameModel._creatorName!)
+        creatorName.text = "Created by ".appending(creatorNameString)
         creatorName.font = UIFont.systemFont(ofSize: 12.0)
         creatorName.textColor = UIColor.gray
         creatorName.sizeToFit()

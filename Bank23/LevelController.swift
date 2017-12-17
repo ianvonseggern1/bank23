@@ -31,7 +31,7 @@ public final class LevelController
 
     var levelsString = UserDefaults.standard.object(forKey: LEVELS_CREATED_USER_DEFAULTS_KEY) as? String
     
-    if levelsString == nil {
+    if levelsString == nil || levelsString == "" {
       levelsString = level.toString()
     } else {
       levelsString = levelsString! + LEVELS_CREATED_STRING_SEPERATOR + level.toString()
@@ -51,12 +51,32 @@ public final class LevelController
     var rtn = [GameModel]()
     for levelString in levelsString!.components(separatedBy: LEVELS_CREATED_STRING_SEPERATOR) {
       do {
-        rtn.append(try GameModel.fromString(levelString))
+        let model = try GameModel.fromString(levelString)
+        model._levelType = LevelType.UserCreated
+        rtn.append(model)
       } catch {
         print("Unable to read local level")
       }
     }
     return rtn
+  }
+  
+  static func removeLocalLevel(toRemove: GameModel) {
+    var newLevels = [GameModel]()
+    let currentLevels = LevelController.getLocalLevels()
+    for level in currentLevels {
+      if !(toRemove.hash() == level.hash() && toRemove._levelName == level._levelName) {
+        newLevels.append(level)
+      }
+    }
+    
+    let levelsString = newLevels.map({ (level: GameModel) -> String in
+      return level.toString()
+    }).joined(separator: LEVELS_CREATED_STRING_SEPERATOR)
+    
+    let userDefaults = UserDefaults.standard
+    userDefaults.set(levelsString, forKey: LEVELS_CREATED_USER_DEFAULTS_KEY)
+    userDefaults.synchronize()
   }
   
   static func writeLevelToDatabase(level: GameModel) throws {
@@ -112,6 +132,7 @@ public final class LevelController
             if (board._sortKey != nil) {
               gameModel._sortKey = board._sortKey!
             }
+            gameModel._levelType = LevelType.Server
             models.append(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {

@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum LevelType {
+  case Undefined
+  case BuiltIn // TODO, decide if I'm keeping any of these
+  case Server
+  case UserCreated // Local
+}
+
 private let PIECE_LIST_STRING_PIECE_SEPERATOR = "."
 private let MODEL_STRING_SEPERATOR = ","
 
@@ -17,7 +24,8 @@ public final class GameModel {
   var _levelName = ""
   var _creatorName: String?
   var _explanationLabel: String? // Used for tutorials
-  var _sortKey = "zzzzz"
+  var _sortKey = "zzzzz" // Default to a high value to put things lacking a sort key in back. Like user created levels
+  var _levelType: LevelType = LevelType.Undefined
   
   public init() {
   }
@@ -149,7 +157,9 @@ public final class GameModel {
     var collapsedPieces = [String: Piece]()
     for piece in expandedPieceList {
       if let currentPiece = collapsedPieces[piece.typeName()] {
-        collapsedPieces[piece.typeName()] = try! currentPiece.increment(currentPiece)
+        // NOTE this used to be currentPiece.increment(currentPiece) which was wrong
+        // but I don't know what bugs will ensue from fixing it
+        collapsedPieces[piece.typeName()] = try! currentPiece.increment(piece)
       } else {
         collapsedPieces[piece.typeName()] = piece
       }
