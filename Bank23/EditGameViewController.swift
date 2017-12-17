@@ -18,8 +18,14 @@ protocol EditGameViewControllerDelegate: NSObjectProtocol {
   func add(level: GameModel)
 }
 
+private let INITIAL_BOARD_SIZE = 5
+
 final class EditGameViewController: UIViewController {
-  var _gameModel = GameModel()
+  var _gameModel = try! GameModel(name: "",
+                                  collapsedPieces: [],
+                                  initialBoard: Array.init(repeating:Array.init(repeating: Piece.empty,
+                                                                                count: INITIAL_BOARD_SIZE),
+                                                           count: INITIAL_BOARD_SIZE))
   var _view = EditGameView(frame:CGRect.zero)
   var _selectedPiece: Piece?
   
@@ -30,10 +36,9 @@ final class EditGameViewController: UIViewController {
     
     self.view = _view
     self.setupNavigationBar()
-
-    let initialBoardSize = 5
-    _view._sizeStepper.value = Double(initialBoardSize)
-    self.setupEmptyGameModel(size: initialBoardSize)
+    _view._sizeStepper.value = Double(_gameModel.boardSize())
+    
+    refreshViews()
     
     _view._sizeStepper.addTarget(self, action: #selector(sizeStepperTapped), for: UIControlEvents.valueChanged)
 
@@ -49,19 +54,25 @@ final class EditGameViewController: UIViewController {
                                                           action: #selector(didTapSave)), animated: true)
   }
   
-  func setupEmptyGameModel(size: Int) {
-    _gameModel = try! GameModel(name: "",
-                                collapsedPieces: [],
-                                initialBoard: Array.init(repeating:Array.init(repeating: Piece.empty,
-                                                                              count: size),
-                                                         count: size))
-
+  func setModel(model: GameModel) {
+    _gameModel = model
+    _view._sizeStepper.value = Double(_gameModel.boardSize())
+    refreshViews()
+  }
+  
+  func refreshViews() {
     _view._board.updateModel(board: _gameModel._board._board)
     _view._remainingPieces.updatePiecesLeft(pieces: _gameModel._pieces)
   }
   
   func sizeStepperTapped() {
-    self.setupEmptyGameModel(size: Int(_view._sizeStepper.value))
+    let size = Int(_view._sizeStepper.value)
+    _gameModel = try! GameModel(name: "",
+                                collapsedPieces: [],
+                                initialBoard: Array.init(repeating:Array.init(repeating: Piece.empty,
+                                                                              count: size),
+                                                         count: size))
+    refreshViews()
   }
   
   func userDidTap(gesture: UITapGestureRecognizer) {
@@ -175,10 +186,10 @@ final class EditGameViewController: UIViewController {
       try LevelController.saveLocally(level: _gameModel)
       try LevelController.writeLevelToDatabase(level: _gameModel)
       
-      // For now we write it locally to the level menu controller in addition to the DB
       if let username = UserController.getUsername() {
         _gameModel._creatorName = username
       }
+      _gameModel._levelType = LevelType.UserCreated
       delegate!.add(level: _gameModel)
     } catch {
       let alert = UIAlertController(title: nil,

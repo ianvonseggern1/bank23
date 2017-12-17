@@ -86,6 +86,13 @@ public final class GameModel {
     return result
   }
   
+  func boardSize() -> Int {
+    if _board._rows != _board._columns {
+      print("Error: while board model supports rows != columns, consumers of API assume these are equal")
+    }
+    return _board._rows
+  }
+  
   // Win iff there are no banks left
   func isWon() -> Bool {
     for column in _board._board {

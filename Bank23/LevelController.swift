@@ -44,7 +44,7 @@ public final class LevelController
   
   static func getLocalLevels() -> [GameModel] {
     let levelsString = UserDefaults.standard.object(forKey: LEVELS_CREATED_USER_DEFAULTS_KEY) as? String
-    if levelsString == nil {
+    if levelsString == nil || levelsString == "" {
       return []
     }
     

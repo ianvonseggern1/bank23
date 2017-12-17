@@ -32,9 +32,10 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _aboutLabel = UILabel()
   let _aboutExplanation = UILabel()
   
-  let _deleteLevelAlert = UIAlertController(title: nil,
+  let _levelActionSheet = UIAlertController(title: nil,
                                             message: nil,
                                             preferredStyle: .actionSheet)
+  var _deleteAction: UIAlertAction? = nil
   var _longPressSelectedRow: Int? = nil
   
   var _loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
@@ -53,10 +54,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(gesture:)))
     _tableView.addGestureRecognizer(gesture)
     
-    _deleteLevelAlert.addAction(UIAlertAction(title: "Delete",
-                                              style: .destructive,
-                                              handler: { (action) in self.removeLevel() }))
-    _deleteLevelAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    _levelActionSheet.addAction(UIAlertAction(title: "Open in Editor",
+                                              style: .default,
+                                              handler: { (action) in self.openSelectedLevelInEditor()}))
+    _deleteAction = UIAlertAction(title: "Delete",
+                                  style: .destructive,
+                                  handler: { (action) in self.removeSelectedLevel() })
+    _levelActionSheet.addAction(_deleteAction!)
+    _levelActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     
     _aboutExplanation.isHidden = true
     
@@ -66,11 +71,11 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
 
     self.navigationItem.title = "Main Menu"
     
-    let menuIcon = UIButton()
-    menuIcon.setImage(UIImage(named: "cross.png"), for: UIControlState.normal)
-    menuIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-    menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
-    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
+    let xOutIcon = UIButton()
+    xOutIcon.setImage(UIImage(named: "cross.png"), for: UIControlState.normal)
+    xOutIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+    xOutIcon.addTarget(self, action: #selector(didTapXOut), for: UIControlEvents.touchUpInside)
+    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: xOutIcon), animated: false)
     
     _levelsBeaten = _resultController.getAllLevelsBeaten()
   }
@@ -87,10 +92,9 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
     
     let model = _initialGameModels[indexPath!.row]
-    if model._levelType == LevelType.UserCreated {
-      _longPressSelectedRow = indexPath!.row
-      self.present(_deleteLevelAlert, animated: true, completion: nil)
-    }
+    _deleteAction!.isEnabled = model._levelType == LevelType.UserCreated
+    _longPressSelectedRow = indexPath!.row
+    self.present(_levelActionSheet, animated: true, completion: nil)
   }
 
   public func fetchLevels() {
@@ -111,13 +115,19 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  public func removeLevel() {
+  public func removeSelectedLevel() {
     LevelController.removeLocalLevel(toRemove: _initialGameModels[_longPressSelectedRow!])
     _initialGameModels.remove(at: _longPressSelectedRow!)
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
     _longPressSelectedRow = nil
+  }
+  
+  public func openSelectedLevelInEditor() {
+    let model = _initialGameModels[_longPressSelectedRow!]
+    _editGameViewController.setModel(model: model)
+    self.navigationController?.pushViewController(_editGameViewController, animated: true)
   }
   
   public func sortGames() {
@@ -137,7 +147,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  func didTapMenu() {
+  func didTapXOut() {
     self.dismiss(animated: true, completion: nil)
   }
   
