@@ -54,8 +54,14 @@ final class EditGameViewController: UIViewController {
                                                           action: #selector(didTapSave)), animated: true)
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    _view._name.text = ""
+  }
+  
   func setModel(model: GameModel) {
-    _gameModel = model
+    _gameModel = model.copy()
     _view._sizeStepper.value = Double(_gameModel.boardSize())
     refreshViews()
   }
