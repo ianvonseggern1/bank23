@@ -31,6 +31,7 @@ public final class LevelController
 
     var levelsString = UserDefaults.standard.object(forKey: LEVELS_CREATED_USER_DEFAULTS_KEY) as? String
     
+    level.collapsePieceList()
     if levelsString == nil || levelsString == "" {
       levelsString = level.toString()
     } else {
@@ -133,6 +134,7 @@ public final class LevelController
               gameModel._sortKey = board._sortKey!
             }
             gameModel._levelType = LevelType.Server
+            gameModel.collapsePieceList()
             models.append(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
           } catch {

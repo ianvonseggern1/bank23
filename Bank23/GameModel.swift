@@ -130,6 +130,10 @@ public final class GameModel {
     return coinsOnBoard + remainingCoins < banksOnBoard
   }
   
+  public func collapsePieceList() {
+    _pieces = GameModel.collapsePieces(_pieces)
+  }
+  
   public func collapsedPieceListToString() -> String {
     return GameModel.pieceListToString(pieces: GameModel.collapsePieces(_pieces))
   }
