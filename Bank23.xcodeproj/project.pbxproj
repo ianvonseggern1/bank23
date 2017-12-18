@@ -21,6 +21,9 @@
 		669189581E9855480099A497 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189571E9855480099A497 /* cross.png */; };
 		669C5ABC1FE42D9700B04BA1 /* Boards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ABB1FE42D9700B04BA1 /* Boards.swift */; };
 		669C5AC01FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */; };
+		669C5AC41FE6C68200B04BA1 /* kerplunk-sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */; };
+		669C5AC61FE6C6F700B04BA1 /* NoiseEffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */; };
+		669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */; };
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
@@ -92,6 +95,9 @@
 		669189571E9855480099A497 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		669C5ABB1FE42D9700B04BA1 /* Boards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Boards.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (8)/AmazonAws/Models/NoSQL/Boards.swift"; sourceTree = "<group>"; };
 		669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserCreatedBoardsTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (10)/AmazonAws/Models/NoSQL/UserCreatedBoardsTable.swift"; sourceTree = "<group>"; };
+		669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "kerplunk-sound.wav"; sourceTree = "<group>"; };
+		669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseEffectsController.swift; sourceTree = "<group>"; };
+		669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "cha-ching.wav"; sourceTree = "<group>"; };
 		66B5F0071E82DBE000F96770 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
@@ -182,6 +188,8 @@
 				B64CB4F61E04A34C005A7781 /* Products */,
 				B61F478E1E6E5F7C00A48CA4 /* Water.png */,
 				669189381E95DD150099A497 /* Sandcastle 02.png */,
+				669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */,
+				669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */,
 				669189341E9585B50099A497 /* Sandcastle.png */,
 				669189321E957ACB0099A497 /* refresh.png */,
 				669189361E959AB50099A497 /* Mountains 01.png */,
@@ -220,6 +228,7 @@
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
 				6691894F1E9816810099A497 /* UserController.swift */,
 				66B5F0071E82DBE000F96770 /* GameModel.swift */,
+				669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */,
 				1ED40AD31E81A18500E62E1B /* LevelController.swift */,
 				669189451E96EFA70099A497 /* ResultController.swift */,
 				B674462C1E145133001A3529 /* EditGameViewController.swift */,
@@ -323,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				669C5AC41FE6C68200B04BA1 /* kerplunk-sound.wav in Resources */,
 				B61C692E1E71FD5600E68150 /* Mountains.png in Resources */,
 				669189351E9585B50099A497 /* Sandcastle.png in Resources */,
 				B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */,
@@ -341,6 +351,7 @@
 				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,
 				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
 				B61C694A1E74B45B00E68150 /* Models in Resources */,
+				669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */,
 				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
 				6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */,
 				B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */,
@@ -441,6 +452,7 @@
 				B64CB4F91E04A34C005A7781 /* AppDelegate.swift in Sources */,
 				6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */,
 				669189461E96EFA70099A497 /* ResultController.swift in Sources */,
+				669C5AC61FE6C6F700B04BA1 /* NoiseEffectsController.swift in Sources */,
 				B64CB50D1E04B7EC005A7781 /* Board.swift in Sources */,
 				B67446111E0D1D5E001A3529 /* PieceView.swift in Sources */,
 				B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */,

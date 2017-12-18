@@ -95,39 +95,57 @@ public final class GameModel {
   
   // Win iff there are no banks left
   func isWon() -> Bool {
-    for column in _board._board {
-      for piece in column {
-        if piece.sameType(otherPiece: Piece.bank(1)) && piece.value() > 0 {
-          return false
-        }
-      }
-    }
-    return true
+    return self.bankCount() == 0
   }
   
   // Returns true if there are not enough coins left to fill the banks
   func isLost() -> Bool {
-    var remainingCoins = 0
-    for piece in _pieces {
-      if piece.sameType(otherPiece: Piece.coins(1)) {
-        remainingCoins += piece.value()
-      }
-    }
-    
-    var coinsOnBoard = 0
-    var banksOnBoard = 0
+    return self.coinCount() < self.bankCount()
+  }
+  
+  // This calculates the number of pieces dropped in the water between an old
+  // model and new model. It relies on the assumption that the only way to lose
+  // coins without decrementing banks is by dropping them in water.
+  public func coinsLostToWaterCount(oldModel: GameModel) -> Int {
+    let banksFilled = oldModel.bankCount() - self.bankCount()
+    let coinsLost = oldModel.coinCount() - self.coinCount()
+    return coinsLost - banksFilled
+  }
+  
+  // This calculates the number of coins placed into banks by counting the total
+  // bank count in each model and subtracting
+  public func coinsUsedInBanksCount(oldModel: GameModel) -> Int {
+    return oldModel.bankCount() - self.bankCount()
+  }
+  
+  public func bankCount() -> Int {
+    return countPiecesOnBoard(ofType: Piece.bank(1))
+  }
+  
+  public func coinCount() -> Int {
+    return countPiecesOnBoard(ofType: Piece.coins(1)) + countPiecesRemaining(ofType: Piece.coins(1))
+  }
+  
+  private func countPiecesOnBoard(ofType: Piece) -> Int {
+    var count = 0
     for column in _board._board {
       for piece in column {
-        if piece.sameType(otherPiece: Piece.bank(1)) {
-          banksOnBoard += piece.value()
-        }
-        if piece.sameType(otherPiece: Piece.coins(1)) {
-          coinsOnBoard += piece.value()
+        if piece.sameType(otherPiece: ofType) {
+          count += piece.value()
         }
       }
     }
-    
-    return coinsOnBoard + remainingCoins < banksOnBoard
+    return count
+  }
+  
+  private func countPiecesRemaining(ofType: Piece) -> Int {
+    var count = 0
+    for piece in _pieces {
+      if piece.sameType(otherPiece: ofType) {
+        count += piece.value()
+      }
+    }
+    return count
   }
   
   public func collapsePieceList() {

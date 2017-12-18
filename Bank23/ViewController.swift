@@ -169,10 +169,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func swipePieceOn(from:Direction) {
     _moves.append(from)
     
-    var piece = _gameModel._pieces.popLast()
-    if piece == nil {
-      piece = Piece.empty
-    }
+    let modelBeforeMove = _gameModel.copy()
+    
+    let piece: Piece = (_gameModel._pieces.last == nil) ? Piece.empty : _gameModel._pieces.last!
 
     // Eh shitty, but it works for now. Basic premise is to animate the rest of the distance the pieces on the board
     // need to move and then to slowly fade the new piece onto the board.
@@ -197,10 +196,13 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                               inDirection: from)
                    },
                    completion: { (completed) -> () in
-                     let newPieceLocation: (Int, Int)? = self._gameModel._board.swipePieceOn(newPiece: piece!, from: from)
+                     let newPieceLocation: (Int, Int)? = self._gameModel._board.swipePieceOn(newPiece: piece, from: from)
                     
-                     // Update the view with all the new locations but not the new piece, then we animate it on,
-                     // then we update again
+                    let modelBeforeAddingNewPiece = self._gameModel.copy()
+                    
+                     // Update the view with all the new locations but not the new piece,
+                     // then we animate it on, then we update again
+                     self.playAudioForChangesInState(oldModel: modelBeforeMove)
                      self._view.updateModel(self._gameModel)
                     
 //                     UIView.animate(withDuration: 0.2,
@@ -210,9 +212,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
 //                                    completion: nil)
                     
                      var newPieceView: PieceView? = nil
-                     if (piece != nil && piece! != Piece.empty && newPieceLocation != nil) {
+                     if (piece != Piece.empty && newPieceLocation != nil) {
                        let (newPieceColumn, newPieceRow) = newPieceLocation!
-                       newPieceView = self._view._board.addPiece(piece: piece!,
+                       newPieceView = self._view._board.addPiece(piece: piece,
                                                                  row: newPieceRow,
                                                                  col: newPieceColumn)
                        newPieceView!.alpha = 0.0
@@ -222,9 +224,13 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                         newPieceView?.alpha = 1.0
                                       },
                                       completion: { (completed) in
-                                        self._gameModel._board.mergePiece(piece: piece!,
+                                        let _ = self._gameModel._pieces.popLast()
+                                        self._gameModel._board.mergePiece(piece: piece,
                                                                           row: newPieceRow,
                                                                           column: newPieceColumn)
+                                        self.playAudioForChangesInState(
+                                          oldModel: modelBeforeAddingNewPiece
+                                        )
                                         self._view.updateModel(self._gameModel)
                                         
                                         // testing
@@ -238,6 +244,18 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                        self.completedSwipingPieceOn()
                      }
                    })
+  }
+  
+  // Immediately upon updating the view with a new model this should be called as well
+  // It determines the noises to be played and plays them.
+  // Currently it is used twice, immediatley after the slide animation is completed and
+  // immediately after the new piece is added to the board
+  func playAudioForChangesInState(oldModel: GameModel) {
+    if _gameModel.coinsLostToWaterCount(oldModel: oldModel) > 0 {
+      NoiseEffectsController.playKerplunk()
+    } else if _gameModel.coinsUsedInBanksCount(oldModel: oldModel) > 0 {
+      NoiseEffectsController.playChaChing()
+    }
   }
   
   func completedSwipingPieceOn() {
