@@ -203,6 +203,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                      // Update the view with all the new locations but not the new piece,
                      // then we animate it on, then we update again
                      self.playAudioForChangesInState(oldModel: modelBeforeMove)
+                     // Pop piece after determining audio changes, but before updating view
+                     let _ = self._gameModel._pieces.popLast()
                      self._view.updateModel(self._gameModel)
                     
 //                     UIView.animate(withDuration: 0.2,
@@ -224,7 +226,6 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                         newPieceView?.alpha = 1.0
                                       },
                                       completion: { (completed) in
-                                        let _ = self._gameModel._pieces.popLast()
                                         self._gameModel._board.mergePiece(piece: piece,
                                                                           row: newPieceRow,
                                                                           column: newPieceColumn)
