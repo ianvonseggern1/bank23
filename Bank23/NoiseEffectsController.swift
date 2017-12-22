@@ -11,15 +11,26 @@ import AudioToolbox
 
 public final class NoiseEffectsController
 {
-  static func playKerplunk() {
-    NoiseEffectsController.playSound(name: "kerplunk-sound", extensionName: "wav", soundId: 0)
+  // TODO persist in user defaults
+  var audioOn = true
+  
+  func toggleAudio() {
+    audioOn = !audioOn
   }
   
-  static func playChaChing() {
-    NoiseEffectsController.playSound(name: "cha-ching", extensionName: "wav", soundId: 1)
+  func playKerplunk() {
+    playSound(name: "kerplunk-sound", extensionName: "wav", soundId: 0)
   }
   
-  private static func playSound(name: String, extensionName: String, soundId: Int) {
+  func playChaChing() {
+    playSound(name: "cha-ching", extensionName: "wav", soundId: 1)
+  }
+  
+  private func playSound(name: String, extensionName: String, soundId: Int) {
+    if !audioOn {
+      return
+    }
+    
     if let soundUrl = Bundle.main.url(forResource: name, withExtension: extensionName) {
       var soundId: SystemSoundID = 0
       AudioServicesCreateSystemSoundID(soundUrl as CFURL, &soundId)

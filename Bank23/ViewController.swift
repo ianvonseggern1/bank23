@@ -14,6 +14,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   var _gameModel = GameModel()
   
   let _levelMenuController = LevelMenuController()
+  let _noiseEffectsController = NoiseEffectsController()
 
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
@@ -30,6 +31,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     // Configure level menu controller
     _levelMenuController.delegate = self
     _levelMenuController.fetchLevels()
+    _levelMenuController._noiseEffectsController = _noiseEffectsController
     
     self.setupNavigationBarItems()
     let panGesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(gesture:)))
@@ -260,9 +262,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   // immediately after the new piece is added to the board
   func playAudioForChangesInState(oldModel: GameModel) {
     if _gameModel.coinsLostToWaterCount(oldModel: oldModel) > 0 {
-      NoiseEffectsController.playKerplunk()
+      _noiseEffectsController.playKerplunk()
     } else if _gameModel.coinsUsedInBanksCount(oldModel: oldModel) > 0 {
-      NoiseEffectsController.playChaChing()
+      _noiseEffectsController.playChaChing()
     }
   }
   

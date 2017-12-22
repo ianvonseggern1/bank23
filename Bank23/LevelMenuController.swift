@@ -22,6 +22,9 @@ protocol LevelMenuControllerDelegate: NSObjectProtocol {
 public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EditGameViewControllerDelegate {
   
   weak var delegate: LevelMenuControllerDelegate?
+  
+  // Created by ViewController
+  var _noiseEffectsController: NoiseEffectsController?
 
   let _editGameViewController = EditGameViewController()
   let _userController = UserController()
@@ -55,6 +58,27 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     let gesture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(gesture:)))
     _tableView.addGestureRecognizer(gesture)
     
+    _aboutExplanation.isHidden = true
+    
+    _editGameViewController.delegate = self
+    
+    setupNavigationBar()
+    setupLevelActionSheet()
+  }
+  
+  func setupNavigationBar() {
+    self.navigationItem.title = "Main Menu"
+    
+    let xOutIcon = UIButton()
+    xOutIcon.setImage(UIImage(named: "cross.png"), for: UIControlState.normal)
+    xOutIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+    xOutIcon.addTarget(self, action: #selector(didTapXOut), for: UIControlEvents.touchUpInside)
+    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: xOutIcon), animated: false)
+    
+    setAudioButtonTitle()
+  }
+  
+  func setupLevelActionSheet() {
     _levelActionSheet.addAction(UIAlertAction(title: "Open in Editor",
                                               style: .default,
                                               handler: { (action) in self.openSelectedLevelInEditor()}))
@@ -63,20 +87,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                   handler: { (action) in self.removeSelectedLevel() })
     _levelActionSheet.addAction(_deleteAction!)
     _levelActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-    
-    _aboutExplanation.isHidden = true
-    
-    _editGameViewController.delegate = self
-    
-    // Setup Navigation Bar
-
-    self.navigationItem.title = "Main Menu"
-    
-    let xOutIcon = UIButton()
-    xOutIcon.setImage(UIImage(named: "cross.png"), for: UIControlState.normal)
-    xOutIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-    xOutIcon.addTarget(self, action: #selector(didTapXOut), for: UIControlEvents.touchUpInside)
-    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: xOutIcon), animated: false)
   }
   
   @objc public func didLongPress(gesture: UIPanGestureRecognizer) {
@@ -157,6 +167,20 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     DispatchQueue.main.async {
       self.dismiss(animated: true, completion: nil)
     }
+  }
+  
+  @objc func didTapAudioToggle() {
+    _noiseEffectsController!.toggleAudio()
+    setAudioButtonTitle()
+  }
+  
+  func setAudioButtonTitle() {
+    let title = _noiseEffectsController!.audioOn ? "Audio On" : "Audio Off"
+    self.navigationItem.setRightBarButton(UIBarButtonItem(title: title,
+                                                          style: UIBarButtonItemStyle.plain,
+                                                          target: self,
+                                                          action: #selector(didTapAudioToggle)),
+                                          animated: false)
   }
   
   public func goToNextLevel() {
