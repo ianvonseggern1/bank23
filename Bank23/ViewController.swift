@@ -213,6 +213,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
 //                                    },
 //                                    completion: nil)
                     
+                    
                      var newPieceView: PieceView? = nil
                      if (piece != Piece.empty && newPieceLocation != nil) {
                        let (newPieceColumn, newPieceRow) = newPieceLocation!
@@ -221,7 +222,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                                                  col: newPieceColumn)
                        newPieceView!.alpha = 0.0
                       
-                       UIView.animate(withDuration: 0.4,
+                       UIView.animate(withDuration: 0.2,
                                       animations:{
                                         newPieceView?.alpha = 1.0
                                       },
@@ -249,7 +250,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   
   // Immediately upon updating the view with a new model this should be called as well
   // It determines the noises to be played and plays them.
-  // Currently it is used twice, immediatley after the slide animation is completed and
+  // Currently it is used twice, immediately after the slide animation is completed and
   // immediately after the new piece is added to the board
   func playAudioForChangesInState(oldModel: GameModel) {
     if _gameModel.coinsLostToWaterCount(oldModel: oldModel) > 0 {
