@@ -19,11 +19,11 @@ class VictoryView: UIView {
     self.backgroundColor = UIColor.clear
     
     _victoryLabel.text = "YOU WON!"
-    _victoryLabel.font = UIFont.systemFont(ofSize: 48, weight: 1.0)
+    _victoryLabel.font = UIFont.systemFont(ofSize: 48, weight: UIFont.Weight(rawValue: 1.0))
     self.addSubview(_victoryLabel)
     
     _nextLevelLabel.text = "Next Level >"
-    _nextLevelLabel.font = UIFont.systemFont(ofSize: 36, weight: 1.0)
+    _nextLevelLabel.font = UIFont.systemFont(ofSize: 36, weight: UIFont.Weight(rawValue: 1.0))
     _nextLevelLabel.textColor = UIColor.darkGray
     self.addSubview(_nextLevelLabel)
   }

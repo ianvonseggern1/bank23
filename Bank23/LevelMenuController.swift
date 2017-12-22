@@ -80,7 +80,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _levelsBeaten = _resultController.getAllLevelsBeaten()
   }
   
-  public func didLongPress(gesture: UIPanGestureRecognizer) {
+  @objc public func didLongPress(gesture: UIPanGestureRecognizer) {
     if gesture.state != UIGestureRecognizerState.began {
       return
     }
@@ -147,8 +147,10 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  func didTapXOut() {
-    self.dismiss(animated: true, completion: nil)
+  @objc func didTapXOut() {
+    DispatchQueue.main.async {
+      self.dismiss(animated: true, completion: nil)
+    }
   }
   
   func addUserCreatedLevels() {

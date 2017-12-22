@@ -62,17 +62,19 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     self.navigationItem.setRightBarButton(UIBarButtonItem(customView: refreshIcon), animated: false)
   }
   
-  func didTapNextLevel() {
+  @objc func didTapNextLevel() {
     _levelMenuController.goToNextLevel()
     reset()
   }
   
-  func didTapMenu() {
-    let navigationController = UINavigationController(rootViewController: _levelMenuController)
-    self.present(navigationController, animated: true, completion: nil)
+  @objc func didTapMenu() {
+    DispatchQueue.main.async {
+      let navigationController = UINavigationController(rootViewController: self._levelMenuController)
+      self.present(navigationController, animated: true, completion: nil)
+    }
   }
   
-  func didTapRefresh() {
+  @objc func didTapRefresh() {
     if (_gameModel.isWon() || _showedIsLostAlert) {
       self.reset()
     } else {
@@ -92,25 +94,29 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
-    ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
-                                           uniquePlayId: _uniquePlayId!,
-                                           victory: _gameModel.isWon(),
-                                           enoughPiecesLeft: _gameModel.isLost(),
-                                           moves: _moves,
-                                           initialShuffledPieces: _initialShuffledPieces)
+    if (_moves.count > 0) {
+      ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
+                                             uniquePlayId: _uniquePlayId!,
+                                             victory: _gameModel.isWon(),
+                                             enoughPiecesLeft: _gameModel.isLost(),
+                                             moves: _moves,
+                                             initialShuffledPieces: _initialShuffledPieces)
+    }
     
     self.setupBoard()
-    self.navigationItem.title = _gameModel._levelName
-    _view.updateModel(_gameModel)
-    _view._victoryView.isHidden = true
-    _showedIsLostAlert = false
-    _view._board.backgroundColor = BoardView.backgroundColor()
+    DispatchQueue.main.async {
+      self.navigationItem.title = self._gameModel._levelName
+      self._view.updateModel(self._gameModel)
+      self._view._victoryView.isHidden = true
+      self._showedIsLostAlert = false
+      self._view._board.backgroundColor = BoardView.backgroundColor()
 
-    _view.setNeedsLayout()
-    _view.layoutIfNeeded()
+      self._view.setNeedsLayout()
+      self._view.layoutIfNeeded()
+    }
   }
   
-  func userDidPan(gesture: UIPanGestureRecognizer) {
+  @objc func userDidPan(gesture: UIPanGestureRecognizer) {
     let minimumDistanceToConsider = CGFloat(3.0)
     let point = gesture.translation(in: _view)
     if abs(point.x) < minimumDistanceToConsider && abs(point.y) < minimumDistanceToConsider {
@@ -310,22 +316,22 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     ]
   }
   
-  func arrowKeyTapped(sender: UIKeyCommand) {
+  @objc func arrowKeyTapped(sender: UIKeyCommand) {
     if !_view.isUserInteractionEnabled {
       return
     }
 
     switch sender.input {
-    case UIKeyInputUpArrow:
+    case UIKeyInputUpArrow?:
       self.swipePieceOn(from: Direction.bottom)
       break
-    case UIKeyInputRightArrow:
+    case UIKeyInputRightArrow?:
       self.swipePieceOn(from: Direction.left)
       break
-    case UIKeyInputLeftArrow:
+    case UIKeyInputLeftArrow?:
       self.swipePieceOn(from: Direction.right)
       break
-    case UIKeyInputDownArrow:
+    case UIKeyInputDownArrow?:
       self.swipePieceOn(from: Direction.top)
       break
     default:

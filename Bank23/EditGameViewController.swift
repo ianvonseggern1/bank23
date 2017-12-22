@@ -72,7 +72,7 @@ final class EditGameViewController: UIViewController {
     _view._remainingPieces.updatePiecesLeft(pieces: _gameModel._pieces)
   }
   
-  func sizeStepperTapped() {
+  @objc func sizeStepperTapped() {
     let size = Int(_view._sizeStepper.value)
     _gameModel = try! GameModel(name: "",
                                 collapsedPieces: [],
@@ -82,7 +82,7 @@ final class EditGameViewController: UIViewController {
     refreshViews()
   }
   
-  func userDidTap(gesture: UITapGestureRecognizer) {
+  @objc func userDidTap(gesture: UITapGestureRecognizer) {
     if _view._name.isFirstResponder {
       _view._name.resignFirstResponder()
       return
@@ -176,7 +176,7 @@ final class EditGameViewController: UIViewController {
     let _ = self.navigationController?.popViewController(animated: true)
   }
   
-  func didTapSave() {
+  @objc func didTapSave() {
     if _view._name.text == "" {
       let alert = UIAlertController(title: nil,
                                     message: "You must add a name",
