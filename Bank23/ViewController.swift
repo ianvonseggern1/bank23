@@ -287,12 +287,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func showVictoryView() {
-    if _levelMenuController._currentRow == _levelMenuController._initialGameModels.count - 1 {
-      _view._victoryView._nextLevelLabel.isHidden = true
-    } else {
-      _view._victoryView._nextLevelLabel.isHidden = false
-    }
-    
+    _view._victoryView._nextLevelLabel.isHidden = _levelMenuController.currentLevelIsLast()
     _view._victoryView.isHidden = false
   }
 

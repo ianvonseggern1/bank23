@@ -24,6 +24,7 @@
 		669C5AC41FE6C68200B04BA1 /* kerplunk-sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */; };
 		669C5AC61FE6C6F700B04BA1 /* NoiseEffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */; };
 		669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */; };
+		669C5ACA1FECAAFE00B04BA1 /* BuiltInLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */; };
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
@@ -98,6 +99,7 @@
 		669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "kerplunk-sound.wav"; sourceTree = "<group>"; };
 		669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseEffectsController.swift; sourceTree = "<group>"; };
 		669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "cha-ching.wav"; sourceTree = "<group>"; };
+		669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInLevels.swift; sourceTree = "<group>"; };
 		66B5F0071E82DBE000F96770 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				B64CB4F81E04A34C005A7781 /* AppDelegate.swift */,
 				B64CB4FA1E04A34C005A7781 /* ViewController.swift */,
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
+				669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */,
 				6691894F1E9816810099A497 /* UserController.swift */,
 				66B5F0071E82DBE000F96770 /* GameModel.swift */,
 				669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */,
@@ -454,6 +457,7 @@
 				6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */,
 				669189461E96EFA70099A497 /* ResultController.swift in Sources */,
 				669C5AC61FE6C6F700B04BA1 /* NoiseEffectsController.swift in Sources */,
+				669C5ACA1FECAAFE00B04BA1 /* BuiltInLevels.swift in Sources */,
 				B64CB50D1E04B7EC005A7781 /* Board.swift in Sources */,
 				B67446111E0D1D5E001A3529 /* PieceView.swift in Sources */,
 				B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */,

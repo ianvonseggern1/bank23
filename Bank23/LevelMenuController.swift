@@ -25,7 +25,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _userController = UserController()
   let _resultController = ResultController()
 
-  var _initialGameModels = [GameModel]()
+  var _gameModels = [GameModel]()
 
   var _tableView = UITableView()
   let _usernameTextField = UITextField()
@@ -91,24 +91,31 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       return
     }
     
-    let model = _initialGameModels[indexPath!.row]
+    let model = _gameModels[indexPath!.row]
     _deleteAction!.isEnabled = model._levelType == LevelType.UserCreated
     _longPressSelectedRow = indexPath!.row
     self.present(_levelActionSheet, animated: true, completion: nil)
   }
 
   public func fetchLevels() {
-    addLocalLevels()
-    addUserCreatedLevels()
+    // Built In Levels
+    _gameModels.append(contentsOf: BuiltInLevels.get())
+    // User Created Levels
+    _gameModels.append(contentsOf: LevelController.getLocalLevels())
+    // Levels from Server
     LevelController.getAllBoardsFromDatabase(boardCallback: self.addAllAndReloadCurrentGame)
   }
 
   public func currentLevel() -> GameModel {
-    return _initialGameModels[_currentRow].copy()
+    return _gameModels[_currentRow].copy()
+  }
+  
+  public func currentLevelIsLast() -> Bool {
+    return _currentRow == (_gameModels.count - 1)
   }
   
   public func add(level: GameModel) {
-    _initialGameModels.append(level)
+    _gameModels.append(level)
     sortGames()
     DispatchQueue.main.async {
       self._tableView.reloadData()
@@ -116,8 +123,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   }
   
   public func removeSelectedLevel() {
-    LevelController.removeLocalLevel(toRemove: _initialGameModels[_longPressSelectedRow!])
-    _initialGameModels.remove(at: _longPressSelectedRow!)
+    LevelController.removeLocalLevel(toRemove: _gameModels[_longPressSelectedRow!])
+    _gameModels.remove(at: _longPressSelectedRow!)
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
@@ -125,13 +132,13 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   }
   
   public func openSelectedLevelInEditor() {
-    let model = _initialGameModels[_longPressSelectedRow!]
+    let model = _gameModels[_longPressSelectedRow!]
     _editGameViewController.setModel(model: model)
     self.navigationController?.pushViewController(_editGameViewController, animated: true)
   }
   
   public func sortGames() {
-    _initialGameModels.sort(by: {
+    _gameModels.sort(by: {
       ($0._sortKey == $1._sortKey)
         ? ($0._levelName < $1._levelName)
         : ($0._sortKey < $1._sortKey)
@@ -139,7 +146,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   }
   
   public func addAllAndReloadCurrentGame(levels: [GameModel]) {
-    _initialGameModels.append(contentsOf: levels)
+    _gameModels.append(contentsOf: levels)
     sortGames()
     DispatchQueue.main.async {
       self._tableView.reloadData()
@@ -154,199 +161,15 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   }
   
   func addUserCreatedLevels() {
-    _initialGameModels.append(contentsOf: LevelController.getLocalLevels())
+    
   }
   
   func addLocalLevels() {
-    // Helpful reminder board is indexed first by column, then row i.e. board[column][row]
-    
-    // Level 1
-    var initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[2][3] = Piece.bank(10)
-    initialBoard[1][2] = Piece.water(2)
-    initialBoard[3][2] = Piece.water(2)
-    initialBoard[1][3] = Piece.water(5)
-    initialBoard[3][3] = Piece.water(5)
-    initialBoard[1][4] = Piece.water(3)
-    initialBoard[3][4] = Piece.water(3)
-    
-    var initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "The Narrows",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 2
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[2][2] = Piece.bank(10)
-    initialBoard[1][2] = Piece.water(5)
-    initialBoard[3][2] = Piece.water(5)
-    initialBoard[2][3] = Piece.water(5)
-    initialBoard[2][1] = Piece.water(5)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "The Island",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 3
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[2][4] = Piece.bank(10)
-    initialBoard[1][4] = Piece.water(8)
-    initialBoard[3][4] = Piece.water(8)
-    initialBoard[2][3] = Piece.water(4)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "Top Side",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 4
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[4][4] = Piece.bank(10)
-    initialBoard[4][3] = Piece.water(10)
-    initialBoard[3][4] = Piece.water(10)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "Corner Case",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 5
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[2][2] = Piece.bank(10)
-    initialBoard[1][1] = Piece.water(2)
-    initialBoard[3][1] = Piece.water(2)
-    initialBoard[1][2] = Piece.water(3)
-    initialBoard[3][2] = Piece.water(3)
-    initialBoard[1][3] = Piece.water(3)
-    initialBoard[3][3] = Piece.water(3)
-    initialBoard[1][4] = Piece.water(2)
-    initialBoard[3][4] = Piece.water(2)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "The Narrows Part II",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 6
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[0][2] = Piece.bank(5)
-    initialBoard[4][2] = Piece.bank(5)
-    initialBoard[0][1] = Piece.water(3)
-    initialBoard[0][3] = Piece.water(3)
-    initialBoard[1][2] = Piece.water(4)
-    initialBoard[4][1] = Piece.water(3)
-    initialBoard[4][3] = Piece.water(3)
-    initialBoard[3][2] = Piece.water(4)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "Worlds Apart",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 7
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:5), count:5)
-    initialBoard[1][2] = Piece.bank(5)
-    initialBoard[3][2] = Piece.bank(5)
-    initialBoard[1][1] = Piece.water(3)
-    initialBoard[1][3] = Piece.water(3)
-    initialBoard[3][1] = Piece.water(3)
-    initialBoard[3][3] = Piece.water(3)
-    initialBoard[2][1] = Piece.water(3)
-    initialBoard[2][2] = Piece.water(2)
-    initialBoard[2][3] = Piece.water(3)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "Split Brain",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
-    
-    // Level 8
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:7), count:7)
-    initialBoard[3][3] = Piece.bank(16)
-    initialBoard[3][2] = Piece.water(4)
-    initialBoard[3][4] = Piece.water(4)
-    initialBoard[2][3] = Piece.water(4)
-    initialBoard[4][3] = Piece.water(4)
-    initialBoard[1][2] = Piece.water(2)
-    initialBoard[5][2] = Piece.water(2)
-    initialBoard[2][1] = Piece.water(2)
-    initialBoard[2][5] = Piece.water(2)
-    initialBoard[4][1] = Piece.water(2)
-    initialBoard[4][5] = Piece.water(2)
-    initialBoard[1][4] = Piece.water(2)
-    initialBoard[5][4] = Piece.water(2)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(16))
-    initialPieces.append(Piece.sand(32))
-    
-    let level8 = try! GameModel(name: "007",
-                                collapsedPieces: initialPieces,
-                                initialBoard: initialBoard)
-    level8._sortKey = "pm"
-    _initialGameModels.append(level8)
-    
-    // Level 9
-    initialBoard = Array(repeating:Array(repeating:Piece.empty, count:7), count:7)
-    initialBoard[2][6] = Piece.mountain(1)
-    initialBoard[2][5] = Piece.mountain(1)
-    initialBoard[2][4] = Piece.mountain(1)
-    initialBoard[2][3] = Piece.mountain(1)
-    initialBoard[2][2] = Piece.mountain(1)
-    initialBoard[2][1] = Piece.mountain(1)
-    initialBoard[4][6] = Piece.mountain(1)
-    initialBoard[4][5] = Piece.mountain(1)
-    initialBoard[4][4] = Piece.mountain(1)
-    initialBoard[4][3] = Piece.mountain(1)
-    initialBoard[4][2] = Piece.mountain(1)
-    initialBoard[4][1] = Piece.mountain(1)
-    initialBoard[1][2] = Piece.mountain(1)
-    initialBoard[1][5] = Piece.mountain(1)
-    initialBoard[5][2] = Piece.mountain(1)
-    initialBoard[5][5] = Piece.mountain(1)
-    
-    initialBoard[1][1] = Piece.water(4)
-    initialBoard[1][4] = Piece.water(4)
-    initialBoard[5][1] = Piece.water(4)
-    initialBoard[5][4] = Piece.water(4)
-    initialBoard[3][3] = Piece.water(4)
-    
-    initialBoard[3][2] = Piece.bank(5)
-    initialBoard[3][4] = Piece.bank(5)
-    
-    initialPieces = [Piece]()
-    initialPieces.append(Piece.coins(10))
-    initialPieces.append(Piece.sand(20))
-    
-    _initialGameModels.append(try! GameModel(name: "Grand Canyon",
-                                             collapsedPieces: initialPieces,
-                                             initialBoard: initialBoard))
+
   }
   
   public func goToNextLevel() {
-    if (_currentRow < _initialGameModels.count) {
+    if (_currentRow < _gameModels.count) {
       _currentRow += 1
     } else {
       NSLog("Can't go to next level, this is the last one")
@@ -374,7 +197,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     if section == 0 {
       return 1
     } else if section == 1 {
-      return _initialGameModels.count
+      return _gameModels.count
     } else if section == 2 {
       return 1
     } else if section == 3 {
@@ -420,7 +243,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       _loginButton.delegate = _userController
       tableViewCell.addSubview(_loginButton)
     } else if indexPath.section == 1 {
-      let gameModel = _initialGameModels[indexPath.row]
+      let gameModel = _gameModels[indexPath.row]
       
       let levelName = UILabel()
       levelName.text = gameModel._levelName
@@ -467,7 +290,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
                                               width: 90,
                                               height: 90))
       boardView.showCountLabels = false
-      boardView.updateModel(board: _initialGameModels[indexPath.row]._board._board)
+      boardView.updateModel(board: _gameModels[indexPath.row]._board._board)
       tableViewCell.addSubview(boardView)
     
     } else if indexPath.section == 2 {
