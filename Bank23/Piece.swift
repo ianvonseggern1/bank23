@@ -22,8 +22,9 @@ public enum Piece {
   case mountain(Int)
   
   public static func initFromName(_ name: String) throws -> Piece {
-    let count = Int(name.substring(from: name.index(name.startIndex, offsetBy: 1)))
-    let pieceTypeString = name.substring(to: name.index(name.startIndex, offsetBy: 1))
+    let indexOfCount = name.index(name.startIndex, offsetBy: 1)
+    let count = Int(name[indexOfCount...])
+    let pieceTypeString = String(name[..<indexOfCount])
     if pieceTypeString != "e" && count == nil {
       throw PieceModelError.couldNotCreatePieceFromString
     }
