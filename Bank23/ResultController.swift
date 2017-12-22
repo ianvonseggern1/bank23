@@ -73,10 +73,6 @@ public final class ResultController
                      forKey: LEVELS_BEAT_USER_DEFAULTS_KEY)
     userDefaults.synchronize()
   }
-  
-//  func getAllLevelsBeaten() -> Set<String> {
-//    return Set(levelsBeat)
-//  }
 
   func levelBeaten(_ model: GameModel) -> Bool {
     return Set(levelsBeat).contains(String(model.hash()))
