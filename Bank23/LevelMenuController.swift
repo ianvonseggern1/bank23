@@ -11,6 +11,8 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 
+let LEVEL_ROW_VIEW_HEIGHT = 110
+
 protocol LevelMenuControllerDelegate: NSObjectProtocol {
   // TODO, update to explictly pass newly selected level here
   // rather than creating a hidden dependency on setting it first
@@ -41,7 +43,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   var _loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
   
   var _currentRow = 0
-  var _levelsBeaten = Set<String>()
   
   override public func viewDidLoad() {
     super.viewDidLoad()
@@ -76,8 +77,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     xOutIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
     xOutIcon.addTarget(self, action: #selector(didTapXOut), for: UIControlEvents.touchUpInside)
     self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: xOutIcon), animated: false)
-    
-    _levelsBeaten = _resultController.getAllLevelsBeaten()
   }
   
   @objc public func didLongPress(gesture: UIPanGestureRecognizer) {
@@ -160,14 +159,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  func addUserCreatedLevels() {
-    
-  }
-  
-  func addLocalLevels() {
-
-  }
-  
   public func goToNextLevel() {
     if (_currentRow < _gameModels.count) {
       _currentRow += 1
@@ -178,10 +169,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   public func userBeatLevel() {
     _resultController.userBeatlevel(level: currentLevel())
-    
-    // Could make this more efficient and only reload when they beat a level for the
-    // first time, for now reload data every time
-    _levelsBeaten = _resultController.getAllLevelsBeaten()
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
@@ -243,56 +230,12 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       _loginButton.delegate = _userController
       tableViewCell.addSubview(_loginButton)
     } else if indexPath.section == 1 {
-      let gameModel = _gameModels[indexPath.row]
-      
-      let levelName = UILabel()
-      levelName.text = gameModel._levelName
-      levelName.font = UIFont.boldSystemFont(ofSize: 16.0)
-      levelName.sizeToFit()
-      levelName.frame = CGRect(x: 10,
-                           y: 10,
-                           width: levelName.frame.width,
-                           height: levelName.frame.height)
-      tableViewCell.addSubview(levelName)
-      
-      if gameModel._creatorName != nil || gameModel._levelType == LevelType.UserCreated {
-        let creatorNameString: String
-        if gameModel._levelType == LevelType.UserCreated {
-          creatorNameString = "You!"
-        } else {
-          creatorNameString = gameModel._creatorName!
-        }
-        
-        let creatorName = UILabel()
-        creatorName.text = "Created by ".appending(creatorNameString)
-        creatorName.font = UIFont.systemFont(ofSize: 12.0)
-        creatorName.textColor = UIColor.gray
-        creatorName.sizeToFit()
-        creatorName.frame = CGRect(x: 10,
-                                   y: levelName.frame.maxY,
-                                   width: creatorName.frame.width,
-                                   height: creatorName.frame.height)
-        tableViewCell.addSubview(creatorName)
-      }
-      
-      if _levelsBeaten.contains(String(gameModel.hash())) {
-        let checkmark = UIImageView()
-        checkmark.image = UIImage(named: "checkmark.png")!
-        checkmark.frame = CGRect(x: 10,
-                                 y: 90 - 20,
-                                 width: 20,
-                                 height: 20)
-        tableViewCell.addSubview(checkmark)
-      }
-      
-      let boardView = BoardView(frame: CGRect(x: self._tableView.frame.width - 100,
-                                              y: 10,
-                                              width: 90,
-                                              height: 90))
-      boardView.showCountLabels = false
-      boardView.updateModel(board: _gameModels[indexPath.row]._board._board)
-      tableViewCell.addSubview(boardView)
-    
+      let model = _gameModels[indexPath.row]
+      let levelRowCell = LevelMenuLevelRowView(gameModel: model,
+                                               levelBeaten: _resultController.levelBeaten(model))
+      levelRowCell.frame = CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: LEVEL_ROW_VIEW_HEIGHT)
+      tableViewCell.addSubview(levelRowCell)
+
     } else if indexPath.section == 2 {
       let label = UILabel()
       label.text = "+ Add a Level"
@@ -340,7 +283,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     if indexPath.section == 0 {
       return 50
     } else if indexPath.section == 1 {
-      return 110
+      return CGFloat(LEVEL_ROW_VIEW_HEIGHT)
     } else if indexPath.section == 3 {
       return _aboutExplanation.isHidden ? 40 : 40 + _aboutExplanation.frame.height + 10
     }
