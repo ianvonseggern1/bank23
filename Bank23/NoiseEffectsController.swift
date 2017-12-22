@@ -9,13 +9,22 @@
 import Foundation
 import AudioToolbox
 
+let AUDIO_SETTING_USER_DEFAULT_KEY = "AudioSetting"
+
 public final class NoiseEffectsController
 {
-  // TODO persist in user defaults
   var audioOn = true
+  
+  init() {
+    let audioDefault = UserDefaults.standard.object(forKey: AUDIO_SETTING_USER_DEFAULT_KEY) as! Bool?
+    audioOn = audioDefault == nil ? true : audioDefault!
+  }
   
   func toggleAudio() {
     audioOn = !audioOn
+    
+    UserDefaults.standard.set(audioOn, forKey: AUDIO_SETTING_USER_DEFAULT_KEY)
+    UserDefaults.standard.synchronize()
   }
   
   func playKerplunk() {
