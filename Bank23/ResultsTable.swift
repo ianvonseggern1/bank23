@@ -17,17 +17,17 @@ import AWSDynamoDB
 
 class ResultsTable: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
-    var _userUUID: String?
-    var _username: String?
-    var _timeStamp: NSNumber?
-    var _boardHash: String?
-    var _boardName: String?
-    var _moveCount: NSNumber?
-    var _moves: [String]?
-    var _notEnoughPieces: NSNumber?
-    var _playID: String?
-    var _shuffledPieces: [String]?
-    var _won: NSNumber?
+    @objc var _userUUID: String?
+    @objc var _username: String?
+    @objc var _timeStamp: NSNumber?
+    @objc var _boardHash: String?
+    @objc var _boardName: String?
+    @objc var _moveCount: NSNumber?
+    @objc var _moves: [String]?
+    @objc var _notEnoughPieces: NSNumber?
+    @objc var _playID: String?
+    @objc var _shuffledPieces: [String]?
+    @objc var _won: NSNumber?
     
     class func dynamoDBTableName() -> String {
 
