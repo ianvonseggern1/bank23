@@ -10,6 +10,9 @@ import UIKit
 import AWSCore
 import FacebookCore
 
+// Do not commit this as true, this is used to update the level database
+public let ADMIN_MODE = false
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

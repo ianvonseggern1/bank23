@@ -191,7 +191,7 @@ final class EditGameViewController: UIViewController {
 
     do {
       try LevelController.saveLocally(level: _gameModel)
-      try LevelController.writeLevelToDatabase(level: _gameModel)
+      try LevelController.recordUserCreatedLevelOnServer(level: _gameModel)
       
       if let username = UserController.getUsername() {
         _gameModel._creatorName = username

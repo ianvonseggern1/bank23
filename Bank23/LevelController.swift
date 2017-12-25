@@ -13,6 +13,7 @@ import AWSCore
 
 enum LevelNetworkerError: Error {
   case invalidBoardOrInitialPieces
+  case adminPermissionsRequired
 }
 
 // Amazon Dynamo DB doesn't allow empty strings in as values (which is super silly)
@@ -79,8 +80,8 @@ public final class LevelController
     userDefaults.set(levelsString, forKey: LEVELS_CREATED_USER_DEFAULTS_KEY)
     userDefaults.synchronize()
   }
-  
-  static func writeLevelToDatabase(level: GameModel) throws {
+
+  static func recordUserCreatedLevelOnServer(level: GameModel) throws {
     if !verifyBoardIsValid(level._board) || !verifyInitialPieceListIsValid(level._pieces) {
       throw LevelNetworkerError.invalidBoardOrInitialPieces
     }
@@ -101,7 +102,39 @@ public final class LevelController
     
     objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
       if let error = error {
-        print("Amazon DynamoDB Error - saving level: \(error)")
+        print("ERROR recording created level - Amazon DynamoDB: \(error)")
+        return
+      }
+      print("Level creation recorded.")
+    })
+  }
+  
+  static func writeLocalLevelToMainGameDatabase(level: GameModel) throws {
+    if !verifyBoardIsValid(level._board) || !verifyInitialPieceListIsValid(level._pieces) {
+      throw LevelNetworkerError.invalidBoardOrInitialPieces
+    }
+    
+    if !ADMIN_MODE {
+      throw LevelNetworkerError.adminPermissionsRequired
+    }
+    
+    let objectMapper = AWSDynamoDBObjectMapper.default()
+    
+    let itemToCreate = Boards()
+    itemToCreate?._boardId = String(level.hash())
+    itemToCreate?._boardName = level._levelName
+    itemToCreate?._board = level._board.toString()
+    
+    let pieceListString = level.collapsedPieceListToString()
+    itemToCreate?._pieces = pieceListString == "" ? EMPTY_STRING : pieceListString
+    
+    itemToCreate?._creatorId = UserController.getUserId()
+    itemToCreate?._creatorName = UserController.getUsername()
+    itemToCreate?._creationTime = NSDate().timeIntervalSince1970 as NSNumber
+    
+    objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
+      if let error = error {
+        print("ERROR saving level - Amazon DynamoDB: \(error)")
         return
       }
       print("Level saved.")

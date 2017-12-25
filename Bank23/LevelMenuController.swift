@@ -82,6 +82,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _levelActionSheet.addAction(UIAlertAction(title: "Open in Editor",
                                               style: .default,
                                               handler: { (action) in self.openSelectedLevelInEditor()}))
+    
+    if (ADMIN_MODE) {
+      _levelActionSheet.addAction(UIAlertAction(title: "Save to Database",
+                                                style: .default,
+                                                handler: { (action) in
+                                                  self.saveLocalLevelToDatabase()}))
+    }
+    
     _deleteAction = UIAlertAction(title: "Delete",
                                   style: .destructive,
                                   handler: { (action) in self.removeSelectedLevel() })
@@ -144,6 +152,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     let model = _gameModels[_longPressSelectedRow!]
     _editGameViewController.setModel(model: model)
     self.navigationController?.pushViewController(_editGameViewController, animated: true)
+  }
+  
+  func saveLocalLevelToDatabase() {
+    let model = _gameModels[_longPressSelectedRow!]
+    do {
+      try LevelController.writeLocalLevelToMainGameDatabase(level: model)
+    } catch {
+    }
   }
   
   public func sortGames() {
