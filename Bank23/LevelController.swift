@@ -132,6 +132,8 @@ public final class LevelController
     itemToCreate?._creatorName = UserController.getUsername()
     itemToCreate?._creationTime = NSDate().timeIntervalSince1970 as NSNumber
     
+    itemToCreate?._isActive = true
+    
     objectMapper.save(itemToCreate!, completionHandler: {(error: Error?) -> Void in
       if let error = error {
         print("ERROR saving level - Amazon DynamoDB: \(error)")
