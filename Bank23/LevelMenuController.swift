@@ -116,7 +116,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
 
   public func fetchLevels() {
     // Built In Levels
-    _gameModels.append(contentsOf: BuiltInLevels.get())
+    //_gameModels.append(contentsOf: BuiltInLevels.get())
     // User Created Levels
     _gameModels.append(contentsOf: LevelController.getLocalLevels())
     // Levels from Server
