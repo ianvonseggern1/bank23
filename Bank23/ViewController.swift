@@ -299,7 +299,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     // If they just won inform the level controller
     if _gameModel.isWon() && _view._victoryView.isHidden {
       _timer.pause()
-      _levelMenuController.userBeatLevel() // TODO pass time elapsed to userBeatLevel
+      _levelMenuController.userBeatLevel(elapsedTime: _timer.time())
       showVictoryView()
     }
     

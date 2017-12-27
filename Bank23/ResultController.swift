@@ -18,15 +18,18 @@ private let LEVELS_BEAT_USER_DEFAULTS_KEY = "Bank23LevelsBeat"
 // restarts a level both locally and to the database
 public final class ResultController
 {
-  var levelsBeat: [String]
+  var levelsBeat = [String: Int]()
   
   public init() {
     let levelsBeatString = UserDefaults.standard.object(forKey: LEVELS_BEAT_USER_DEFAULTS_KEY) as? String
 
     if levelsBeatString == nil {
-      levelsBeat = []
+      levelsBeat = [:]
     } else {
-      levelsBeat = levelsBeatString!.components(separatedBy: LEVELS_BEAT_STRING_SEPERATOR)
+      let levelsBeatKeys = levelsBeatString!.components(separatedBy: LEVELS_BEAT_STRING_SEPERATOR)
+      for levelKey in levelsBeatKeys {
+        levelsBeat[levelKey] = Int(INT_MAX) // TODO
+      }
     }
   }
   
@@ -61,21 +64,22 @@ public final class ResultController
     })
   }
 
-  func userBeatlevel(level: GameModel) {
+  func userBeatlevel(level: GameModel, elapsedTime: Int) {
     let levelHash = String(level.hash())
-    if levelsBeat.contains(levelHash) {
+    if levelsBeat[levelHash] != nil && levelsBeat[levelHash]! < elapsedTime {
       return
     }
     
-    levelsBeat.append(levelHash)
+    levelsBeat[levelHash] = elapsedTime
     
+    // TODO
     let userDefaults = UserDefaults.standard
-    userDefaults.set(levelsBeat.joined(separator: LEVELS_BEAT_STRING_SEPERATOR),
+    userDefaults.set(levelsBeat.keys.joined(separator: LEVELS_BEAT_STRING_SEPERATOR),
                      forKey: LEVELS_BEAT_USER_DEFAULTS_KEY)
     userDefaults.synchronize()
   }
 
   func levelBeaten(_ model: GameModel) -> Bool {
-    return Set(levelsBeat).contains(String(model.hash()))
+    return Set(levelsBeat.keys).contains(String(model.hash()))
   }
 }

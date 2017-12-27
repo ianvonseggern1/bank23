@@ -207,8 +207,8 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  public func userBeatLevel() {
-    _resultController.userBeatlevel(level: currentLevel())
+  public func userBeatLevel(elapsedTime: Int) {
+    _resultController.userBeatlevel(level: currentLevel(), elapsedTime: elapsedTime)
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
