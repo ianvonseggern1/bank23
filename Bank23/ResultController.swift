@@ -35,7 +35,8 @@ public final class ResultController
                                     victory: Bool,
                                     enoughPiecesLeft: Bool,
                                     moves: [Direction],
-                                    initialShuffledPieces: [Piece]) {
+                                    initialShuffledPieces: [Piece],
+                                    elapsedTime: Int) { // TODO write elapsed time to db
     let resultToAdd = ResultsTable()
     resultToAdd?._boardHash = String(level.hash())
     resultToAdd?._boardName = level._levelName

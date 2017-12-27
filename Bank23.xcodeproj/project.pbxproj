@@ -26,6 +26,7 @@
 		669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */; };
 		669C5ACA1FECAAFE00B04BA1 /* BuiltInLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */; };
 		669C5ACC1FECB44700B04BA1 /* LevelMenuLevelRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ACB1FECB44700B04BA1 /* LevelMenuLevelRowView.swift */; };
+		669C5ACE1FF2DD0F00B04BA1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ACD1FF2DD0F00B04BA1 /* Timer.swift */; };
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
 		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
 		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
@@ -102,6 +103,7 @@
 		669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "cha-ching.wav"; sourceTree = "<group>"; };
 		669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInLevels.swift; sourceTree = "<group>"; };
 		669C5ACB1FECB44700B04BA1 /* LevelMenuLevelRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenuLevelRowView.swift; sourceTree = "<group>"; };
+		669C5ACD1FF2DD0F00B04BA1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		66B5F0071E82DBE000F96770 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
 		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				667895791FE0976F00A7D840 /* Bank23.entitlements */,
 				B64CB4F81E04A34C005A7781 /* AppDelegate.swift */,
 				B64CB4FA1E04A34C005A7781 /* ViewController.swift */,
+				669C5ACD1FF2DD0F00B04BA1 /* Timer.swift */,
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
 				669C5ACB1FECB44700B04BA1 /* LevelMenuLevelRowView.swift */,
 				669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */,
@@ -475,6 +478,7 @@
 				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,
+				669C5ACE1FF2DD0F00B04BA1 /* Timer.swift in Sources */,
 				6691894E1E9748240099A497 /* ResultsTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

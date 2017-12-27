@@ -16,6 +16,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   let _levelMenuController = LevelMenuController()
   let _noiseEffectsController = NoiseEffectsController()
 
+  var _timer = Timer()
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
   var _moves = [Direction]()
@@ -53,16 +54,32 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     let menuIcon = UIButton()
     menuIcon.setImage(UIImage(named: "menu-icon25.png"), for: UIControlState.normal)
     menuIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 22)
-    menuIcon.addTarget(self, action: #selector(didTapMenu), for: UIControlEvents.touchUpInside)
-    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon), animated: false)
+    menuIcon.addTarget(self,
+                       action: #selector(didTapMenu),
+                       for: UIControlEvents.touchUpInside)
+    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: menuIcon),
+                                         animated: false)
     
     let refreshIcon = UIButton()
     refreshIcon.setImage(UIImage(named: "refresh.png"), for: UIControlState.normal)
     refreshIcon.bounds = CGRect(x: 10, y: 0, width: 25, height: 25)
-    refreshIcon.addTarget(self, action: #selector(didTapRefresh), for: UIControlEvents.touchUpInside)
-
-    self.navigationItem.setRightBarButton(UIBarButtonItem(customView: refreshIcon), animated: false)
+    refreshIcon.addTarget(self,
+                          action: #selector(didTapRefresh),
+                          for: UIControlEvents.touchUpInside)
+    self.navigationItem.setRightBarButton(UIBarButtonItem(customView: refreshIcon),
+                                          animated: false)
   }
+
+// TODO pause timer when view isn't on screen
+//  override func viewDidAppear(_ animated: Bool) {
+//    if _timer.time() > 0 {
+//      _timer.start()
+//    }
+//  }
+//
+//  override func viewDidDisappear(_ animated: Bool) {
+//    _timer.pause()
+//  }
   
   @objc func didTapNextLevel() {
     _levelMenuController.goToNextLevel()
@@ -88,8 +105,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     let alert = UIAlertController(title: nil,
                                   message: message,
                                   preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-    alert.addAction(UIAlertAction(title: "Reset", style: UIAlertActionStyle.destructive, handler: { (_ : UIAlertAction) -> Void in
+    alert.addAction(UIAlertAction(title: "Cancel",
+                                  style: UIAlertActionStyle.cancel,
+                                  handler: nil))
+    alert.addAction(UIAlertAction(title: "Reset",
+                                  style: UIAlertActionStyle.destructive,
+                                  handler: { (_ : UIAlertAction) -> Void in
       self.reset()
     }))
     self.present(alert, animated: true, completion: nil)
@@ -102,7 +123,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                              victory: _gameModel.isWon(),
                                              enoughPiecesLeft: _gameModel.isLost(),
                                              moves: _moves,
-                                             initialShuffledPieces: _initialShuffledPieces)
+                                             initialShuffledPieces: _initialShuffledPieces,
+                                             elapsedTime: _timer.time())
     }
     
     self.setupBoard()
@@ -175,10 +197,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
 
   func swipePieceOn(from:Direction) {
+    if _moves.count == 0 {
+      _timer.start()
+    }
+    
     _moves.append(from)
-    
     let modelBeforeMove = _gameModel.copy()
-    
     let piece: Piece = (_gameModel._pieces.last == nil) ? Piece.empty : _gameModel._pieces.last!
 
     // Eh shitty, but it works for now. Basic premise is to animate the rest of the distance the pieces on the board
@@ -274,10 +298,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     
     // If they just won inform the level controller
     if _gameModel.isWon() && _view._victoryView.isHidden {
-      _levelMenuController.userBeatLevel()
-    }
-
-    if _gameModel.isWon() {
+      _timer.pause()
+      _levelMenuController.userBeatLevel() // TODO pass time elapsed to userBeatLevel
       showVictoryView()
     }
     
@@ -289,6 +311,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func showVictoryView() {
+    _view._victoryView.setTimeTime(time: _timer.time())
     _view._victoryView._nextLevelLabel.isHidden = _levelMenuController.currentLevelIsLast()
     _view._victoryView.isHidden = false
   }
@@ -297,6 +320,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _uniquePlayId = UUID.init().uuidString
     _moves = [Direction]()
     _gameModel = _levelMenuController.currentLevel()
+    _timer = Timer()
     // The pieces are popped off the back as the user plays so we reverse this list
     // which is used for the database
     _initialShuffledPieces = _gameModel._pieces.reversed()
