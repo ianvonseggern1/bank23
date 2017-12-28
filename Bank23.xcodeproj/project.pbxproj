@@ -10,12 +10,12 @@
 		1ED40AD41E81A18500E62E1B /* LevelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelController.swift */; };
 		6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */; };
 		6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6611C9241EAFA04200A2E7C5 /* checkmark.png */; };
+		66622DCF1FF584AF0011465F /* ResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DCE1FF584AF0011465F /* ResultsTable.swift */; };
 		669189331E957ACB0099A497 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189321E957ACB0099A497 /* refresh.png */; };
 		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
 		669189391E95DD150099A497 /* Sandcastle 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189381E95DD150099A497 /* Sandcastle 02.png */; };
 		669189461E96EFA70099A497 /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669189451E96EFA70099A497 /* ResultController.swift */; };
-		6691894E1E9748240099A497 /* ResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691894D1E9748240099A497 /* ResultsTable.swift */; };
 		669189501E9816810099A497 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691894F1E9816810099A497 /* UserController.swift */; };
 		669189541E9853440099A497 /* sandcastle 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189531E9853440099A497 /* sandcastle 03.png */; };
 		669189581E9855480099A497 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189571E9855480099A497 /* cross.png */; };
@@ -86,13 +86,13 @@
 		363CF6CA2565A25D716503AE /* Pods_Bank23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bank23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryView.swift; sourceTree = "<group>"; };
 		6611C9241EAFA04200A2E7C5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
+		66622DCE1FF584AF0011465F /* ResultsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (12)/AmazonAws/Models/NoSQL/ResultsTable.swift"; sourceTree = "<group>"; };
 		667895791FE0976F00A7D840 /* Bank23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bank23.entitlements; sourceTree = "<group>"; };
 		669189321E957ACB0099A497 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
 		669189361E959AB50099A497 /* Mountains 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mountains 01.png"; sourceTree = "<group>"; };
 		669189381E95DD150099A497 /* Sandcastle 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 02.png"; sourceTree = "<group>"; };
 		669189451E96EFA70099A497 /* ResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
-		6691894D1E9748240099A497 /* ResultsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTable.swift; sourceTree = "<group>"; };
 		6691894F1E9816810099A497 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		669189531E9853440099A497 /* sandcastle 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sandcastle 03.png"; sourceTree = "<group>"; };
 		669189571E9855480099A497 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
@@ -240,6 +240,7 @@
 				669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */,
 				1ED40AD31E81A18500E62E1B /* LevelController.swift */,
 				669189451E96EFA70099A497 /* ResultController.swift */,
+				66622DCE1FF584AF0011465F /* ResultsTable.swift */,
 				B674462C1E145133001A3529 /* EditGameViewController.swift */,
 				B64CB50A1E04A634005A7781 /* Piece.swift */,
 				669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */,
@@ -248,7 +249,6 @@
 				669C5ABB1FE42D9700B04BA1 /* Boards.swift */,
 				6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */,
 				B685361D1E1C982700A401B6 /* RemainingPiecesView.swift */,
-				6691894D1E9748240099A497 /* ResultsTable.swift */,
 				B62426711E5124B200CEEF08 /* NextPieceView.swift */,
 				B674462A1E135E1D001A3529 /* EditGameView.swift */,
 				B67446281E135762001A3529 /* BoardView.swift */,
@@ -455,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66622DCF1FF584AF0011465F /* ResultsTable.swift in Sources */,
 				669C5ABC1FE42D9700B04BA1 /* Boards.swift in Sources */,
 				669C5AC01FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift in Sources */,
 				669189501E9816810099A497 /* UserController.swift in Sources */,
@@ -479,7 +480,6 @@
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,
 				669C5ACE1FF2DD0F00B04BA1 /* Timer.swift in Sources */,
-				6691894E1E9748240099A497 /* ResultsTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

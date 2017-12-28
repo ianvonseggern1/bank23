@@ -52,7 +52,7 @@ public final class ResultController
                                     enoughPiecesLeft: Bool,
                                     moves: [Direction],
                                     initialShuffledPieces: [Piece],
-                                    elapsedTime: Int) { // TODO write elapsed time to db
+                                    elapsedTime: Int) {
     let resultToAdd = ResultsTable()
     resultToAdd?._boardHash = String(level.hash())
     resultToAdd?._boardName = level._levelName
@@ -61,11 +61,15 @@ public final class ResultController
     resultToAdd?._notEnoughPieces = enoughPiecesLeft as NSNumber
     resultToAdd?._moveCount = moves.count as NSNumber
     resultToAdd?._moves = moves.map({ Direction.toString($0) })
-    resultToAdd?._shuffledPieces = initialShuffledPieces.map({ $0.shortName() })
-    
+    if initialShuffledPieces.count > 0 {
+      resultToAdd?._shuffledPieces = initialShuffledPieces.map({ $0.shortName() })
+    }
     resultToAdd?._timeStamp = NSDate().timeIntervalSince1970 as NSNumber
     resultToAdd?._userUUID = UserController.getUserId()
-    resultToAdd?._username = UserController.getUsername()
+    if let username = UserController.getUsername() {
+      resultToAdd?._username = username
+    }
+    resultToAdd?._elapsedTime = elapsedTime as NSNumber
     
     let objectMapper = AWSDynamoDBObjectMapper.default()
     objectMapper.save(resultToAdd!, completionHandler: {(error: Error?) -> Void in
