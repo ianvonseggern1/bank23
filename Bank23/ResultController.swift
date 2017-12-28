@@ -11,7 +11,10 @@ import AWSMobileHubHelper
 import AWSDynamoDB
 import AWSCore
 
+// Seperates entries in the string
 private let LEVELS_BEAT_STRING_SEPERATOR = "-"
+// Seperates key (board hash) from value (completion time in seconds)
+private let LEVELS_BEAT_TIME_SEPERATOR: Character = ":"
 private let LEVELS_BEAT_USER_DEFAULTS_KEY = "Bank23LevelsBeat"
 
 // This class is responsible for recording the results when a user beats or
@@ -26,9 +29,19 @@ public final class ResultController
     if levelsBeatString == nil {
       levelsBeat = [:]
     } else {
-      let levelsBeatKeys = levelsBeatString!.components(separatedBy: LEVELS_BEAT_STRING_SEPERATOR)
-      for levelKey in levelsBeatKeys {
-        levelsBeat[levelKey] = Int(INT_MAX) // TODO
+      let stringArray = levelsBeatString!.components(separatedBy: LEVELS_BEAT_STRING_SEPERATOR)
+      for levelString in stringArray {
+        let indexOfSeperator = levelString.index(of: LEVELS_BEAT_TIME_SEPERATOR)
+        if indexOfSeperator == nil {
+          // This level was beaten before we traked time. We really don't need to keep this
+          // case as it only affects me.
+          levelsBeat[levelString] = Int(INT_MAX)
+        } else {
+          let key = String(levelString[..<indexOfSeperator!])
+          let indexOfTime = levelString.index(indexOfSeperator!, offsetBy: 1)
+          let time = Int(levelString[indexOfTime...])
+          levelsBeat[key] = time
+        }
       }
     }
   }
@@ -66,20 +79,30 @@ public final class ResultController
 
   func userBeatlevel(level: GameModel, elapsedTime: Int) {
     let levelHash = String(level.hash())
+    // If this isn't the fastest time we don't need to update anything
     if levelsBeat[levelHash] != nil && levelsBeat[levelHash]! < elapsedTime {
       return
     }
     
+    // Update the dictionary
     levelsBeat[levelHash] = elapsedTime
     
-    // TODO
+    // Update the user defaults, first construct a new set of strings for all beaten
+    // levels
+    var levelsBeatStrings = [String]()
+    for levelKey in levelsBeat.keys {
+      let levelTime = levelsBeat[levelKey]!
+      levelsBeatStrings.append(
+        levelKey + String(LEVELS_BEAT_TIME_SEPERATOR) + String(describing: levelTime)
+      )
+    }
     let userDefaults = UserDefaults.standard
-    userDefaults.set(levelsBeat.keys.joined(separator: LEVELS_BEAT_STRING_SEPERATOR),
+    userDefaults.set(levelsBeatStrings.joined(separator: LEVELS_BEAT_STRING_SEPERATOR),
                      forKey: LEVELS_BEAT_USER_DEFAULTS_KEY)
     userDefaults.synchronize()
   }
 
-  func levelBeaten(_ model: GameModel) -> Bool {
-    return Set(levelsBeat.keys).contains(String(model.hash()))
+  func levelBestTime(_ model: GameModel) -> Int? {
+    return levelsBeat[String(model.hash())]
   }
 }

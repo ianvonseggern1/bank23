@@ -272,7 +272,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     } else if indexPath.section == 1 {
       let model = _gameModels[indexPath.row]
       let levelRowCell = LevelMenuLevelRowView(gameModel: model,
-                                               levelBeaten: _resultController.levelBeaten(model))
+                                               levelBeatenTime: _resultController.levelBestTime(model))
       levelRowCell.frame = CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: LEVEL_ROW_VIEW_HEIGHT)
       tableViewCell.addSubview(levelRowCell)
 

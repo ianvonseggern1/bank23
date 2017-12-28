@@ -13,10 +13,11 @@ import UIKit
 class LevelMenuLevelRowView: UIView {
   let _levelName = UILabel()
   let _creatorName = UILabel()
-  let _checkmark = UIImageView() // Shown if they have beaten the level before
+  var _bestTime: UILabel?
+  var _checkmark: UIImageView? // Shown if they have beaten the level before
   let _boardView = BoardView(frame: CGRect.zero)
   
-  init(gameModel: GameModel, levelBeaten: Bool) {
+  init(gameModel: GameModel, levelBeatenTime: Int?) {
     super.init(frame: CGRect.zero)
     
     _levelName.text = gameModel._levelName
@@ -39,13 +40,20 @@ class LevelMenuLevelRowView: UIView {
       self.addSubview(_creatorName)
     }
     
-    if levelBeaten {
-      _checkmark.image = UIImage(named: "checkmark.png")!
-      _checkmark.frame = CGRect(x: 10,
-                                y: 90 - 20,
-                                width: 20,
-                                height: 20)
-      self.addSubview(_checkmark)
+    if levelBeatenTime != nil {
+      _checkmark = UIImageView()
+      _checkmark!.image = UIImage(named: "checkmark.png")!
+      self.addSubview(_checkmark!)
+      
+      // For levels beaten before we stored the time we set time to INT_MAX
+      // Skip showing the time in that case
+      if levelBeatenTime != Int(INT_MAX) {
+        _bestTime = UILabel()
+        _bestTime!.text = secondsToTimeString(time: levelBeatenTime!)
+        _bestTime!.font = UIFont.systemFont(ofSize: 12.0)
+        _bestTime!.sizeToFit()
+        self.addSubview(_bestTime!)
+      }
     }
     
     _boardView.showCountLabels = false
@@ -72,5 +80,15 @@ class LevelMenuLevelRowView: UIView {
                                y: 10,
                                width: 90,
                                height: 90)
+    
+    _checkmark?.frame = CGRect(x: 10,
+                               y: 90 - 20,
+                               width: 20,
+                               height: 20)
+    
+    _bestTime?.frame = CGRect(x: _checkmark!.frame.maxX + 5,
+                              y: 90 - _bestTime!.frame.height,
+                              width: _bestTime!.frame.width,
+                              height: _bestTime!.frame.height)
   }
 }

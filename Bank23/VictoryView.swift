@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+// Converts seconds to [hh:][m]m:ss
+func secondsToTimeString(time: Int) -> String {
+  var remainingTime = time
+  let seconds = remainingTime % 60
+  remainingTime = Int(remainingTime / 60)
+  let minutes = remainingTime % 60
+  let hours = Int(remainingTime / 60)
+  let secondsString = (seconds < 10) ? "0" + String(seconds) : String(seconds)
+  return ((hours == 0) ? "" : String(hours) + ":") +
+    String(minutes) + ":" + secondsString
+}
+
 class VictoryView: UIView {
   let _victoryLabel = UILabel()
   let _timeLabel = UILabel()
@@ -69,16 +81,7 @@ class VictoryView: UIView {
   }
   
   func setTimeTime(time: Int) {
-    var remainingTime = time
-    let seconds = remainingTime % 60
-    remainingTime = Int(remainingTime / 60)
-    let minutes = remainingTime % 60
-    let hours = Int(remainingTime / 60)
-    let secondsString = (seconds < 10) ? "0" + String(seconds) : String(seconds)
-    let timeString = ((hours == 0) ? "" : String(hours) + ":") +
-      String(minutes) + ":" + secondsString
-    
-    _timeLabel.text = timeString
+    _timeLabel.text = secondsToTimeString(time: time)
     self.setNeedsLayout()
     self.layoutSubviews()
   }

@@ -31,6 +31,6 @@ public final class Timer {
   }
   
   private func timeSinceSplit() -> Int {
-    return splitStart != nil ? Int(-1 * splitStart!.timeIntervalSinceNow) : 0
+    return splitStart != nil ? Int(ceil(-1 * splitStart!.timeIntervalSinceNow)) : 0
   }
 }
