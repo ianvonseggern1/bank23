@@ -25,13 +25,21 @@ final class UserController: LoginButtonDelegate {
   }
   
   static func setUsername(_ username: String) {
-    let userDefaults = UserDefaults.standard
-    userDefaults.set(username, forKey: "Bank23Username")
-    userDefaults.synchronize()
+    UserDefaults.standard.set(username, forKey: "Bank23Username")
+    UserDefaults.standard.synchronize()
   }
   
   static func getUsername() -> String? {
     return UserDefaults.standard.object(forKey: "Bank23Username") as? String
+  }
+  
+  static func setCurrentLevel(level: GameModel) {
+    UserDefaults.standard.set(String(level.hash()), forKey: "Bank23CurrentLevel")
+    UserDefaults.standard.synchronize()
+  }
+  
+  static func getCurrentLevelHash() -> String? {
+    return UserDefaults.standard.object(forKey: "Bank23CurrentLevel") as? String
   }
   
   // LoginButtonDelegate

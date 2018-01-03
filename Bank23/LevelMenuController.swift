@@ -173,10 +173,26 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   public func addAllAndReloadCurrentGame(levels: [GameModel]) {
     _gameModels.append(contentsOf: levels)
     sortGames()
+    
+    if let currentLevel = UserController.getCurrentLevelHash() {
+      if let currentRow = findRowForLevelHash(levelHash: currentLevel) {
+        _currentRow = currentRow
+      }
+    }
+    
     DispatchQueue.main.async {
       self._tableView.reloadData()
       self.delegate?.reset()
     }
+  }
+  
+  public func findRowForLevelHash(levelHash: String) -> Int? {
+    for (index, game) in _gameModels.enumerated() {
+      if String(game.hash()) == levelHash {
+        return index
+      }
+    }
+    return nil
   }
   
   @objc func didTapXOut() {
@@ -201,10 +217,17 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   public func goToNextLevel() {
     if (_currentRow < _gameModels.count) {
-      _currentRow += 1
+      setCurrentRow(row: _currentRow + 1)
     } else {
       NSLog("Can't go to next level, this is the last one")
     }
+  }
+  
+  // Stores this to user defaults in addition to setting it
+  func setCurrentRow(row: Int) {
+    let newLevel = _gameModels[row]
+    UserController.setCurrentLevel(level: newLevel)
+    _currentRow = row
   }
   
   public func userBeatLevel(elapsedTime: Int) {
@@ -344,7 +367,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
     
     if indexPath.section == 1 {
-      _currentRow = indexPath.row
+      setCurrentRow(row: indexPath.row)
       delegate?.reset()
       self.dismiss(animated: true, completion: nil)
     
