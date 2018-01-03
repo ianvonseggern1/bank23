@@ -11,6 +11,8 @@
 		6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */; };
 		6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6611C9241EAFA04200A2E7C5 /* checkmark.png */; };
 		66622DCF1FF584AF0011465F /* ResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DCE1FF584AF0011465F /* ResultsTable.swift */; };
+		66622DD11FFD50120011465F /* BestTimeNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD01FFD50120011465F /* BestTimeNetworker.swift */; };
+		66622DD31FFD504E0011465F /* BestTimesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD21FFD504D0011465F /* BestTimesTable.swift */; };
 		669189331E957ACB0099A497 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189321E957ACB0099A497 /* refresh.png */; };
 		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
@@ -87,6 +89,8 @@
 		6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryView.swift; sourceTree = "<group>"; };
 		6611C9241EAFA04200A2E7C5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		66622DCE1FF584AF0011465F /* ResultsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (12)/AmazonAws/Models/NoSQL/ResultsTable.swift"; sourceTree = "<group>"; };
+		66622DD01FFD50120011465F /* BestTimeNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTimeNetworker.swift; sourceTree = "<group>"; };
+		66622DD21FFD504D0011465F /* BestTimesTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestTimesTable.swift; sourceTree = "<group>"; };
 		667895791FE0976F00A7D840 /* Bank23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bank23.entitlements; sourceTree = "<group>"; };
 		669189321E957ACB0099A497 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
@@ -239,7 +243,9 @@
 				66B5F0071E82DBE000F96770 /* GameModel.swift */,
 				669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */,
 				1ED40AD31E81A18500E62E1B /* LevelController.swift */,
+				66622DD21FFD504D0011465F /* BestTimesTable.swift */,
 				669189451E96EFA70099A497 /* ResultController.swift */,
+				66622DD01FFD50120011465F /* BestTimeNetworker.swift */,
 				66622DCE1FF584AF0011465F /* ResultsTable.swift */,
 				B674462C1E145133001A3529 /* EditGameViewController.swift */,
 				B64CB50A1E04A634005A7781 /* Piece.swift */,
@@ -470,6 +476,7 @@
 				B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */,
 				66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */,
 				B67446291E135762001A3529 /* BoardView.swift in Sources */,
+				66622DD31FFD504E0011465F /* BestTimesTable.swift in Sources */,
 				669C5ACC1FECB44700B04BA1 /* LevelMenuLevelRowView.swift in Sources */,
 				B64CB50B1E04A634005A7781 /* Piece.swift in Sources */,
 				B674462B1E135E1D001A3529 /* EditGameView.swift in Sources */,
@@ -477,6 +484,7 @@
 				B61C69461E74B44F00E68150 /* AWSMobileClient.swift in Sources */,
 				1ED40AD41E81A18500E62E1B /* LevelController.swift in Sources */,
 				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
+				66622DD11FFD50120011465F /* BestTimeNetworker.swift in Sources */,
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,
 				669C5ACE1FF2DD0F00B04BA1 /* Timer.swift in Sources */,
