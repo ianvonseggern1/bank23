@@ -18,7 +18,7 @@ enum LevelNetworkerError: Error {
 
 // Amazon Dynamo DB doesn't allow empty strings in as values (which is super silly)
 // so we swap with EMPTY_STRING
-private let EMPTY_STRING = "empty"
+public let EMPTY_STRING = "empty"
 
 private let LEVELS_CREATED_STRING_SEPERATOR = "-"
 private let LEVELS_CREATED_USER_DEFAULTS_KEY = "Bank23LevelsCreated"

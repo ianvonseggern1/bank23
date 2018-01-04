@@ -15,6 +15,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   
   let _levelMenuController = LevelMenuController()
   let _noiseEffectsController = NoiseEffectsController()
+  let _bestTimeNetworker = BestTimeNetworker()
 
   var _timer = Timer()
   var _currentSwipeDirection: Direction?
@@ -117,6 +118,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
+    if (_gameModel.isWon()) {
+      // TODO show UI alert on network error and offer retry
+      let _ = _bestTimeNetworker.userCompletedLevelWithTime(level: _gameModel,
+                                                            time: _timer.time())
+    }
+
     if (_moves.count > 0) {
       ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
                                              uniquePlayId: _uniquePlayId!,

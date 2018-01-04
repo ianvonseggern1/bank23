@@ -22,16 +22,66 @@ public final class BestTimeNetworker {
   var bestTimes = [String: BestTime]() // Map boardID to BestTime
   
   // Returns true if the database has been successfully updated, false otherwise
-  func userCompletedLevelWithTime(level: GameModel, time: Int) -> Bool {
+  func userCompletedLevelWithTime(level: GameModel, time: Int) {
     let boardID = String(level.hash())
     
     // If its not the best time ever we don't need to do anything
     if bestTimes[boardID] != nil && bestTimes[boardID]!.time <= time {
-      return true
+      return
     }
     
-    // TODO update DB conditionally
-    return true
+    var newItemAttributes = [String: AWSDynamoDBAttributeValue]()
+    
+    let boardIDValue = AWSDynamoDBAttributeValue.init()!
+    boardIDValue.s = boardID
+    newItemAttributes["boardID"] = boardIDValue
+    
+    let timeStampValue = AWSDynamoDBAttributeValue.init()!
+    timeStampValue.n = String(describing: NSDate().timeIntervalSince1970 as NSNumber)
+    newItemAttributes["timeStamp"] = timeStampValue
+    
+    let timeValue = AWSDynamoDBAttributeValue.init()!
+    timeValue.n = String(time)
+    newItemAttributes["time"] = timeValue
+    
+    if let username = UserController.getUsername() {
+      let usernameValue = AWSDynamoDBAttributeValue.init()!
+      usernameValue.s = username
+      newItemAttributes["username"] = usernameValue
+    }
+    
+    let userUUIDValue = AWSDynamoDBAttributeValue.init()!
+    userUUIDValue.s = UserController.getUserId()
+    newItemAttributes["userUUID"] = userUUIDValue
+    
+//    "_boardID" : "boardID",
+//    "_timeStamp" : "timeStamp",
+//    "_facebookID" : "facebookID",
+//    "_playID" : "playID",
+//    "_time" : "time",
+//    "_userUUID" : "userUUID",
+//    "_username" : "username",
+    
+    
+    let newItem = AWSDynamoDBPutItemInput.init()!
+    
+    
+    newItem.tableName = BestTimesTable.dynamoDBTableName()
+    newItem.item = newItemAttributes
+    
+    // The following makes sure the DB is only updated if this is still the smallest time
+    newItem.conditionExpression = "#t > :newTime"
+    newItem.expressionAttributeNames = ["#t": "time"] // time is a reserved word in AWS <_<
+    newItem.expressionAttributeValues = [":newTime": timeValue]
+    
+    AWSDynamoDB.default().putItem(newItem) { (response, error) in
+      if error != nil {
+        print("Error saving best time for \(level._levelName) - \(error!)")
+        // TODO offer retry UI
+      } else {
+        
+      }
+    }
   }
 
   func getAllBestTimes() {
