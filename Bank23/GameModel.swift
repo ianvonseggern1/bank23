@@ -68,6 +68,7 @@ public final class GameModel {
     copy._creatorName = self._creatorName
     copy._explanationLabel = self._explanationLabel
     copy._sortKey = self._sortKey
+    copy._levelType = self._levelType
     
     return copy
   }

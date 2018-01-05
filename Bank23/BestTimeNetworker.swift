@@ -15,71 +15,66 @@ struct BestTime {
   var time = 0
   var username: String?
   var userID = ""
-  var facebookID: String?
 }
 
 public final class BestTimeNetworker {
   var bestTimes = [String: BestTime]() // Map boardID to BestTime
   
   // Returns true if the database has been successfully updated, false otherwise
-  func userCompletedLevelWithTime(level: GameModel, time: Int) {
+  func userCompletedLevelWithTime(level: GameModel, elapsedTime: Int, playID: String) {
     let boardID = String(level.hash())
     
     // If its not the best time ever we don't need to do anything
-    if bestTimes[boardID] != nil && bestTimes[boardID]!.time <= time {
+    // We also don't want to store this time if its a user created level
+    if (bestTimes[boardID] != nil && bestTimes[boardID]!.time <= elapsedTime) ||
+       level._levelType != LevelType.Server {
       return
     }
     
-    var newItemAttributes = [String: AWSDynamoDBAttributeValue]()
-    
     let boardIDValue = AWSDynamoDBAttributeValue.init()!
     boardIDValue.s = boardID
-    newItemAttributes["boardID"] = boardIDValue
     
     let timeStampValue = AWSDynamoDBAttributeValue.init()!
     timeStampValue.n = String(describing: NSDate().timeIntervalSince1970 as NSNumber)
-    newItemAttributes["timeStamp"] = timeStampValue
     
-    let timeValue = AWSDynamoDBAttributeValue.init()!
-    timeValue.n = String(time)
-    newItemAttributes["time"] = timeValue
-    
-    if let username = UserController.getUsername() {
-      let usernameValue = AWSDynamoDBAttributeValue.init()!
-      usernameValue.s = username
-      newItemAttributes["username"] = usernameValue
-    }
+    let bestTimeValue = AWSDynamoDBAttributeValue.init()!
+    bestTimeValue.n = String(elapsedTime)
+  
+    let usernameValue = AWSDynamoDBAttributeValue.init()!
+    usernameValue.s = UserController.getUsername() ?? "Unknown"
     
     let userUUIDValue = AWSDynamoDBAttributeValue.init()!
     userUUIDValue.s = UserController.getUserId()
-    newItemAttributes["userUUID"] = userUUIDValue
     
-//    "_boardID" : "boardID",
-//    "_timeStamp" : "timeStamp",
-//    "_facebookID" : "facebookID",
-//    "_playID" : "playID",
-//    "_time" : "time",
-//    "_userUUID" : "userUUID",
-//    "_username" : "username",
+    let playIDValue = AWSDynamoDBAttributeValue.init()!
+    playIDValue.s = playID
+
+    let newItem = AWSDynamoDBUpdateItemInput.init()!
     
+    var updateExpression = "SET userUUID = :useruuid, "
+    updateExpression += "bestTime = :bestTime, "
+    updateExpression += "bestTimeTimeStamp = :bestTimeTimeStamp, "
+    updateExpression += "username = :username, "
+    updateExpression += "playID = :playID"
     
-    let newItem = AWSDynamoDBPutItemInput.init()!
-    
-    
-    newItem.tableName = BestTimesTable.dynamoDBTableName()
-    newItem.item = newItemAttributes
+    newItem.updateExpression = updateExpression
+    newItem.expressionAttributeValues = [":bestTime": bestTimeValue,
+                                         ":useruuid": userUUIDValue,
+                                         ":bestTimeTimeStamp": timeStampValue,
+                                         ":username": usernameValue,
+                                         ":playID": playIDValue]
+    newItem.key = ["boardID": boardIDValue]
+    newItem.tableName = BestTimeTable.dynamoDBTableName()
     
     // The following makes sure the DB is only updated if this is still the smallest time
-    newItem.conditionExpression = "#t > :newTime"
-    newItem.expressionAttributeNames = ["#t": "time"] // time is a reserved word in AWS <_<
-    newItem.expressionAttributeValues = [":newTime": timeValue]
+    newItem.conditionExpression = "attribute_not_exists(bestTime) OR bestTime > :bestTime"
     
-    AWSDynamoDB.default().putItem(newItem) { (response, error) in
+    AWSDynamoDB.default().updateItem(newItem) { (response, error) in
       if error != nil {
         print("Error saving best time for \(level._levelName) - \(error!)")
-        // TODO offer retry UI
+        // TODO offer retry UI - note this case includes the case of the conditional check failing
       } else {
-        
+        // TODO update locally
       }
     }
   }
@@ -95,16 +90,15 @@ public final class BestTimeNetworker {
         print("Unable to fetch best times. Error: \(error)")
       } else if let paginatedOutput = task.result {
         for item in paginatedOutput.items {
-          let bestTimeTableInstance = item as! BestTimesTable
+          let bestTimeTableInstance = item as! BestTimeTable
 
           if (
-            bestTimeTableInstance._time != nil &&
+            bestTimeTableInstance._bestTime != nil &&
             bestTimeTableInstance._userUUID != nil &&
             bestTimeTableInstance._boardID != nil
           ) {
             var bestTime = BestTime()
-            bestTime.facebookID = bestTimeTableInstance._facebookID
-            bestTime.time = bestTimeTableInstance._time as! Int
+            bestTime.time = bestTimeTableInstance._bestTime as! Int
             bestTime.userID = bestTimeTableInstance._userUUID!
             bestTime.username = bestTimeTableInstance._username
             
