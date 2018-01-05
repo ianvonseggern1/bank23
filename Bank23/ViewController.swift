@@ -324,9 +324,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func showVictoryView() {
-    _view._victoryView.setTimeTime(time: _timer.time())
-    _view._victoryView._nextLevelLabel.isHidden = _levelMenuController.currentLevelIsLast()
-    _view._victoryView.isHidden = false
+    DispatchQueue.main.async {
+      self._view._victoryView.setTimeTime(time: self._timer.time())
+      self._view._victoryView._nextLevelLabel.isHidden = self._levelMenuController.currentLevelIsLast()
+      self._view._victoryView.sizeToFit()
+      self._view._victoryView.isHidden = false
+    }
   }
 
   func setupBoard() {

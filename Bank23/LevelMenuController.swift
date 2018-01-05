@@ -257,7 +257,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     return 0
   }
   
-  // TODO create seperate views for these
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let tableViewCell = UITableViewCell()
     tableViewCell.selectionStyle = UITableViewCellSelectionStyle.none

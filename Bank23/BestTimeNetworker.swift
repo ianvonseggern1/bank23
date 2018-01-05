@@ -76,10 +76,12 @@ public final class BestTimeNetworker {
     bestTimeValue.n = String(elapsedTime)
   
     let usernameValue = AWSDynamoDBAttributeValue.init()!
-    usernameValue.s = UserController.getUsername() ?? "Unknown"
+    let usernameString = UserController.getUsername() ?? "Unknown"
+    usernameValue.s = usernameString
     
     let userUUIDValue = AWSDynamoDBAttributeValue.init()!
-    userUUIDValue.s = UserController.getUserId()
+    let userIDString = UserController.getUserId()
+    userUUIDValue.s = userIDString
     
     let playIDValue = AWSDynamoDBAttributeValue.init()!
     playIDValue.s = playID
@@ -109,7 +111,12 @@ public final class BestTimeNetworker {
         print("Error saving best time for \(level._levelName) - \(error!)")
         // TODO offer retry UI - note this case includes the case of the conditional check failing
       } else {
-        // TODO update locally
+        let newBestTimes = BestTime(time: elapsedTime,
+                                    username: usernameString,
+                                    userID: userIDString)
+        self.bestTimes[boardID] = newBestTimes
+        
+        // TODO update the victory UI to include the news of the new record
       }
     }
   }

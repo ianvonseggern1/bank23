@@ -42,6 +42,9 @@ class VictoryView: UIView {
     _nextLevelLabel.font = UIFont.systemFont(ofSize: 36, weight: UIFont.Weight(rawValue: 1.0))
     _nextLevelLabel.textColor = UIColor.darkGray
     self.addSubview(_nextLevelLabel)
+    
+    self.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
+    self.layer.cornerRadius = 5.0
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -52,9 +55,9 @@ class VictoryView: UIView {
     _victoryLabel.sizeToFit()
     _nextLevelLabel.sizeToFit()
     _timeLabel.sizeToFit()
-    return CGSize(width: max(_victoryLabel.frame.width,
-                             _nextLevelLabel.frame.width,
-                             _timeLabel.frame.width),
+    return CGSize(width: 8 + max(_victoryLabel.frame.width,
+                                 _nextLevelLabel.frame.width,
+                                 _timeLabel.frame.width),
                   height: (_victoryLabel.frame.height + 4 +
                            _nextLevelLabel.frame.height + 4 +
                            _timeLabel.frame.height))
