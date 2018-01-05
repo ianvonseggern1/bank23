@@ -34,6 +34,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _levelMenuController.delegate = self
     _levelMenuController.fetchLevels()
     _levelMenuController._noiseEffectsController = _noiseEffectsController
+    _levelMenuController._bestTimeNetworker = _bestTimeNetworker
     
     self.setupNavigationBarItems()
     let panGesture = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(gesture:)))

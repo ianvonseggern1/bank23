@@ -25,6 +25,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   
   // Created by ViewController
   var _noiseEffectsController: NoiseEffectsController?
+  var _bestTimeNetworker: BestTimeNetworker?
 
   let _editGameViewController = EditGameViewController()
   let _userController = UserController()
@@ -294,8 +295,10 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       tableViewCell.addSubview(_loginButton)
     } else if indexPath.section == 1 {
       let model = _gameModels[indexPath.row]
+      let bestTime = _bestTimeNetworker!.getBestTimeFor(level: model)
       let levelRowCell = LevelMenuLevelRowView(gameModel: model,
-                                               levelBeatenTime: _resultController.levelBestTime(model))
+                                               levelBeatenTime: _resultController.levelBestTime(model),
+                                               bestTimeInfo: bestTime)
       levelRowCell.frame = CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: LEVEL_ROW_VIEW_HEIGHT)
       tableViewCell.addSubview(levelRowCell)
 

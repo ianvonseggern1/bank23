@@ -20,6 +20,41 @@ struct BestTime {
 public final class BestTimeNetworker {
   var bestTimes = [String: BestTime]() // Map boardID to BestTime
   
+  init() {
+    let objectMapper = AWSDynamoDBObjectMapper.default()
+    let scanExpression = AWSDynamoDBScanExpression()
+    scanExpression.limit = 250
+    
+    objectMapper.scan(BestTimeTable.self, expression: scanExpression).continueWith {
+      (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> () in
+      if let error = task.error as NSError? {
+        print("Unable to fetch best times. Error: \(error)")
+      } else if let paginatedOutput = task.result {
+        for item in paginatedOutput.items {
+          let bestTimeTableInstance = item as! BestTimeTable
+          
+          if (
+            bestTimeTableInstance._bestTime != nil &&
+              bestTimeTableInstance._userUUID != nil &&
+              bestTimeTableInstance._boardID != nil
+            ) {
+            var bestTime = BestTime()
+            bestTime.time = bestTimeTableInstance._bestTime as! Int
+            bestTime.userID = bestTimeTableInstance._userUUID!
+            bestTime.username = bestTimeTableInstance._username
+            
+            self.bestTimes[bestTimeTableInstance._boardID!] = bestTime
+          }
+        }
+      }
+    }
+  }
+  
+  func getBestTimeFor(level: GameModel) -> BestTime? {
+    let boardID = String(level.hash())
+    return bestTimes[boardID]
+  }
+  
   // Returns true if the database has been successfully updated, false otherwise
   func userCompletedLevelWithTime(level: GameModel, elapsedTime: Int, playID: String) {
     let boardID = String(level.hash())
@@ -75,36 +110,6 @@ public final class BestTimeNetworker {
         // TODO offer retry UI - note this case includes the case of the conditional check failing
       } else {
         // TODO update locally
-      }
-    }
-  }
-
-  func getAllBestTimes() {
-    let objectMapper = AWSDynamoDBObjectMapper.default()
-    let scanExpression = AWSDynamoDBScanExpression()
-    scanExpression.limit = 250
-    
-    objectMapper.scan(Boards.self, expression: scanExpression).continueWith {
-      (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> () in
-      if let error = task.error as NSError? {
-        print("Unable to fetch best times. Error: \(error)")
-      } else if let paginatedOutput = task.result {
-        for item in paginatedOutput.items {
-          let bestTimeTableInstance = item as! BestTimeTable
-
-          if (
-            bestTimeTableInstance._bestTime != nil &&
-            bestTimeTableInstance._userUUID != nil &&
-            bestTimeTableInstance._boardID != nil
-          ) {
-            var bestTime = BestTime()
-            bestTime.time = bestTimeTableInstance._bestTime as! Int
-            bestTime.userID = bestTimeTableInstance._userUUID!
-            bestTime.username = bestTimeTableInstance._username
-            
-            self.bestTimes[bestTimeTableInstance._boardID!] = bestTime
-          }
-        }
       }
     }
   }
