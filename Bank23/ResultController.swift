@@ -49,7 +49,7 @@ public final class ResultController
   static func writeResultToDatabase(level: GameModel, // Initial model, before moves are made
                                     uniquePlayId: String,
                                     victory: Bool,
-                                    enoughPiecesLeft: Bool,
+                                    notEnoughPiecesLeft: Bool,
                                     moves: [Direction],
                                     initialShuffledPieces: [Piece],
                                     elapsedTime: Int) {
@@ -58,7 +58,7 @@ public final class ResultController
     resultToAdd?._boardName = level._levelName
     resultToAdd?._playID = uniquePlayId
     resultToAdd?._won = victory as NSNumber
-    resultToAdd?._notEnoughPieces = enoughPiecesLeft as NSNumber
+    resultToAdd?._notEnoughPieces = notEnoughPiecesLeft as NSNumber
     resultToAdd?._moveCount = moves.count as NSNumber
     resultToAdd?._moves = moves.map({ Direction.toString($0) })
     if initialShuffledPieces.count > 0 {

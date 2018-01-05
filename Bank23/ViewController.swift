@@ -119,13 +119,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
-    if (_moves.count > 0) {
-      // TODO this is the wrong level in the case of a victory
-      // current level has already been updated
+    // Only record the game if its not won, if its won we alrady recorded it
+    if (_moves.count > 0 && !_gameModel.isWon()) {
       ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
                                              uniquePlayId: _uniquePlayId!,
-                                             victory: _gameModel.isWon(),
-                                             enoughPiecesLeft: _gameModel.isLost(),
+                                             victory: false,
+                                             notEnoughPiecesLeft: _gameModel.isLost(),
                                              moves: _moves,
                                              initialShuffledPieces: _initialShuffledPieces,
                                              elapsedTime: _timer.time())
@@ -307,6 +306,13 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       _bestTimeNetworker.userCompletedLevelWithTime(level: _levelMenuController.currentLevel(),
                                                     elapsedTime: _timer.time(),
                                                     playID: _uniquePlayId!)
+      ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
+                                             uniquePlayId: _uniquePlayId!,
+                                             victory: true,
+                                             notEnoughPiecesLeft: false,
+                                             moves: _moves,
+                                             initialShuffledPieces: _initialShuffledPieces,
+                                             elapsedTime: _timer.time())
       showVictoryView()
     }
     
