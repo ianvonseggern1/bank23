@@ -192,6 +192,12 @@ public final class LevelController
             gameModel.collapsePieceList()
             models.append(gameModel)
             print("SUCCESS! Added level \(board._boardName ?? "") to level menu")
+            
+            // Due to changes in how the levels are stored some have different hash's
+            // in the DB. We print that here so those can be fixed.
+            if String(gameModel.hash()) != board._boardId {
+              print("\(board._boardName ?? "") has a different hash \(String(gameModel.hash())) from that in the DB \(board._boardId ?? "")")
+            }
           } catch {
             print("Unable to create game from board \(board._board ?? "") and pieces \(board._pieces ?? "")")
           }
