@@ -12,6 +12,7 @@ import UIKit
 protocol LevelMenuRowActionControllerDelegate: NSObjectProtocol {
   func openInGameEditor(level: GameModel)
   func deleteLevel(_ level: GameModel)
+  func presentEditSortKeyAlert(_ alert: UIAlertController)
 }
 
 public final class LevelMenuRowActionController {
@@ -35,6 +36,12 @@ public final class LevelMenuRowActionController {
                                                 style: .default,
                                                 handler: { (action) in
                                                   self.saveLocalLevelToDatabase()}))
+      _levelActionSheet.addAction(UIAlertAction(
+        title: "Edit sort key value: \(level._sortKey)",
+        style: .default,
+        handler: { (action) in
+          self.editSortKeyFor(level: level)
+      }))
     }
     if level._levelType == LevelType.UserCreated {
       _levelActionSheet.addAction(UIAlertAction(title: "Delete",
@@ -46,6 +53,22 @@ public final class LevelMenuRowActionController {
     _levelActionSheet.addAction(UIAlertAction(title: "Cancel",
                                               style: .cancel,
                                               handler: nil))
+  }
+  
+  func editSortKeyFor(level: GameModel) {
+    let sortKeyEditAlert = UIAlertController(
+      title: "New Sort Key",
+      message: "Edit sort key for \(level._levelName)",
+      preferredStyle: .alert)
+    sortKeyEditAlert.addTextField { (textField) in
+      textField.placeholder = level._sortKey
+      textField.textAlignment = .center
+    }
+    sortKeyEditAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert) in
+      // TODO
+    }))
+    sortKeyEditAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    self.delegate!.presentEditSortKeyAlert(sortKeyEditAlert)
   }
   
   func saveLocalLevelToDatabase() {

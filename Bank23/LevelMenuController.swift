@@ -145,6 +145,10 @@ public class LevelMenuController:
     }
   }
   
+  func presentEditSortKeyAlert(_ alert: UIAlertController) {
+    self.present(alert, animated: true)
+  }
+  
   public func sortGames() {
     _gameModels.sort(by: {
       ($0._sortKey == $1._sortKey)
