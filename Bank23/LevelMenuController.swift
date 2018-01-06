@@ -19,8 +19,14 @@ protocol LevelMenuControllerDelegate: NSObjectProtocol {
   func reset()
 }
 
-public class LevelMenuController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, EditGameViewControllerDelegate {
-  
+public class LevelMenuController:
+  UIViewController,
+  UITableViewDataSource,
+  UITableViewDelegate,
+  UITextFieldDelegate,
+  EditGameViewControllerDelegate,
+  LevelMenuRowActionControllerDelegate
+{
   weak var delegate: LevelMenuControllerDelegate?
   
   // Created by ViewController
@@ -30,6 +36,7 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _editGameViewController = EditGameViewController()
   let _userController = UserController()
   let _resultController = ResultController()
+  var _actionSheetController: LevelMenuRowActionController?
 
   var _gameModels = [GameModel]()
 
@@ -37,12 +44,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   let _usernameTextField = UITextField()
   let _aboutLabel = UILabel()
   let _aboutExplanation = UILabel()
-  
-  let _levelActionSheet = UIAlertController(title: nil,
-                                            message: nil,
-                                            preferredStyle: .actionSheet)
-  var _deleteAction: UIAlertAction? = nil
-  var _longPressSelectedRow: Int? = nil
   
   var _loginButton = LoginButton(readPermissions: [ .publicProfile, .email, .userFriends ])
   
@@ -64,7 +65,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _editGameViewController.delegate = self
     
     setupNavigationBar()
-    setupLevelActionSheet()
   }
   
   func setupNavigationBar() {
@@ -79,25 +79,6 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     setAudioButtonTitle()
   }
   
-  func setupLevelActionSheet() {
-    _levelActionSheet.addAction(UIAlertAction(title: "Open in Editor",
-                                              style: .default,
-                                              handler: { (action) in self.openSelectedLevelInEditor()}))
-    
-    if (ADMIN_MODE) {
-      _levelActionSheet.addAction(UIAlertAction(title: "Save to Database",
-                                                style: .default,
-                                                handler: { (action) in
-                                                  self.saveLocalLevelToDatabase()}))
-    }
-    
-    _deleteAction = UIAlertAction(title: "Delete",
-                                  style: .destructive,
-                                  handler: { (action) in self.removeSelectedLevel() })
-    _levelActionSheet.addAction(_deleteAction!)
-    _levelActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-  }
-  
   @objc public func didLongPress(gesture: UIPanGestureRecognizer) {
     if gesture.state != UIGestureRecognizerState.began {
       return
@@ -109,10 +90,12 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
       return
     }
     
-    let model = _gameModels[indexPath!.row]
-    _deleteAction!.isEnabled = model._levelType == LevelType.UserCreated
-    _longPressSelectedRow = indexPath!.row
-    self.present(_levelActionSheet, animated: true, completion: nil)
+    let selectedLevel = _gameModels[indexPath!.row]
+    _actionSheetController = LevelMenuRowActionController(level: selectedLevel)
+    _actionSheetController!.delegate = self
+    self.present(_actionSheetController!._levelActionSheet,
+                 animated: true,
+                 completion: nil)
   }
 
   public func fetchLevels() {
@@ -147,26 +130,18 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     }
   }
   
-  public func removeSelectedLevel() {
-    LevelController.removeLocalLevel(toRemove: _gameModels[_longPressSelectedRow!])
-    _gameModels.remove(at: _longPressSelectedRow!)
-    DispatchQueue.main.async {
-      self._tableView.reloadData()
-    }
-    _longPressSelectedRow = nil
-  }
-  
-  public func openSelectedLevelInEditor() {
-    let model = _gameModels[_longPressSelectedRow!]
-    _editGameViewController.setModel(model: model)
+  func openInGameEditor(level: GameModel) {
+    _editGameViewController.setModel(model: level)
     self.navigationController?.pushViewController(_editGameViewController, animated: true)
   }
   
-  func saveLocalLevelToDatabase() {
-    let model = _gameModels[_longPressSelectedRow!]
-    do {
-      try LevelController.writeLocalLevelToMainGameDatabase(level: model)
-    } catch {
+  func deleteLevel(_ level: GameModel) {
+    LevelController.removeLocalLevel(toRemove: level)
+    if let levelRow = findRowForLevelHash(levelHash: String(level.hash())) {
+      _gameModels.remove(at: levelRow)
+    }
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
     }
   }
   
