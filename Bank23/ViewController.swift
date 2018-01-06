@@ -119,7 +119,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   func reset() {
-    // Only record the game if its not won, if its won we alrady recorded it
+    // Only record the game if its not won, if its won we already recorded it
     if (_moves.count > 0 && !_gameModel.isWon()) {
       ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
                                              uniquePlayId: _uniquePlayId!,
@@ -302,7 +302,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     // If they just won inform the level controller
     if _gameModel.isWon() && _view._victoryView.isHidden {
       _timer.pause()
-      _levelMenuController.userBeatLevel(elapsedTime: _timer.time())
+      let isUsersFastestTime = _levelMenuController.userBeatLevel(elapsedTime: _timer.time())
       _bestTimeNetworker.userCompletedLevelWithTime(level: _levelMenuController.currentLevel(),
                                                     elapsedTime: _timer.time(),
                                                     playID: _uniquePlayId!)
@@ -313,7 +313,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                              moves: _moves,
                                              initialShuffledPieces: _initialShuffledPieces,
                                              elapsedTime: _timer.time())
-      showVictoryView()
+      showVictoryView(isUsersFastestTime: isUsersFastestTime)
     }
     
     if _gameModel.isLost() && !_showedIsLostAlert {
@@ -323,9 +323,10 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     }
   }
   
-  func showVictoryView() {
+  func showVictoryView(isUsersFastestTime: Bool) {
     DispatchQueue.main.async {
-      self._view._victoryView.setTimeTime(time: self._timer.time())
+      self._view._victoryView.setTimeElapsed(time: self._timer.time(),
+                                             isUsersFastestTime: isUsersFastestTime)
       self._view._victoryView._nextLevelLabel.isHidden = self._levelMenuController.currentLevelIsLast()
       self._view._victoryView.sizeToFit()
       self._view._victoryView.isHidden = false

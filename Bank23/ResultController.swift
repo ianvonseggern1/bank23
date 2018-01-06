@@ -81,11 +81,12 @@ public final class ResultController
     })
   }
 
-  func userBeatlevel(level: GameModel, elapsedTime: Int) {
+  // Returns true iff this is the fastest time yet
+  func userBeatlevel(level: GameModel, elapsedTime: Int) -> Bool {
     let levelHash = String(level.hash())
     // If this isn't the fastest time we don't need to update anything
-    if levelsBeat[levelHash] != nil && levelsBeat[levelHash]! < elapsedTime {
-      return
+    if levelsBeat[levelHash] != nil && levelsBeat[levelHash]! <= elapsedTime {
+      return false
     }
     
     // Update the dictionary
@@ -104,6 +105,8 @@ public final class ResultController
     userDefaults.set(levelsBeatStrings.joined(separator: LEVELS_BEAT_STRING_SEPERATOR),
                      forKey: LEVELS_BEAT_USER_DEFAULTS_KEY)
     userDefaults.synchronize()
+    
+    return true
   }
 
   func levelBestTime(_ model: GameModel) -> Int? {

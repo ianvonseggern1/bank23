@@ -231,11 +231,13 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
     _currentRow = row
   }
   
-  public func userBeatLevel(elapsedTime: Int) {
-    _resultController.userBeatlevel(level: currentLevel(), elapsedTime: elapsedTime)
+  public func userBeatLevel(elapsedTime: Int) -> Bool {
+    let isFastestTime = _resultController.userBeatlevel(level: currentLevel(),
+                                                        elapsedTime: elapsedTime)
     DispatchQueue.main.async {
       self._tableView.reloadData()
     }
+    return isFastestTime
   }
   
   // UITableViewDataSource
