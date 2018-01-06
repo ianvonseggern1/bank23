@@ -130,25 +130,6 @@ public class LevelMenuController:
     }
   }
   
-  func openInGameEditor(level: GameModel) {
-    _editGameViewController.setModel(model: level)
-    self.navigationController?.pushViewController(_editGameViewController, animated: true)
-  }
-  
-  func deleteLevel(_ level: GameModel) {
-    LevelController.removeLocalLevel(toRemove: level)
-    if let levelRow = findRowForLevelHash(levelHash: String(level.hash())) {
-      _gameModels.remove(at: levelRow)
-    }
-    DispatchQueue.main.async {
-      self._tableView.reloadData()
-    }
-  }
-  
-  func presentEditSortKeyAlert(_ alert: UIAlertController) {
-    self.present(alert, animated: true)
-  }
-  
   public func sortGames() {
     _gameModels.sort(by: {
       ($0._sortKey == $1._sortKey)
@@ -224,6 +205,34 @@ public class LevelMenuController:
       self._tableView.reloadData()
     }
     return isFastestTime
+  }
+  
+  // LevelMenuRowActionControllerDelegate
+  
+  func openInGameEditor(level: GameModel) {
+    _editGameViewController.setModel(model: level)
+    self.navigationController?.pushViewController(_editGameViewController, animated: true)
+  }
+  
+  func deleteLevel(_ level: GameModel) {
+    LevelController.removeLocalLevel(toRemove: level)
+    if let levelRow = findRowForLevelHash(levelHash: String(level.hash())) {
+      _gameModels.remove(at: levelRow)
+    }
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
+  }
+  
+  func presentEditSortKeyAlert(_ alert: UIAlertController) {
+    self.present(alert, animated: true)
+  }
+  
+  func sortKeyUpdated() {
+    sortGames()
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
   }
   
   // UITableViewDataSource

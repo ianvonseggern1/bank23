@@ -13,6 +13,7 @@ protocol LevelMenuRowActionControllerDelegate: NSObjectProtocol {
   func openInGameEditor(level: GameModel)
   func deleteLevel(_ level: GameModel)
   func presentEditSortKeyAlert(_ alert: UIAlertController)
+  func sortKeyUpdated()
 }
 
 public final class LevelMenuRowActionController {
@@ -65,7 +66,14 @@ public final class LevelMenuRowActionController {
       textField.textAlignment = .center
     }
     sortKeyEditAlert.addAction(UIAlertAction(title: "Save", style: .default, handler: { (alert) in
-      // TODO
+      let textField = sortKeyEditAlert.textFields![0] as UITextField
+      if textField.text != nil && textField.text! != "" {
+        // We assume the network call succeeds and update locally, since this is just an
+        // admin feature anyway
+        LevelController.editLevelSortKey(level: level, newSortKey: textField.text!)
+        level._sortKey = textField.text!
+        self.delegate!.sortKeyUpdated()
+      }
     }))
     sortKeyEditAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     self.delegate!.presentEditSortKeyAlert(sortKeyEditAlert)

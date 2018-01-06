@@ -143,6 +143,26 @@ public final class LevelController
     })
   }
   
+  static func editLevelSortKey(level: GameModel, newSortKey: String) {
+    let boardIdValue = AWSDynamoDBAttributeValue.init()!
+    boardIdValue.s = String(level.hash())
+    let sortKeyValue = AWSDynamoDBAttributeValue.init()!
+    sortKeyValue.s = newSortKey
+    
+    let updateItem = AWSDynamoDBUpdateItemInput.init()!
+    updateItem.updateExpression = "SET sortKey = :sortKey"
+    updateItem.expressionAttributeValues = [":sortKey": sortKeyValue]
+    updateItem.key = ["boardId": boardIdValue]
+    updateItem.tableName = Boards.dynamoDBTableName()
+
+    AWSDynamoDB.default().updateItem(updateItem) { (response, error) in
+      if error != nil {
+        print("Failed to update sort key for \(level._levelName) - \(error!)")
+      } else {
+      }
+    }
+  }
+  
   static func getAllBoardsFromDatabase(boardCallback: @escaping ([GameModel]) -> Void) {
     let objectMapper = AWSDynamoDBObjectMapper.default()
     let scanExpression = AWSDynamoDBScanExpression()
