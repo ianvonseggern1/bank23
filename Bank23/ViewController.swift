@@ -99,17 +99,19 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     if (_gameModel.isWon() || _showedIsLostAlert) {
       self.reset()
     } else {
-      self.showResetAlert(message: "Are you sure you want to reset?")
+      self.showResetAlert(message: "Are you sure you want to reset?", showCancel: true)
     }
   }
   
-  func showResetAlert(message: String) {
+  func showResetAlert(message: String, showCancel: Bool) {
     let alert = UIAlertController(title: nil,
                                   message: message,
                                   preferredStyle: UIAlertControllerStyle.alert)
-    alert.addAction(UIAlertAction(title: "Cancel",
-                                  style: UIAlertActionStyle.cancel,
-                                  handler: nil))
+    if showCancel {
+      alert.addAction(UIAlertAction(title: "Cancel",
+                                    style: UIAlertActionStyle.cancel,
+                                    handler: nil))
+    }
     alert.addAction(UIAlertAction(title: "Reset",
                                   style: UIAlertActionStyle.destructive,
                                   handler: { (_ : UIAlertAction) -> Void in
@@ -319,7 +321,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     if _gameModel.isLost() && !_showedIsLostAlert {
       _view._board.backgroundColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1)
       _showedIsLostAlert = true
-      showResetAlert(message: "No remaining ways to win, would you like to reset?")
+      showResetAlert(message: "Uh oh, looks like you dropped too many coins into the water traps!\nThere are no longer enough remaining coins to win.",
+                     showCancel: false)
     }
   }
   
