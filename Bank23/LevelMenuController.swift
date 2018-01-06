@@ -125,7 +125,14 @@ public class LevelMenuController: UIViewController, UITableViewDataSource, UITab
   }
 
   public func currentLevel() -> GameModel {
-    return _gameModels[_currentRow].copy()
+    if _gameModels.count > 0 {
+      return _gameModels[_currentRow].copy()
+    }
+    return try! GameModel(name: "",
+                          collapsedPieces: [],
+                          initialBoard: Array.init(repeating:Array.init(repeating: Piece.empty,
+                                                                        count: 5),
+                                                   count: 5))
   }
   
   public func currentLevelIsLast() -> Bool {
