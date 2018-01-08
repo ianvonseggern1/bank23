@@ -304,17 +304,36 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     // If they just won inform the level controller
     if _gameModel.isWon() && _view._victoryView.isHidden {
       _timer.pause()
-      let isUsersFastestTime = _levelMenuController.userBeatLevel(elapsedTime: _timer.time())
-      _bestTimeNetworker.userCompletedLevelWithTime(level: _levelMenuController.currentLevel(),
-                                                    elapsedTime: _timer.time(),
-                                                    playID: _uniquePlayId!)
-      ResultController.writeResultToDatabase(level: _levelMenuController.currentLevel(),
+      let elapsedTime = _timer.time()
+      let initialLevelModel = _levelMenuController.currentLevel()
+      let isUsersFastestTime = _levelMenuController.userBeatLevel(elapsedTime: elapsedTime)
+      
+      // If its not the best time ever we don't need to do anything
+      // We also don't want to store this time if its a user created level
+      let bestTime = _bestTimeNetworker.getBestTimeFor(level: initialLevelModel)
+      if (
+        _gameModel._levelType == LevelType.Server &&
+        (bestTime == nil || bestTime!.time > elapsedTime)
+      ) {
+        // If the user lacks a real username prompt them to provide one before
+        // attempting to record record
+        let username = UserController.getUsername()
+        if username == nil || username! == "" {
+          promptForUsernameAndCallBestTimeNetworker()
+        } else {
+          _bestTimeNetworker.userCompletedLevelWithTime(level: initialLevelModel,
+                                                        elapsedTime: elapsedTime,
+                                                        playID: _uniquePlayId!)
+        }
+      }
+      
+      ResultController.writeResultToDatabase(level: initialLevelModel,
                                              uniquePlayId: _uniquePlayId!,
                                              victory: true,
                                              notEnoughPiecesLeft: false,
                                              moves: _moves,
                                              initialShuffledPieces: _initialShuffledPieces,
-                                             elapsedTime: _timer.time())
+                                             elapsedTime: elapsedTime)
       showVictoryView(isUsersFastestTime: isUsersFastestTime)
     }
     
@@ -324,6 +343,28 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       showResetAlert(message: "Uh oh, looks like you dropped too many coins into the water traps!\nThere are no longer enough remaining coins to win.",
                      showCancel: false)
     }
+  }
+  
+  // For now this is just used if they don't have a username
+  // Might update to use in all cases
+  func promptForUsernameAndCallBestTimeNetworker() {
+    let createUsernameAlert = UIAlertController(
+      title: "Wow!",
+      message: "That was fast, looks like you set the record time! Please enter a name for the leaderboard.",
+      preferredStyle: .alert)
+    createUsernameAlert.addTextField { (textField) in
+      textField.placeholder = "Username"
+      textField.textAlignment = .center
+    }
+    createUsernameAlert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (alert) in
+      let textField = createUsernameAlert.textFields![0] as UITextField
+      if let newName = textField.text {
+        UserController.setUsername(newName)
+      }
+      self._bestTimeNetworker.userCompletedLevelWithTime(level: self._levelMenuController.currentLevel(),
+                                                         elapsedTime: self._timer.time(),
+                                                         playID: self._uniquePlayId!)
+    }))
   }
   
   func showVictoryView(isUsersFastestTime: Bool) {

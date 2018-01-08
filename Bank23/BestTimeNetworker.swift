@@ -59,13 +59,6 @@ public final class BestTimeNetworker {
   func userCompletedLevelWithTime(level: GameModel, elapsedTime: Int, playID: String) {
     let boardID = String(level.hash())
     
-    // If its not the best time ever we don't need to do anything
-    // We also don't want to store this time if its a user created level
-    if (bestTimes[boardID] != nil && bestTimes[boardID]!.time <= elapsedTime) ||
-       level._levelType != LevelType.Server {
-      return
-    }
-    
     let boardIDValue = AWSDynamoDBAttributeValue.init()!
     boardIDValue.s = boardID
     
