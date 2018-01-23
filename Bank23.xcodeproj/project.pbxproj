@@ -14,6 +14,7 @@
 		66622DD11FFD50120011465F /* BestTimeNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD01FFD50120011465F /* BestTimeNetworker.swift */; };
 		66622DD71FFF1FBB0011465F /* BestTimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD61FFF1FBB0011465F /* BestTimeTable.swift */; };
 		66622DD92001740A0011465F /* LevelMenuRowActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD8200174090011465F /* LevelMenuRowActionController.swift */; };
+		66622DDB20031D6B0011465F /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DDA20031D6B0011465F /* TimerView.swift */; };
 		669189331E957ACB0099A497 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189321E957ACB0099A497 /* refresh.png */; };
 		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
@@ -93,6 +94,7 @@
 		66622DD01FFD50120011465F /* BestTimeNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTimeNetworker.swift; sourceTree = "<group>"; };
 		66622DD61FFF1FBB0011465F /* BestTimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BestTimeTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (15)/AmazonAws/Models/NoSQL/BestTimeTable.swift"; sourceTree = "<group>"; };
 		66622DD8200174090011465F /* LevelMenuRowActionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenuRowActionController.swift; sourceTree = "<group>"; };
+		66622DDA20031D6B0011465F /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		667895791FE0976F00A7D840 /* Bank23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bank23.entitlements; sourceTree = "<group>"; };
 		669189321E957ACB0099A497 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				667895791FE0976F00A7D840 /* Bank23.entitlements */,
 				B64CB4F81E04A34C005A7781 /* AppDelegate.swift */,
 				B64CB4FA1E04A34C005A7781 /* ViewController.swift */,
+				66622DDA20031D6B0011465F /* TimerView.swift */,
 				669C5ACD1FF2DD0F00B04BA1 /* Timer.swift */,
 				B67446261E11F0D9001A3529 /* LevelMenuController.swift */,
 				66622DD8200174090011465F /* LevelMenuRowActionController.swift */,
@@ -488,6 +491,7 @@
 				1ED40AD41E81A18500E62E1B /* LevelController.swift in Sources */,
 				B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */,
 				66622DD11FFD50120011465F /* BestTimeNetworker.swift in Sources */,
+				66622DDB20031D6B0011465F /* TimerView.swift in Sources */,
 				66622DD92001740A0011465F /* LevelMenuRowActionController.swift in Sources */,
 				B62426721E5124B200CEEF08 /* NextPieceView.swift in Sources */,
 				B685361E1E1C982700A401B6 /* RemainingPiecesView.swift in Sources */,

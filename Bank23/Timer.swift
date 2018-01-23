@@ -9,7 +9,7 @@
 import Foundation
 
 // Timer counts up in seconds, and supports pausing
-public final class Timer {
+public final class GameTimer {
   // Total of all prior splits
   var timeElapsed = 0
   

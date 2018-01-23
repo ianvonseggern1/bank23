@@ -17,6 +17,7 @@ class GameView: UIView {
   let _victoryView = VictoryView(frame: CGRect.zero)
   let _remainingPiecesView = RemainingPiecesView(frame: CGRect.zero)
   let _nextPieceView = NextPieceView(frame: CGRect.zero)
+  let _timerView = TimerView(frame: CGRect.zero)
   
   // Used to place text under the board in tutorials
   let _explanationLabel = UILabel()
@@ -30,6 +31,7 @@ class GameView: UIView {
     
     self.addSubview(_remainingPiecesView)
     self.addSubview(_nextPieceView)
+    self.addSubview(_timerView)
     
     self.addSubview(_victoryView)
 
@@ -54,6 +56,7 @@ class GameView: UIView {
     
     _remainingPiecesView.sizeToFit()
     _nextPieceView.sizeToFit()
+    _timerView.sizeToFit()
     let boardSize = _board.sizeThatFits(CGSize(width: bounds.width - 2 * BOARD_PADDING,
                                                height: bounds.height - 2 * BOARD_PADDING))
     
@@ -71,7 +74,17 @@ class GameView: UIView {
                                   y: 90,
                                   width: _nextPieceView.frame.width,
                                   height: _nextPieceView.frame.height)
-
+    
+    // RemainingPieces, TimerView, and NextPiece are all adjacent and we want to center
+    // the timer in the gap, so we calculate the total space and split it
+    let extraHoziontalSpace = _board.frame.width - (_remainingPiecesView.frame.width +
+                                                    _timerView.frame.width +
+                                                    _nextPieceView.frame.width)
+    _timerView.frame = CGRect(x: _remainingPiecesView.frame.maxX + extraHoziontalSpace / 2,
+                              y: 90,
+                              width: _timerView.frame.width,
+                              height: _timerView.frame.height)
+  
     let explanationSize = _explanationLabel.sizeThatFits(CGSize(width: bounds.width - 2 * BOARD_PADDING,
                                                                 height: bounds.height - 30 - _board.frame.maxY))
     _explanationLabel.frame = CGRect(x: (bounds.width - explanationSize.width) / 2,

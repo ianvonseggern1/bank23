@@ -17,7 +17,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   let _noiseEffectsController = NoiseEffectsController()
   let _bestTimeNetworker = BestTimeNetworker()
 
-  var _timer = Timer()
+  var _timer = GameTimer()
   var _currentSwipeDirection: Direction?
   var _showedIsLostAlert = false
   var _moves = [Direction]()
@@ -48,6 +48,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     let nextLevelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNextLevel))
     _view._victoryView._nextLevelLabel.isUserInteractionEnabled = true
     _view._victoryView._nextLevelLabel.addGestureRecognizer(nextLevelTap)
+    
+    let timerViewTap = UITapGestureRecognizer(target: self, action: #selector(didTapTimerView))
+    _view._timerView.addGestureRecognizer(timerViewTap)
     
     self.navigationItem.title = _gameModel._levelName
   }
@@ -86,6 +89,12 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   @objc func didTapNextLevel() {
     _levelMenuController.goToNextLevel()
     reset()
+  }
+  
+  @objc func didTapTimerView() {
+    _view._timerView.toggleShowTime()
+    _view.setNeedsLayout()
+    _view.setNeedsDisplay()
   }
   
   @objc func didTapMenu() {
@@ -200,10 +209,24 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       _view._board.adjust(movablePieceMask: movablePieceMask, by: min(distance, _view._board.singleSquareSize() * 0.8), inDirection: direction)
     }
   }
+  
+  func startTimer() {
+    _timer.start()
+    
+    _view._timerView.setTime(time: _timer.time())
+    _view.setNeedsLayout()
+    _view.setNeedsDisplay()
+    
+    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (_) in
+      self._view._timerView.setTime(time: self._timer.time())
+      self._view.setNeedsLayout()
+      self._view.setNeedsDisplay()
+    }
+  }
 
   func swipePieceOn(from:Direction) {
     if _moves.count == 0 {
-      _timer.start()
+      startTimer()
     }
     
     _moves.append(from)
@@ -381,7 +404,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _uniquePlayId = UUID.init().uuidString
     _moves = [Direction]()
     _gameModel = _levelMenuController.currentLevel()
-    _timer = Timer()
+    _timer = GameTimer()
     // The pieces are popped off the back as the user plays so we reverse this list
     // which is used for the database
     _initialShuffledPieces = _gameModel._pieces.reversed()
