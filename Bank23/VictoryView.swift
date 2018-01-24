@@ -83,9 +83,11 @@ class VictoryView: UIView {
                                    height: _nextLevelLabel.frame.height)
   }
   
-  func setTimeElapsed(time: Int, isUsersFastestTime: Bool) {
+  func setTimeElapsed(time: Int, isUsersFastestTime: Bool, isRecord: Bool) {
     var text = secondsToTimeString(time: time)
-    if isUsersFastestTime {
+    if isRecord {
+      text += " - The Fastest Time Ever!"
+    } else if isUsersFastestTime {
       text += " - Your Fastest Time!"
     }
     _timeLabel.text = text
