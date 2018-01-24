@@ -57,7 +57,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   
   func setupNavigationBarItems() {
     let menuIcon = UIButton()
-    menuIcon.setImage(UIImage(named: "menu-icon25.png"), for: UIControlState.normal)
+    menuIcon.setImage(UIImage(named: "menu.jpg"), for: UIControlState.normal)
     menuIcon.bounds = CGRect(x: 0, y: 0, width: 25, height: 22)
     menuIcon.addTarget(self,
                        action: #selector(didTapMenu),
@@ -66,7 +66,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                          animated: false)
     
     let refreshIcon = UIButton()
-    refreshIcon.setImage(UIImage(named: "refresh.png"), for: UIControlState.normal)
+    refreshIcon.setImage(UIImage(named: "refresh.jpg"), for: UIControlState.normal)
     refreshIcon.bounds = CGRect(x: 10, y: 0, width: 25, height: 25)
     refreshIcon.addTarget(self,
                           action: #selector(didTapRefresh),

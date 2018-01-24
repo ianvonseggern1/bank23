@@ -71,7 +71,7 @@ public class LevelMenuController:
     self.navigationItem.title = "Main Menu"
     
     let xOutIcon = UIButton()
-    xOutIcon.setImage(UIImage(named: "cross.png"), for: UIControlState.normal)
+    xOutIcon.setImage(UIImage(named: "cross.jpg"), for: UIControlState.normal)
     xOutIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
     xOutIcon.addTarget(self, action: #selector(didTapXOut), for: UIControlEvents.touchUpInside)
     self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: xOutIcon), animated: false)
