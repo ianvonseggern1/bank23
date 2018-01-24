@@ -56,7 +56,10 @@ public final class BestTimeNetworker {
   }
   
   // Returns true if the database has been successfully updated, false otherwise
-  func userCompletedLevelWithTime(level: GameModel, elapsedTime: Int, playID: String) {
+  func userCompletedLevelWithTime(level: GameModel,
+                                  elapsedTime: Int,
+                                  playID: String,
+                                  successfullyUpdated: @escaping () -> Void) {
     let boardID = String(level.hash())
     
     let boardIDValue = AWSDynamoDBAttributeValue.init()!
@@ -109,7 +112,7 @@ public final class BestTimeNetworker {
                                     userID: userIDString)
         self.bestTimes[boardID] = newBestTimes
         
-        // TODO update the victory UI to include the news of the new record
+        successfullyUpdated()
       }
     }
   }

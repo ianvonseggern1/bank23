@@ -154,6 +154,12 @@ public class LevelMenuController:
     }
   }
   
+  public func reload() {
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
+  }
+  
   public func findRowForLevelHash(levelHash: String) -> Int? {
     for (index, game) in _gameModels.enumerated() {
       if String(game.hash()) == levelHash {

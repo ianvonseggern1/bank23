@@ -349,7 +349,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
         } else {
           _bestTimeNetworker.userCompletedLevelWithTime(level: initialLevelModel,
                                                         elapsedTime: elapsedTime,
-                                                        playID: _uniquePlayId!)
+                                                        playID: _uniquePlayId!,
+                                                        successfullyUpdated: _levelMenuController.reload)
         }
       }
       
@@ -389,8 +390,10 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       }
       self._bestTimeNetworker.userCompletedLevelWithTime(level: self._levelMenuController.currentLevel(),
                                                          elapsedTime: self._timer.time(),
-                                                         playID: self._uniquePlayId!)
+                                                         playID: self._uniquePlayId!,
+                                                         successfullyUpdated: self._levelMenuController.reload)
     }))
+    self.present(createUsernameAlert, animated: true, completion: nil)
   }
   
   func showVictoryView(isUsersFastestTime: Bool, isRecord: Bool) {
