@@ -219,8 +219,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     
     Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (_) in
       self._view._timerView.setTime(time: self._timer.time())
-      self._view.setNeedsLayout()
-      self._view.setNeedsDisplay()
+      self._view._timerView.sizeToFit()
+      self._view._timerView.setNeedsLayout()
+      self._view._timerView.setNeedsDisplay()
     }
   }
 
