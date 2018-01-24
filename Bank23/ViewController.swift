@@ -347,10 +347,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
         if username == nil || username! == "" {
           promptForUsernameAndCallBestTimeNetworker()
         } else {
-          _bestTimeNetworker.userCompletedLevelWithTime(level: initialLevelModel,
-                                                        elapsedTime: elapsedTime,
-                                                        playID: _uniquePlayId!,
-                                                        successfullyUpdated: _levelMenuController.reload)
+          callBestTimeNetworkerWithResult()
         }
       }
       
@@ -388,12 +385,32 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       if let newName = textField.text {
         UserController.setUsername(newName)
       }
-      self._bestTimeNetworker.userCompletedLevelWithTime(level: self._levelMenuController.currentLevel(),
-                                                         elapsedTime: self._timer.time(),
-                                                         playID: self._uniquePlayId!,
-                                                         successfullyUpdated: self._levelMenuController.reload)
+      self.callBestTimeNetworkerWithResult()
     }))
     self.present(createUsernameAlert, animated: true, completion: nil)
+  }
+  
+  func alertFailedUpdateBestTime() {
+    let alert = UIAlertController(title: nil,
+                                  message: "Failed to save best time",
+                                  preferredStyle: UIAlertControllerStyle.alert)
+    alert.addAction(UIAlertAction(title: "Skip",
+                                  style: UIAlertActionStyle.cancel,
+                                  handler: nil))
+    alert.addAction(UIAlertAction(title: "Try Again",
+                                  style: UIAlertActionStyle.default,
+                                  handler: { (_ : UIAlertAction) -> Void in
+                                    self.callBestTimeNetworkerWithResult()
+    }))
+    self.present(alert, animated: true, completion: nil)
+  }
+  
+  func callBestTimeNetworkerWithResult() {
+    self._bestTimeNetworker.userCompletedLevelWithTime(level: self._levelMenuController.currentLevel(),
+                                                       elapsedTime: self._timer.time(),
+                                                       playID: self._uniquePlayId!,
+                                                       updateSuccesful: self._levelMenuController.reload,
+                                                       updateFailed: self.alertFailedUpdateBestTime)
   }
   
   func showVictoryView(isUsersFastestTime: Bool, isRecord: Bool) {

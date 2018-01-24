@@ -59,7 +59,8 @@ public final class BestTimeNetworker {
   func userCompletedLevelWithTime(level: GameModel,
                                   elapsedTime: Int,
                                   playID: String,
-                                  successfullyUpdated: @escaping () -> Void) {
+                                  updateSuccesful: @escaping () -> Void,
+                                  updateFailed: @escaping () -> Void) {
     let boardID = String(level.hash())
     
     let boardIDValue = AWSDynamoDBAttributeValue.init()!
@@ -104,15 +105,20 @@ public final class BestTimeNetworker {
     
     AWSDynamoDB.default().updateItem(newItem) { (response, error) in
       if error != nil {
-        print("Error saving best time for \(level._levelName) - \(error!)")
-        // TODO offer retry UI - note this case includes the case of the conditional check failing
+        // We need to differentiate cases where someone else recently beat this time from
+        // offline errors
+        // This is brittle, would be good to look for better ways to do this
+        if error!.localizedDescription == "The Internet connection appears to be offline." {
+          print("Error saving best time for \(level._levelName) - \(error!)")
+          updateFailed()
+        }
       } else {
         let newBestTimes = BestTime(time: elapsedTime,
                                     username: usernameString,
                                     userID: userIDString)
         self.bestTimes[boardID] = newBestTimes
         
-        successfullyUpdated()
+        updateSuccesful()
       }
     }
   }
