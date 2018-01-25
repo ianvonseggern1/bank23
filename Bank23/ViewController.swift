@@ -44,6 +44,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     setupBoard()
     _view.updateModel(_gameModel)
     
+    _view._timerView.setTime(time: 0)
+    
     _view._victoryView.isHidden = true
     let nextLevelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNextLevel))
     _view._victoryView._nextLevelLabel.isUserInteractionEnabled = true

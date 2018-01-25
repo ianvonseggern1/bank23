@@ -13,13 +13,17 @@ final class TimerView: UIView {
   let titleLabel = UILabel(frame: CGRect.zero)
   let timeLabel = UILabel(frame: CGRect.zero)
 
-  // TODO add arrow to indicate clickableness
+  // TODO add arrow/ui to indicate clickableness
   override init(frame: CGRect) {
     super.init(frame:frame)
     
     titleLabel.text = "Time"
     titleLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
     titleLabel.textColor = PieceView.labelColor()
+    titleLabel.textAlignment = .center
+    
+    timeLabel.textAlignment = .center
+    
     self.addSubview(titleLabel)
     self.addSubview(timeLabel)
     
@@ -40,15 +44,16 @@ final class TimerView: UIView {
   }
   
   override func layoutSubviews() {
+    let width = self.frame.width - 8
     titleLabel.sizeToFit()
     timeLabel.sizeToFit()
     titleLabel.frame = CGRect(x: 4,
                               y: 4,
-                              width: titleLabel.frame.width,
+                              width: width,
                               height: titleLabel.frame.height)
     timeLabel.frame = CGRect(x: 4,
                              y: titleLabel.frame.maxY,
-                             width: timeLabel.frame.width,
+                             width: width,
                              height: timeLabel.frame.height)
   }
   
