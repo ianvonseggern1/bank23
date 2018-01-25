@@ -42,6 +42,15 @@ final class UserController: LoginButtonDelegate {
     return UserDefaults.standard.object(forKey: "Bank23CurrentLevel") as? String
   }
   
+  static func setDefaultTimerMode(on: Bool) {
+    UserDefaults.standard.set(on, forKey: "Bank23TimerDefaultMode")
+    UserDefaults.standard.synchronize()
+  }
+  
+  static func getDefaultTimerModeOn() -> Bool {
+    return UserDefaults.standard.bool(forKey: "Bank23TimerDefaultMode")
+  }
+  
   // LoginButtonDelegate
   
   public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {

@@ -23,6 +23,7 @@ final class TimerView: UIView {
     titleLabel.textAlignment = .center
     
     timeLabel.textAlignment = .center
+    timeLabel.isHidden = true
     
     self.addSubview(titleLabel)
     self.addSubview(timeLabel)
@@ -61,7 +62,9 @@ final class TimerView: UIView {
     timeLabel.text = secondsToTimeString(time: time)
   }
   
-  func toggleShowTime() {
+  // Returns true iff we are now showing the time
+  func toggleShowTime() -> Bool {
     timeLabel.isHidden = !timeLabel.isHidden
+    return !timeLabel.isHidden
   }
 }

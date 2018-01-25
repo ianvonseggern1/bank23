@@ -45,6 +45,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
     _view.updateModel(_gameModel)
     
     _view._timerView.setTime(time: 0)
+    if UserController.getDefaultTimerModeOn() {
+      let _ = _view._timerView.toggleShowTime()
+    }
     
     _view._victoryView.isHidden = true
     let nextLevelTap = UITapGestureRecognizer(target: self, action: #selector(didTapNextLevel))
@@ -94,7 +97,8 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   }
   
   @objc func didTapTimerView() {
-    _view._timerView.toggleShowTime()
+    let isOn = _view._timerView.toggleShowTime()
+    UserController.setDefaultTimerMode(on: isOn)
     _view.setNeedsLayout()
     _view.setNeedsDisplay()
   }
