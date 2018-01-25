@@ -265,36 +265,37 @@ public class LevelMenuController:
     tableViewCell.selectionStyle = UITableViewCellSelectionStyle.none
 
     if indexPath.section == 0 {
-      // TODO remove username text field
-//      let usernameLabel = UILabel()
-//      usernameLabel.text = "Your Username: "
-//      usernameLabel.sizeToFit()
-//      usernameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-//      usernameLabel.textColor = UIColor.darkGray
-//      usernameLabel.frame = CGRect(x: 10,
-//                                   y: 10,
-//                                   width: usernameLabel.frame.width,
-//                                   height: usernameLabel.frame.height)
-//      tableViewCell.addSubview(usernameLabel)
-//
-//      if _usernameTextField.text == nil || _usernameTextField.text == "" {
-//        _usernameTextField.text = UserController.getUsername()
-//      }
-//      _usernameTextField.placeholder = "Tap to enter"
-//      _usernameTextField.returnKeyType = UIReturnKeyType.done
-//      _usernameTextField.delegate = self
-//      _usernameTextField.frame = CGRect(x: usernameLabel.frame.maxX,
-//                                       y: 10,
-//                                       width: tableView.frame.width - usernameLabel.frame.maxX - 10,
-//                                       height: usernameLabel.frame.height)
+      let usernameLabel = UILabel()
+      usernameLabel.text = "Your Username: "
+      usernameLabel.sizeToFit()
+      usernameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+      usernameLabel.textColor = UIColor.darkGray
+      usernameLabel.frame = CGRect(x: 10,
+                                   y: 10,
+                                   width: usernameLabel.frame.width,
+                                   height: usernameLabel.frame.height)
+      tableViewCell.addSubview(usernameLabel)
+
+      if _usernameTextField.text == nil || _usernameTextField.text == "" {
+        _usernameTextField.text = UserController.getUsername()
+      }
+      _usernameTextField.placeholder = "Tap to enter"
+      _usernameTextField.returnKeyType = UIReturnKeyType.done
+      _usernameTextField.delegate = self
+      _usernameTextField.frame = CGRect(x: usernameLabel.frame.maxX,
+                                       y: 10,
+                                       width: tableView.frame.width - usernameLabel.frame.maxX - 10,
+                                       height: usernameLabel.frame.height)
+      tableView.addSubview(_usernameTextField)
       
-      _loginButton.sizeToFit()
-      _loginButton.frame = CGRect(x: 10,
-                                  y: 10,
-                                  width: _loginButton.frame.width,
-                                  height: _loginButton.frame.height)
-      _loginButton.delegate = _userController
-      tableViewCell.addSubview(_loginButton)
+      // TODO decide on using this
+//      _loginButton.sizeToFit()
+//      _loginButton.frame = CGRect(x: 10,
+//                                  y: 10,
+//                                  width: _loginButton.frame.width,
+//                                  height: _loginButton.frame.height)
+//      _loginButton.delegate = _userController
+//      tableViewCell.addSubview(_loginButton)
     } else if indexPath.section == 1 {
       let model = _gameModels[indexPath.row]
       let bestTime = _bestTimeNetworker!.getBestTimeFor(level: model)
