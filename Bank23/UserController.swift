@@ -51,6 +51,25 @@ final class UserController: LoginButtonDelegate {
     return UserDefaults.standard.bool(forKey: "Bank23TimerDefaultMode")
   }
   
+  // Cache all the fetched boards
+  static func setCachedServerBoards(boards: [GameModel]) {
+    let boardStrings = boards.map({ (game: GameModel) -> String in
+      return game.toString()
+    })
+    UserDefaults.standard.set(boardStrings, forKey: "Bank23CachedServerBoards")
+  }
+  
+  static func getCachedServerBoards() -> [GameModel] {
+    let boardStrings = UserDefaults.standard.array(forKey: "Bank23CachedServerBoards")
+    if boardStrings != nil && boardStrings!.count > 0 {
+      return boardStrings!.map({ (boardString: Any) -> GameModel in
+        return try! GameModel.fromString(boardString as! String)
+      })
+    } else {
+      return []
+    }
+  }
+  
   // LoginButtonDelegate
   
   public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {

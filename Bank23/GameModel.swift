@@ -49,14 +49,23 @@ public final class GameModel {
     modelParts.append(_board.toString())
     modelParts.append(self.collapsedPieceListToString())
     modelParts.append(_levelName)
+    modelParts.append(_sortKey)
+    modelParts.append(_explanationLabel ?? "")
     return modelParts.joined(separator: MODEL_STRING_SEPERATOR)
   }
   
   public static func fromString(_ modelString: String) throws -> GameModel {
     let modelParts = modelString.components(separatedBy: MODEL_STRING_SEPERATOR)
-    return try GameModel(name: modelParts[2],
-                         initialPiecesString: modelParts[1],
-                         initialBoardString: modelParts[0])
+    let model = try GameModel(name: modelParts[2],
+                              initialPiecesString: modelParts[1],
+                              initialBoardString: modelParts[0])
+    if modelParts.count > 3 {
+      model._sortKey = modelParts[3]
+    }
+    if modelParts.count > 4 && modelParts[4].count > 0 {
+      model._explanationLabel = modelParts[4]
+    }
+    return model
   }
   
   // Note this function reshuffles the pieces

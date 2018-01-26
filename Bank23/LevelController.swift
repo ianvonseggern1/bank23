@@ -173,6 +173,8 @@ public final class LevelController
     objectMapper.scan(Boards.self, expression: scanExpression).continueWith { (task:AWSTask<AWSDynamoDBPaginatedOutput>) -> Any? in
       if let error = task.error as NSError? {
         print("Unable to fetch boards. Error: \(error)")
+        
+        boardCallback(UserController.getCachedServerBoards())
       } else if let paginatedOutput = task.result {
         
         var models = [GameModel]()
@@ -202,6 +204,7 @@ public final class LevelController
             print("Unable to create game from board \(board._board ?? "") and pieces \(board._pieces ?? "")")
           }
         }
+        UserController.setCachedServerBoards(boards: models)
         boardCallback(models)
       }
       return nil
