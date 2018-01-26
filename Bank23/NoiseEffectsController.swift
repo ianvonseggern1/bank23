@@ -8,6 +8,7 @@
 
 import Foundation
 import AudioToolbox
+import AVFoundation
 
 let AUDIO_SETTING_USER_DEFAULT_KEY = "AudioSetting"
 
@@ -18,6 +19,9 @@ public final class NoiseEffectsController
   init() {
     let audioDefault = UserDefaults.standard.object(forKey: AUDIO_SETTING_USER_DEFAULT_KEY) as! Bool?
     audioOn = audioDefault == nil ? true : audioDefault!
+    
+    try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback,
+                                                     with: [.mixWithOthers])
   }
   
   func toggleAudio() {
