@@ -212,6 +212,10 @@ public class LevelMenuController:
     let newLevel = _gameModels[row]
     UserController.setCurrentLevel(level: newLevel)
     _currentRow = row
+    
+    DispatchQueue.main.async {
+      self._tableView.reloadData()
+    }
   }
   
   public func userBeatLevel(elapsedTime: Int) -> Bool {
@@ -313,6 +317,12 @@ public class LevelMenuController:
                                                levelBeatenTime: _resultController.levelBestTime(model),
                                                bestTimeInfo: bestTime)
       levelRowCell.frame = CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: LEVEL_ROW_VIEW_HEIGHT)
+      
+      if _currentRow == indexPath.row {
+        levelRowCell.backgroundColor = BoardView.backgroundColor()
+        levelRowCell._boardView.backgroundColor = UIColor.white
+      }
+      
       tableViewCell.addSubview(levelRowCell)
 
     } else if indexPath.section == 2 {
