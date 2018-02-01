@@ -277,6 +277,9 @@ public class LevelMenuController:
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let tableViewCell = UITableViewCell()
     tableViewCell.selectionStyle = UITableViewCellSelectionStyle.none
+    tableViewCell.preservesSuperviewLayoutMargins = false
+    tableViewCell.separatorInset = UIEdgeInsets.zero
+    tableViewCell.layoutMargins = UIEdgeInsets.zero
 
     if indexPath.section == 0 {
       let usernameLabel = UILabel()
@@ -319,8 +322,9 @@ public class LevelMenuController:
       levelRowCell.frame = CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: LEVEL_ROW_VIEW_HEIGHT)
       
       if _currentRow == indexPath.row {
-        levelRowCell.backgroundColor = BoardView.backgroundColor()
-        levelRowCell._boardView.backgroundColor = UIColor.white
+        //levelRowCell.backgroundColor = BoardView.backgroundColor()
+        //levelRowCell._boardView.backgroundColor = UIColor.white
+        levelRowCell._currentLevelView.isHidden = false
       }
       
       tableViewCell.addSubview(levelRowCell)
@@ -370,7 +374,7 @@ public class LevelMenuController:
   
   public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.section == 0 {
-      return 50
+      return 40
     } else if indexPath.section == 1 {
       return CGFloat(LEVEL_ROW_VIEW_HEIGHT)
     } else if indexPath.section == 3 {

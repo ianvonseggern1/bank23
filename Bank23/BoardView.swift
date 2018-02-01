@@ -20,6 +20,10 @@ class BoardView: UIImageView {
     return UIColor(red:0.83, green:0.91, blue:0.88, alpha:1.0) // D3E8E1
   }
   
+  static func lineColor() -> UIColor {
+    return UIColor(red:0.42, green:0.56, blue:0.33, alpha:1.0)
+  }
+  
   override init(frame: CGRect) {
     super.init(frame:frame)
     
@@ -35,7 +39,7 @@ class BoardView: UIImageView {
     // draw lines
     UIGraphicsBeginImageContext(self.frame.size)
     let context = UIGraphicsGetCurrentContext()
-    context?.setStrokeColor(UIColor(red:0.42, green:0.56, blue:0.33, alpha:1.0).cgColor)
+    context?.setStrokeColor(BoardView.lineColor().cgColor)
     for i in 0..._columnCount {
       let float_i = CGFloat(i)
       context?.move(to: CGPoint(x: self.singleSquareSize() * float_i, y: 0))

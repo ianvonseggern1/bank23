@@ -18,6 +18,7 @@ class LevelMenuLevelRowView: UIView {
   let _personalBestTime = UILabel()
   var _checkmark = UIImageView() // Shown if they have beaten the level before
   let _boardView = BoardView(frame: CGRect.zero)
+  let _currentLevelView = UIView()
   
   init(gameModel: GameModel, levelBeatenTime: Int?, bestTimeInfo: BestTime?) {
     super.init(frame: CGRect.zero)
@@ -48,6 +49,10 @@ class LevelMenuLevelRowView: UIView {
     _checkmark.image = UIImage(named: "checkmark.jpg")
     _checkmark.isHidden = levelBeatenTime == nil
     self.addSubview(_checkmark)
+    
+    _currentLevelView.backgroundColor = BoardView.lineColor()
+    _currentLevelView.isHidden = true
+    self.addSubview(_currentLevelView)
       
     // For levels beaten before we stored the time we set time to INT_MAX
     // Skip showing the time in that case
@@ -92,5 +97,7 @@ class LevelMenuLevelRowView: UIView {
                               y: 90 - _personalBestTime.frame.height,
                               width: _personalBestTime.frame.width,
                               height: _personalBestTime.frame.height)
+    
+    _currentLevelView.frame = CGRect(x: 0, y: 0, width: 5, height: self.frame.height)
   }
 }
