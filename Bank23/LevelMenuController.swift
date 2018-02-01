@@ -397,8 +397,10 @@ public class LevelMenuController:
     }
     
     if indexPath.section == 1 {
-      setCurrentRow(row: indexPath.row)
-      delegate?.reset()
+      if indexPath.row != _currentRow {
+        setCurrentRow(row: indexPath.row)
+        delegate?.reset()
+      }
       self.dismiss(animated: true, completion: nil)
     
     } else if indexPath.section == 2 {
