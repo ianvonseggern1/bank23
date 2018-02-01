@@ -67,16 +67,6 @@ public class LevelMenuController:
     setupNavigationBar()
   }
   
-  override public func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    
-    if _gameModels.count > _currentRow {
-      _tableView.scrollToRow(at: IndexPath(row: _currentRow, section: 1),
-                             at: .middle,
-                             animated: false)
-    }
-  }
-  
   func setupNavigationBar() {
     self.navigationItem.title = "Main Menu"
     
@@ -215,6 +205,12 @@ public class LevelMenuController:
     
     DispatchQueue.main.async {
       self._tableView.reloadData()
+      
+      if self._gameModels.count > self._currentRow {
+        self._tableView.scrollToRow(at: IndexPath(row: self._currentRow, section: 1),
+                                    at: .middle,
+                                    animated: false)
+      }
     }
   }
   
