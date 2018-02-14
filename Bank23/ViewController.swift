@@ -381,7 +381,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   func promptForUsernameAndCallBestTimeNetworker() {
     let createUsernameAlert = UIAlertController(
       title: "Wow!",
-      message: "That was fast, looks like you set the record time! Please enter a name for the leaderboard.",
+      message: "That was fast, looks like you set the record time! Please enter a nickname to be displayed. In the future you can change your name at the top of the menu.",
       preferredStyle: .alert)
     createUsernameAlert.addTextField { (textField) in
       textField.placeholder = "Username"
