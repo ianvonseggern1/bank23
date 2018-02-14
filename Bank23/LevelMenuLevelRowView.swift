@@ -46,7 +46,7 @@ class LevelMenuLevelRowView: UIView {
     _subtitle.sizeToFit()
     self.addSubview(_subtitle)
     
-    _checkmark.image = UIImage(named: "checkmark.jpg")
+    _checkmark.image = UIImage(named: "Checkmark (1).png")
     _checkmark.isHidden = levelBeatenTime == nil
     self.addSubview(_checkmark)
     

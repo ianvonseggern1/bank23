@@ -19,6 +19,9 @@
 		66622DE3201921C70011465F /* menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DE2201921C60011465F /* menu.jpg */; };
 		66622DE5201921E30011465F /* refresh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DE4201921E20011465F /* refresh.jpg */; };
 		66622DE7201922640011465F /* checkmark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DE6201922640011465F /* checkmark.jpg */; };
+		6689C0972034A1D200BD0B90 /* Refresh (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0962034A1D100BD0B90 /* Refresh (1).png */; };
+		6689C0992034A1D900BD0B90 /* Checkmark (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0982034A1D800BD0B90 /* Checkmark (1).png */; };
+		6689C09B2034A1DF00BD0B90 /* Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C09A2034A1DF00BD0B90 /* Menu.png */; };
 		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
 		669189391E95DD150099A497 /* Sandcastle 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189381E95DD150099A497 /* Sandcastle 02.png */; };
@@ -102,6 +105,9 @@
 		66622DE4201921E20011465F /* refresh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = refresh.jpg; path = ../../Downloads/refresh.jpg; sourceTree = "<group>"; };
 		66622DE6201922640011465F /* checkmark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = checkmark.jpg; sourceTree = "<group>"; };
 		667895791FE0976F00A7D840 /* Bank23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bank23.entitlements; sourceTree = "<group>"; };
+		6689C0962034A1D100BD0B90 /* Refresh (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Refresh (1).png"; sourceTree = "<group>"; };
+		6689C0982034A1D800BD0B90 /* Checkmark (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checkmark (1).png"; sourceTree = "<group>"; };
+		6689C09A2034A1DF00BD0B90 /* Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu.png; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
 		669189361E959AB50099A497 /* Mountains 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mountains 01.png"; sourceTree = "<group>"; };
 		669189381E95DD150099A497 /* Sandcastle 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 02.png"; sourceTree = "<group>"; };
@@ -216,7 +222,10 @@
 				66622DDE2019207F0011465F /* cross.jpg */,
 				66622DE4201921E20011465F /* refresh.jpg */,
 				66622DE6201922640011465F /* checkmark.jpg */,
+				6689C0962034A1D100BD0B90 /* Refresh (1).png */,
+				6689C09A2034A1DF00BD0B90 /* Menu.png */,
 				669189531E9853440099A497 /* sandcastle 03.png */,
+				6689C0982034A1D800BD0B90 /* Checkmark (1).png */,
 				6611C9241EAFA04200A2E7C5 /* checkmark.png */,
 				B66C18651E6FC8EF00CD0498 /* mountain.png */,
 				B61C692D1E71FD5600E68150 /* Mountains.png */,
@@ -375,17 +384,20 @@
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
 				66622DE5201921E30011465F /* refresh.jpg in Resources */,
 				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
+				6689C0992034A1D900BD0B90 /* Checkmark (1).png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
 				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,
 				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
 				B61C694A1E74B45B00E68150 /* Models in Resources */,
 				669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */,
+				6689C0972034A1D200BD0B90 /* Refresh (1).png in Resources */,
 				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
 				6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */,
 				66622DE3201921C70011465F /* menu.jpg in Resources */,
 				B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */,
 				B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */,
 				66622DDF2019207F0011465F /* cross.jpg in Resources */,
+				6689C09B2034A1DF00BD0B90 /* Menu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
