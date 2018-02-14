@@ -73,14 +73,14 @@ class LevelMenuLevelRowView: UIView {
   }
   
   override func layoutSubviews() {
-    _levelName.frame = CGRect(x: 10,
+    _levelName.frame = CGRect(x: 20,
                               y: 10,
-                              width: min(_levelName.frame.width, self.frame.width - 110),
+                              width: min(_levelName.frame.width, self.frame.width - 120),
                               height: _levelName.frame.height)
     
-    _subtitle.frame = CGRect(x: 10,
+    _subtitle.frame = CGRect(x: 20,
                              y: _levelName.frame.maxY + 5,
-                             width: min(_subtitle.frame.width, self.frame.width - 110),
+                             width: min(_subtitle.frame.width, self.frame.width - 120),
                              height: _subtitle.frame.height)
     
     _boardView.frame =  CGRect(x: self.frame.width - 100,
@@ -88,7 +88,7 @@ class LevelMenuLevelRowView: UIView {
                                width: 90,
                                height: 90)
     
-    _checkmark.frame = CGRect(x: 10,
+    _checkmark.frame = CGRect(x: 20,
                                y: 90 - 20,
                                width: 20,
                                height: 20)
@@ -98,6 +98,6 @@ class LevelMenuLevelRowView: UIView {
                               width: _personalBestTime.frame.width,
                               height: _personalBestTime.frame.height)
     
-    _currentLevelView.frame = CGRect(x: 0, y: 0, width: 5, height: self.frame.height)
+    _currentLevelView.frame = CGRect(x: 0, y: 0, width: 10, height: self.frame.height)
   }
 }
