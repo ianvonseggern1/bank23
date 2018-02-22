@@ -31,7 +31,7 @@ class NextPieceView: UIView {
   override func sizeThatFits(_ size: CGSize) -> CGSize {
     _label.sizeToFit()
     return CGSize(width: max(_label.frame.width, SINGLE_SQUARE_SIZE + 2 * 4),
-                  height: _label.frame.height + SINGLE_SQUARE_SIZE + 3 * 4)
+                  height: _label.frame.height + SINGLE_SQUARE_SIZE + 3 * 4 + 5)
   }
   
   override func layoutSubviews() {
