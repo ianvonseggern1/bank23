@@ -69,12 +69,13 @@ public class LevelMenuController:
   
   func setupNavigationBar() {
     self.navigationItem.title = "Main Menu"
-    
-    let xOutIcon = UIButton()
-    xOutIcon.setImage(UIImage(named: "cross.jpg"), for: UIControlState.normal)
-    xOutIcon.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-    xOutIcon.addTarget(self, action: #selector(didTapXOut), for: UIControlEvents.touchUpInside)
-    self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: xOutIcon), animated: false)
+
+    let button = UIBarButtonItem(image: UIImage(named: "Close.png"),
+                                 style: .done,
+                                 target: self,
+                                 action: #selector(didTapXOut))
+    button.tintColor = UIColor.darkGray
+    self.navigationItem.setLeftBarButton(button, animated: false)
     
     setAudioButtonTitle()
   }
@@ -181,12 +182,13 @@ public class LevelMenuController:
   }
   
   func setAudioButtonTitle() {
-    let title = _noiseEffectsController!.audioOn ? "Audio On" : "Audio Off"
-    self.navigationItem.setRightBarButton(UIBarButtonItem(title: title,
-                                                          style: UIBarButtonItemStyle.plain,
-                                                          target: self,
-                                                          action: #selector(didTapAudioToggle)),
-                                          animated: false)
+    let buttonName = _noiseEffectsController!.audioOn ? "Sound On.png" : "Sound Off.png"
+    let button = UIBarButtonItem(image: UIImage(named: buttonName),
+                                 style: .done,
+                                 target: self,
+                                 action: #selector(didTapAudioToggle))
+    button.tintColor = UIColor.darkGray
+    self.navigationItem.setRightBarButton(button, animated: false)
   }
   
   public func goToNextLevel() {
