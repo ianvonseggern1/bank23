@@ -208,7 +208,9 @@ public class LevelMenuController:
     DispatchQueue.main.async {
       self._tableView.reloadData()
       
-      if self._gameModels.count > self._currentRow {
+      // We need to make sure the table exists and as a sanity check we make sure that current row is
+      // in bounds of the data source
+      if self._tableView.dataSource != nil && self._gameModels.count > self._currentRow {
         self._tableView.scrollToRow(at: IndexPath(row: self._currentRow, section: 1),
                                     at: .middle,
                                     animated: false)
