@@ -353,7 +353,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
       let bestTime = _bestTimeNetworker.getBestTimeFor(level: initialLevelModel)
       if (
         _gameModel._levelType == LevelType.Server &&
-        (bestTime == nil || bestTime!.time > elapsedTime)
+        (bestTime != nil && bestTime!.time > elapsedTime)
       ) {
         isRecord = true
         

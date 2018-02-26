@@ -21,6 +21,10 @@ public final class BestTimeNetworker {
   var bestTimes = [String: BestTime]() // Map boardID to BestTime
   
   init() {
+    fetchBestTimes()
+  }
+  
+  func fetchBestTimes() {
     let objectMapper = AWSDynamoDBObjectMapper.default()
     let scanExpression = AWSDynamoDBScanExpression()
     scanExpression.limit = 250
@@ -52,7 +56,17 @@ public final class BestTimeNetworker {
   
   func getBestTimeFor(level: GameModel) -> BestTime? {
     let boardID = String(level.hash())
-    return bestTimes[boardID]
+    let bestTime = bestTimes[boardID]
+    if (bestTime != nil) {
+      return bestTime
+    }
+
+    fetchBestTimes()
+
+    // We could update to wait for a second to see if a best time comes in from a network call and
+    // then return that, but for now we just skip and figure that at least we will have the best times
+    // for the next level
+    return nil
   }
   
   // Returns true if the database has been successfully updated, false otherwise
