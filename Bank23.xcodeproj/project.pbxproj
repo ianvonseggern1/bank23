@@ -30,6 +30,10 @@
 		6689C0AA203E6B6A00BD0B90 /* Sound On 27.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0A8203E6B6A00BD0B90 /* Sound On 27.png */; };
 		6689C0AD203E6DD600BD0B90 /* Sound On.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0AB203E6DD500BD0B90 /* Sound On.png */; };
 		6689C0AE203E6DD600BD0B90 /* Sound Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0AC203E6DD500BD0B90 /* Sound Off.png */; };
+		6689C0B420446DCF00BD0B90 /* Slide 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B320446DCE00BD0B90 /* Slide 1.wav */; };
+		6689C0B620446DE400BD0B90 /* Plunk 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B520446DE300BD0B90 /* Plunk 2.wav */; };
+		6689C0B820446DF300BD0B90 /* Coins 4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B720446DF300BD0B90 /* Coins 4.wav */; };
+		6689C0BA20446EF600BD0B90 /* Swish 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B920446EF600BD0B90 /* Swish 1.wav */; };
 		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
 		669189391E95DD150099A497 /* Sandcastle 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189381E95DD150099A497 /* Sandcastle 02.png */; };
@@ -124,6 +128,10 @@
 		6689C0A8203E6B6A00BD0B90 /* Sound On 27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound On 27.png"; sourceTree = "<group>"; };
 		6689C0AB203E6DD500BD0B90 /* Sound On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound On.png"; sourceTree = "<group>"; };
 		6689C0AC203E6DD500BD0B90 /* Sound Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound Off.png"; sourceTree = "<group>"; };
+		6689C0B320446DCE00BD0B90 /* Slide 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Slide 1.wav"; sourceTree = "<group>"; };
+		6689C0B520446DE300BD0B90 /* Plunk 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Plunk 2.wav"; sourceTree = "<group>"; };
+		6689C0B720446DF300BD0B90 /* Coins 4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Coins 4.wav"; sourceTree = "<group>"; };
+		6689C0B920446EF600BD0B90 /* Swish 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Swish 1.wav"; sourceTree = "<group>"; };
 		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
 		669189361E959AB50099A497 /* Mountains 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mountains 01.png"; sourceTree = "<group>"; };
 		669189381E95DD150099A497 /* Sandcastle 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 02.png"; sourceTree = "<group>"; };
@@ -230,6 +238,10 @@
 				669189381E95DD150099A497 /* Sandcastle 02.png */,
 				669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */,
 				6689C0AC203E6DD500BD0B90 /* Sound Off.png */,
+				6689C0B920446EF600BD0B90 /* Swish 1.wav */,
+				6689C0B720446DF300BD0B90 /* Coins 4.wav */,
+				6689C0B320446DCE00BD0B90 /* Slide 1.wav */,
+				6689C0B520446DE300BD0B90 /* Plunk 2.wav */,
 				6689C0AB203E6DD500BD0B90 /* Sound On.png */,
 				6689C0A7203E6B6900BD0B90 /* Sound Off 27.png */,
 				6689C0A8203E6B6A00BD0B90 /* Sound On 27.png */,
@@ -408,6 +420,7 @@
 				6689C0A0203E653A00BD0B90 /* Close.png in Resources */,
 				669189541E9853440099A497 /* sandcastle 03.png in Resources */,
 				66622DE7201922640011465F /* checkmark.jpg in Resources */,
+				6689C0B820446DF300BD0B90 /* Coins 4.wav in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
 				6689C0A6203E692200BD0B90 /* Sound On 36.png in Resources */,
 				6689C0AE203E6DD600BD0B90 /* Sound Off.png in Resources */,
@@ -418,6 +431,7 @@
 				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,
 				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
 				B61C694A1E74B45B00E68150 /* Models in Resources */,
+				6689C0B620446DE400BD0B90 /* Plunk 2.wav in Resources */,
 				669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */,
 				6689C0AD203E6DD600BD0B90 /* Sound On.png in Resources */,
 				6689C0972034A1D200BD0B90 /* Refresh (1).png in Resources */,
@@ -428,6 +442,8 @@
 				66622DE3201921C70011465F /* menu.jpg in Resources */,
 				B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */,
 				B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */,
+				6689C0B420446DCF00BD0B90 /* Slide 1.wav in Resources */,
+				6689C0BA20446EF600BD0B90 /* Swish 1.wav in Resources */,
 				66622DDF2019207F0011465F /* cross.jpg in Resources */,
 				6689C09B2034A1DF00BD0B90 /* Menu.png in Resources */,
 			);

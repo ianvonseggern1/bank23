@@ -32,11 +32,19 @@ public final class NoiseEffectsController
   }
   
   func playKerplunk() {
-    playSound(name: "kerplunk-sound", extensionName: "wav", soundId: 0)
+    playSound(name: "Plunk 2", extensionName: "wav", soundId: 0)
   }
   
   func playChaChing() {
-    playSound(name: "cha-ching", extensionName: "wav", soundId: 1)
+    playSound(name: "Coins 4", extensionName: "wav", soundId: 1)
+  }
+  
+  func playSwish() {
+    playSound(name: "Swish 1", extensionName: "wav", soundId: 2)
+  }
+  
+  func playSlide() {
+    playSound(name: "Slide 1", extensionName: "wav", soundId: 3)
   }
   
   private func playSound(name: String, extensionName: String, soundId: Int) {

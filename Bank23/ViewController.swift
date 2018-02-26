@@ -269,7 +269,7 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                     
                      // Update the view with all the new locations but not the new piece,
                      // then we animate it on, then we update again
-                     self.playAudioForChangesInState(oldModel: modelBeforeMove)
+                     let playedNoise = self.playAudioForChangesInState(oldModel: modelBeforeMove, playSlide: false)
                      // Pop piece after determining audio changes, but before updating view
                      let _ = self._gameModel._pieces.popLast()
                      self._view.updateModel(self._gameModel)
@@ -297,8 +297,9 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
                                         self._gameModel._board.mergePiece(piece: piece,
                                                                           row: newPieceRow,
                                                                           column: newPieceColumn)
-                                        self.playAudioForChangesInState(
-                                          oldModel: modelBeforeAddingNewPiece
+                                        let _ = self.playAudioForChangesInState(
+                                          oldModel: modelBeforeAddingNewPiece,
+                                          playSlide: !playedNoise
                                         )
                                         self._view.updateModel(self._gameModel)
                                         
@@ -319,12 +320,20 @@ final class ViewController: UIViewController, LevelMenuControllerDelegate {
   // It determines the noises to be played and plays them.
   // Currently it is used twice, immediately after the slide animation is completed and
   // immediately after the new piece is added to the board
-  func playAudioForChangesInState(oldModel: GameModel) {
+  // Returns true if a noise was played
+  func playAudioForChangesInState(oldModel: GameModel, playSlide: Bool) -> Bool {
     if _gameModel.coinsLostToWaterCount(oldModel: oldModel) > 0 {
       _noiseEffectsController.playKerplunk()
     } else if _gameModel.coinsUsedInBanksCount(oldModel: oldModel) > 0 {
       _noiseEffectsController.playChaChing()
+    } else if _gameModel.sandFilledInWaterCount(oldModel: oldModel) > 0 {
+      _noiseEffectsController.playSwish()
+    } else if (playSlide) {
+      _noiseEffectsController.playSlide()
+    } else {
+      return false
     }
+    return true
   }
   
   func completedSwipingPieceOn() {

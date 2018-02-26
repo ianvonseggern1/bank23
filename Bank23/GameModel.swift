@@ -128,12 +128,20 @@ public final class GameModel {
     return oldModel.bankCount() - self.bankCount()
   }
   
+  public func sandFilledInWaterCount(oldModel: GameModel) -> Int {
+    return oldModel.waterCount() - self.waterCount()
+  }
+  
   public func bankCount() -> Int {
     return countPiecesOnBoard(ofType: Piece.bank(1))
   }
   
   public func coinCount() -> Int {
     return countPiecesOnBoard(ofType: Piece.coins(1)) + countPiecesRemaining(ofType: Piece.coins(1))
+  }
+  
+  public func waterCount() -> Int {
+    return countPiecesOnBoard(ofType: Piece.water(1))
   }
   
   private func countPiecesOnBoard(ofType: Piece) -> Int {

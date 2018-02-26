@@ -181,6 +181,9 @@ public final class LevelController
         for b in paginatedOutput.items {
           let board = b as! Boards
           do {
+            if board._isActive == false {
+              continue
+            }
             let pieceListString = board._pieces! == EMPTY_STRING ? "" : board._pieces!
             let gameModel = try GameModel(name: board._boardName!,
                                           initialPiecesString: pieceListString,
