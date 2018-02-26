@@ -9,48 +9,32 @@
 /* Begin PBXBuildFile section */
 		1ED40AD41E81A18500E62E1B /* LevelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED40AD31E81A18500E62E1B /* LevelController.swift */; };
 		6611C9231EAAEA5D00A2E7C5 /* VictoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */; };
-		6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6611C9241EAFA04200A2E7C5 /* checkmark.png */; };
 		66622DCF1FF584AF0011465F /* ResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DCE1FF584AF0011465F /* ResultsTable.swift */; };
 		66622DD11FFD50120011465F /* BestTimeNetworker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD01FFD50120011465F /* BestTimeNetworker.swift */; };
 		66622DD71FFF1FBB0011465F /* BestTimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD61FFF1FBB0011465F /* BestTimeTable.swift */; };
 		66622DD92001740A0011465F /* LevelMenuRowActionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DD8200174090011465F /* LevelMenuRowActionController.swift */; };
 		66622DDB20031D6B0011465F /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66622DDA20031D6B0011465F /* TimerView.swift */; };
-		66622DDF2019207F0011465F /* cross.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DDE2019207F0011465F /* cross.jpg */; };
-		66622DE3201921C70011465F /* menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DE2201921C60011465F /* menu.jpg */; };
-		66622DE5201921E30011465F /* refresh.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DE4201921E20011465F /* refresh.jpg */; };
-		66622DE7201922640011465F /* checkmark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66622DE6201922640011465F /* checkmark.jpg */; };
 		6689C0972034A1D200BD0B90 /* Refresh (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0962034A1D100BD0B90 /* Refresh (1).png */; };
 		6689C0992034A1D900BD0B90 /* Checkmark (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0982034A1D800BD0B90 /* Checkmark (1).png */; };
 		6689C09B2034A1DF00BD0B90 /* Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C09A2034A1DF00BD0B90 /* Menu.png */; };
 		6689C0A0203E653A00BD0B90 /* Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C09F203E653900BD0B90 /* Close.png */; };
-		6689C0A3203E683D00BD0B90 /* Sound On 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0A1203E683D00BD0B90 /* Sound On 2.png */; };
-		6689C0A4203E683D00BD0B90 /* Sound Off 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0A2203E683D00BD0B90 /* Sound Off 2.png */; };
-		6689C0A6203E692200BD0B90 /* Sound On 36.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0A5203E692200BD0B90 /* Sound On 36.png */; };
-		6689C0A9203E6B6A00BD0B90 /* Sound Off 27.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0A7203E6B6900BD0B90 /* Sound Off 27.png */; };
-		6689C0AA203E6B6A00BD0B90 /* Sound On 27.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0A8203E6B6A00BD0B90 /* Sound On 27.png */; };
 		6689C0AD203E6DD600BD0B90 /* Sound On.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0AB203E6DD500BD0B90 /* Sound On.png */; };
 		6689C0AE203E6DD600BD0B90 /* Sound Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0AC203E6DD500BD0B90 /* Sound Off.png */; };
 		6689C0B420446DCF00BD0B90 /* Slide 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B320446DCE00BD0B90 /* Slide 1.wav */; };
 		6689C0B620446DE400BD0B90 /* Plunk 2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B520446DE300BD0B90 /* Plunk 2.wav */; };
 		6689C0B820446DF300BD0B90 /* Coins 4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B720446DF300BD0B90 /* Coins 4.wav */; };
 		6689C0BA20446EF600BD0B90 /* Swish 1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6689C0B920446EF600BD0B90 /* Swish 1.wav */; };
-		669189351E9585B50099A497 /* Sandcastle.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189341E9585B50099A497 /* Sandcastle.png */; };
 		669189371E959AB50099A497 /* Mountains 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189361E959AB50099A497 /* Mountains 01.png */; };
-		669189391E95DD150099A497 /* Sandcastle 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189381E95DD150099A497 /* Sandcastle 02.png */; };
 		669189461E96EFA70099A497 /* ResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669189451E96EFA70099A497 /* ResultController.swift */; };
 		669189501E9816810099A497 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6691894F1E9816810099A497 /* UserController.swift */; };
 		669189541E9853440099A497 /* sandcastle 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 669189531E9853440099A497 /* sandcastle 03.png */; };
 		669C5ABC1FE42D9700B04BA1 /* Boards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ABB1FE42D9700B04BA1 /* Boards.swift */; };
 		669C5AC01FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */; };
-		669C5AC41FE6C68200B04BA1 /* kerplunk-sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */; };
 		669C5AC61FE6C6F700B04BA1 /* NoiseEffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */; };
-		669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */ = {isa = PBXBuildFile; fileRef = 669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */; };
 		669C5ACA1FECAAFE00B04BA1 /* BuiltInLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */; };
 		669C5ACC1FECB44700B04BA1 /* LevelMenuLevelRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ACB1FECB44700B04BA1 /* LevelMenuLevelRowView.swift */; };
 		669C5ACE1FF2DD0F00B04BA1 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669C5ACD1FF2DD0F00B04BA1 /* Timer.swift */; };
 		66B5F0081E82DBE000F96770 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B5F0071E82DBE000F96770 /* GameModel.swift */; };
-		B61C692E1E71FD5600E68150 /* Mountains.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692D1E71FD5600E68150 /* Mountains.png */; };
-		B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */ = {isa = PBXBuildFile; fileRef = B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */; };
 		B61C69371E74AA6F00E68150 /* AWSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69351E74AA6F00E68150 /* AWSCore.framework */; };
 		B61C69381E74AA6F00E68150 /* AWSCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69351E74AA6F00E68150 /* AWSCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B61C69391E74AA6F00E68150 /* AWSDynamoDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */; };
@@ -74,9 +58,6 @@
 		B64CB50D1E04B7EC005A7781 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64CB50C1E04B7EC005A7781 /* Board.swift */; };
 		B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = B6517A811E5101CE00EB9879 /* bank-icon-120.png */; };
 		B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = B6517A831E5101D900EB9879 /* bank-icon-180.png */; };
-		B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */ = {isa = PBXBuildFile; fileRef = B66C18651E6FC8EF00CD0498 /* mountain.png */; };
-		B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */ = {isa = PBXBuildFile; fileRef = B66C18671E6FCA2500CD0498 /* mountain2.png */; };
-		B66C186A1E70843500CD0498 /* menu-icon25.png in Resources */ = {isa = PBXBuildFile; fileRef = B66C18691E70843500CD0498 /* menu-icon25.png */; };
 		B674460F1E0D1CB0001A3529 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B674460E1E0D1CB0001A3529 /* GameView.swift */; };
 		B67446111E0D1D5E001A3529 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446101E0D1D5E001A3529 /* PieceView.swift */; };
 		B67446271E11F0D9001A3529 /* LevelMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67446261E11F0D9001A3529 /* LevelMenuController.swift */; };
@@ -106,49 +87,33 @@
 		1ED40AD31E81A18500E62E1B /* LevelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelController.swift; sourceTree = "<group>"; };
 		363CF6CA2565A25D716503AE /* Pods_Bank23.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bank23.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6611C9221EAAEA5C00A2E7C5 /* VictoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VictoryView.swift; sourceTree = "<group>"; };
-		6611C9241EAFA04200A2E7C5 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmark.png; sourceTree = "<group>"; };
 		66622DCE1FF584AF0011465F /* ResultsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResultsTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (12)/AmazonAws/Models/NoSQL/ResultsTable.swift"; sourceTree = "<group>"; };
 		66622DD01FFD50120011465F /* BestTimeNetworker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestTimeNetworker.swift; sourceTree = "<group>"; };
 		66622DD61FFF1FBB0011465F /* BestTimeTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BestTimeTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (15)/AmazonAws/Models/NoSQL/BestTimeTable.swift"; sourceTree = "<group>"; };
 		66622DD8200174090011465F /* LevelMenuRowActionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenuRowActionController.swift; sourceTree = "<group>"; };
 		66622DDA20031D6B0011465F /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		66622DDE2019207F0011465F /* cross.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cross.jpg; sourceTree = "<group>"; };
-		66622DE2201921C60011465F /* menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = menu.jpg; path = ../../Downloads/menu.jpg; sourceTree = "<group>"; };
-		66622DE4201921E20011465F /* refresh.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = refresh.jpg; path = ../../Downloads/refresh.jpg; sourceTree = "<group>"; };
-		66622DE6201922640011465F /* checkmark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = checkmark.jpg; sourceTree = "<group>"; };
 		667895791FE0976F00A7D840 /* Bank23.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bank23.entitlements; sourceTree = "<group>"; };
 		6689C0962034A1D100BD0B90 /* Refresh (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Refresh (1).png"; sourceTree = "<group>"; };
 		6689C0982034A1D800BD0B90 /* Checkmark (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checkmark (1).png"; sourceTree = "<group>"; };
 		6689C09A2034A1DF00BD0B90 /* Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu.png; sourceTree = "<group>"; };
 		6689C09F203E653900BD0B90 /* Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Close.png; path = ../../Downloads/Close.png; sourceTree = "<group>"; };
-		6689C0A1203E683D00BD0B90 /* Sound On 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sound On 2.png"; path = "../../Downloads/Sound On 2.png"; sourceTree = "<group>"; };
-		6689C0A2203E683D00BD0B90 /* Sound Off 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sound Off 2.png"; path = "../../Downloads/Sound Off 2.png"; sourceTree = "<group>"; };
-		6689C0A5203E692200BD0B90 /* Sound On 36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound On 36.png"; sourceTree = "<group>"; };
-		6689C0A7203E6B6900BD0B90 /* Sound Off 27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound Off 27.png"; sourceTree = "<group>"; };
-		6689C0A8203E6B6A00BD0B90 /* Sound On 27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound On 27.png"; sourceTree = "<group>"; };
 		6689C0AB203E6DD500BD0B90 /* Sound On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound On.png"; sourceTree = "<group>"; };
 		6689C0AC203E6DD500BD0B90 /* Sound Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sound Off.png"; sourceTree = "<group>"; };
 		6689C0B320446DCE00BD0B90 /* Slide 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Slide 1.wav"; sourceTree = "<group>"; };
 		6689C0B520446DE300BD0B90 /* Plunk 2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Plunk 2.wav"; sourceTree = "<group>"; };
 		6689C0B720446DF300BD0B90 /* Coins 4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Coins 4.wav"; sourceTree = "<group>"; };
 		6689C0B920446EF600BD0B90 /* Swish 1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Swish 1.wav"; sourceTree = "<group>"; };
-		669189341E9585B50099A497 /* Sandcastle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sandcastle.png; sourceTree = "<group>"; };
 		669189361E959AB50099A497 /* Mountains 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mountains 01.png"; sourceTree = "<group>"; };
-		669189381E95DD150099A497 /* Sandcastle 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 02.png"; sourceTree = "<group>"; };
 		669189451E96EFA70099A497 /* ResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultController.swift; sourceTree = "<group>"; };
 		6691894F1E9816810099A497 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		669189531E9853440099A497 /* sandcastle 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sandcastle 03.png"; sourceTree = "<group>"; };
 		669C5ABB1FE42D9700B04BA1 /* Boards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Boards.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (8)/AmazonAws/Models/NoSQL/Boards.swift"; sourceTree = "<group>"; };
 		669C5ABF1FE5AD0500B04BA1 /* UserCreatedBoardsTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserCreatedBoardsTable.swift; path = "../../../Downloads/Bank23-integration-lib-aws-my-sample-app-ios-swift (10)/AmazonAws/Models/NoSQL/UserCreatedBoardsTable.swift"; sourceTree = "<group>"; };
-		669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "kerplunk-sound.wav"; sourceTree = "<group>"; };
 		669C5AC51FE6C6F700B04BA1 /* NoiseEffectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiseEffectsController.swift; sourceTree = "<group>"; };
-		669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "cha-ching.wav"; sourceTree = "<group>"; };
 		669C5AC91FECAAFE00B04BA1 /* BuiltInLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuiltInLevels.swift; sourceTree = "<group>"; };
 		669C5ACB1FECB44700B04BA1 /* LevelMenuLevelRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMenuLevelRowView.swift; sourceTree = "<group>"; };
 		669C5ACD1FF2DD0F00B04BA1 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		66B5F0071E82DBE000F96770 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
-		B61C692D1E71FD5600E68150 /* Mountains.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mountains.png; sourceTree = "<group>"; };
-		B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandcastle 01.png"; sourceTree = "<group>"; };
 		B61C69331E74A97600E68150 /* Bank23-integration-lib-aws-my-sample-app-ios-swift */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift"; sourceTree = SOURCE_ROOT; };
 		B61C69351E74AA6F00E68150 /* AWSCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSCore.framework; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws/AWSCore.framework"; sourceTree = "<group>"; };
 		B61C69361E74AA6F00E68150 /* AWSDynamoDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSDynamoDB.framework; path = "Bank23-integration-lib-aws-my-sample-app-ios-swift/Sdk/Aws/AWSDynamoDB.framework"; sourceTree = "<group>"; };
@@ -174,9 +139,6 @@
 		B64CB50C1E04B7EC005A7781 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		B6517A811E5101CE00EB9879 /* bank-icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank-icon-120.png"; sourceTree = "<group>"; };
 		B6517A831E5101D900EB9879 /* bank-icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bank-icon-180.png"; sourceTree = "<group>"; };
-		B66C18651E6FC8EF00CD0498 /* mountain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain.png; sourceTree = "<group>"; };
-		B66C18671E6FCA2500CD0498 /* mountain2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mountain2.png; sourceTree = "<group>"; };
-		B66C18691E70843500CD0498 /* menu-icon25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-icon25.png"; sourceTree = "<group>"; };
 		B674460E1E0D1CB0001A3529 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B67446101E0D1D5E001A3529 /* PieceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
 		B67446261E11F0D9001A3529 /* LevelMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMenuController.swift; sourceTree = "<group>"; };
@@ -235,39 +197,20 @@
 				B61C693D1E74AC5100E68150 /* AmazonAws */,
 				B64CB4F61E04A34C005A7781 /* Products */,
 				B61F478E1E6E5F7C00A48CA4 /* Water.png */,
-				669189381E95DD150099A497 /* Sandcastle 02.png */,
-				669C5AC31FE6C68200B04BA1 /* kerplunk-sound.wav */,
 				6689C0AC203E6DD500BD0B90 /* Sound Off.png */,
 				6689C0B920446EF600BD0B90 /* Swish 1.wav */,
 				6689C0B720446DF300BD0B90 /* Coins 4.wav */,
 				6689C0B320446DCE00BD0B90 /* Slide 1.wav */,
 				6689C0B520446DE300BD0B90 /* Plunk 2.wav */,
 				6689C0AB203E6DD500BD0B90 /* Sound On.png */,
-				6689C0A7203E6B6900BD0B90 /* Sound Off 27.png */,
-				6689C0A8203E6B6A00BD0B90 /* Sound On 27.png */,
-				669C5AC71FE74FCB00B04BA1 /* cha-ching.wav */,
-				669189341E9585B50099A497 /* Sandcastle.png */,
 				669189361E959AB50099A497 /* Mountains 01.png */,
-				6689C0A5203E692200BD0B90 /* Sound On 36.png */,
 				6689C09F203E653900BD0B90 /* Close.png */,
 				B61F47901E6E5F8100A48CA4 /* Piggy Bank 01.png */,
 				B61F478C1E6E5F6E00A48CA4 /* Coin Icon 01.png */,
-				66622DE2201921C60011465F /* menu.jpg */,
-				66622DDE2019207F0011465F /* cross.jpg */,
-				66622DE4201921E20011465F /* refresh.jpg */,
-				66622DE6201922640011465F /* checkmark.jpg */,
 				6689C0962034A1D100BD0B90 /* Refresh (1).png */,
-				6689C0A2203E683D00BD0B90 /* Sound Off 2.png */,
-				6689C0A1203E683D00BD0B90 /* Sound On 2.png */,
 				6689C09A2034A1DF00BD0B90 /* Menu.png */,
 				669189531E9853440099A497 /* sandcastle 03.png */,
 				6689C0982034A1D800BD0B90 /* Checkmark (1).png */,
-				6611C9241EAFA04200A2E7C5 /* checkmark.png */,
-				B66C18651E6FC8EF00CD0498 /* mountain.png */,
-				B61C692D1E71FD5600E68150 /* Mountains.png */,
-				B66C18691E70843500CD0498 /* menu-icon25.png */,
-				B61C692F1E71FD5E00E68150 /* Sandcastle 01.png */,
-				B66C18671E6FCA2500CD0498 /* mountain2.png */,
 				B61F47881E6B8D2000A48CA4 /* AppIcon.appiconset */,
 				B6517A811E5101CE00EB9879 /* bank-icon-120.png */,
 				B6517A831E5101D900EB9879 /* bank-icon-180.png */,
@@ -405,46 +348,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6689C0A9203E6B6A00BD0B90 /* Sound Off 27.png in Resources */,
-				669C5AC41FE6C68200B04BA1 /* kerplunk-sound.wav in Resources */,
-				6689C0A3203E683D00BD0B90 /* Sound On 2.png in Resources */,
-				B61C692E1E71FD5600E68150 /* Mountains.png in Resources */,
-				669189351E9585B50099A497 /* Sandcastle.png in Resources */,
-				B61C69301E71FD5E00E68150 /* Sandcastle 01.png in Resources */,
 				B6517A841E5101D900EB9879 /* bank-icon-180.png in Resources */,
-				B66C186A1E70843500CD0498 /* menu-icon25.png in Resources */,
 				B61F478D1E6E5F6E00A48CA4 /* Coin Icon 01.png in Resources */,
 				669189371E959AB50099A497 /* Mountains 01.png in Resources */,
-				669189391E95DD150099A497 /* Sandcastle 02.png in Resources */,
 				B61F47891E6B8D2000A48CA4 /* AppIcon.appiconset in Resources */,
 				6689C0A0203E653A00BD0B90 /* Close.png in Resources */,
 				669189541E9853440099A497 /* sandcastle 03.png in Resources */,
-				66622DE7201922640011465F /* checkmark.jpg in Resources */,
 				6689C0B820446DF300BD0B90 /* Coins 4.wav in Resources */,
 				B64CB5031E04A34C005A7781 /* LaunchScreen.storyboard in Resources */,
-				6689C0A6203E692200BD0B90 /* Sound On 36.png in Resources */,
 				6689C0AE203E6DD600BD0B90 /* Sound Off.png in Resources */,
-				66622DE5201921E30011465F /* refresh.jpg in Resources */,
 				B61F47911E6E5F8100A48CA4 /* Piggy Bank 01.png in Resources */,
 				6689C0992034A1D900BD0B90 /* Checkmark (1).png in Resources */,
 				B64CB5001E04A34C005A7781 /* Assets.xcassets in Resources */,
-				B66C18681E6FCA2500CD0498 /* mountain2.png in Resources */,
-				B66C18661E6FC8EF00CD0498 /* mountain.png in Resources */,
 				B61C694A1E74B45B00E68150 /* Models in Resources */,
 				6689C0B620446DE400BD0B90 /* Plunk 2.wav in Resources */,
-				669C5AC81FE74FCB00B04BA1 /* cha-ching.wav in Resources */,
 				6689C0AD203E6DD600BD0B90 /* Sound On.png in Resources */,
 				6689C0972034A1D200BD0B90 /* Refresh (1).png in Resources */,
-				6689C0A4203E683D00BD0B90 /* Sound Off 2.png in Resources */,
-				6689C0AA203E6B6A00BD0B90 /* Sound On 27.png in Resources */,
 				B6517A821E5101CE00EB9879 /* bank-icon-120.png in Resources */,
-				6611C9251EAFA04200A2E7C5 /* checkmark.png in Resources */,
-				66622DE3201921C70011465F /* menu.jpg in Resources */,
 				B64CB4FE1E04A34C005A7781 /* Main.storyboard in Resources */,
 				B61F478F1E6E5F7C00A48CA4 /* Water.png in Resources */,
 				6689C0B420446DCF00BD0B90 /* Slide 1.wav in Resources */,
 				6689C0BA20446EF600BD0B90 /* Swish 1.wav in Resources */,
-				66622DDF2019207F0011465F /* cross.jpg in Resources */,
 				6689C09B2034A1DF00BD0B90 /* Menu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
